@@ -5,19 +5,15 @@
         <input class="email-input" type="text" placeholder="Email Address" />
         <input class="username-input" type="text" placeholder="Username" />
         <input
-          v-on:click="passwordTyped"
-          class="password-input"
+          class="text-3xl font-bold underline"
           type="password"
           placeholder="Password"
         />
-        <div v-if="password === true">
-          <input
-            class="passwordConfirm-input"
-            type="text"
-            placeholder="Confirm Password"
-          />
-        </div>
-        <div v-else></div>
+        <input
+          class="passwordConfirm-input"
+          type="text"
+          placeholder="Confirm Password"
+        />
         <button class="signup-button">Sign Up</button>
       </div>
     </sect>
@@ -28,16 +24,9 @@
 export default {
   name: "SignUp_Page",
   data() {
-    return {
-      password: false,
-    };
+    return {};
   },
-  methods: {
-    passwordTyped() {
-      this.password = true;
-      console.log(this.password);
-    },
-  },
+  methods: {},
 };
 </script>
 
