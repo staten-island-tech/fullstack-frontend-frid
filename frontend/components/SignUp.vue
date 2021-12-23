@@ -5,7 +5,7 @@
         <input class="email-input" type="text" placeholder="Email Address" />
         <input class="username-input" type="text" placeholder="Username" />
         <input
-          class="text-3xl font-bold underline"
+          class="h-[5vh] w-[25vw] border-solid border-black border"
           type="password"
           placeholder="Password"
         />
