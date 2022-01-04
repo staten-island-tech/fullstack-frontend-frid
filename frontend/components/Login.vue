@@ -2,7 +2,7 @@
   <div class="login-container">
     <form>
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username">
+    <input class="border py-2 px-3 text-grey-darkest" type="text" id="username" name="username">
     <label for="password">Password:</label>
     <input type="text" id="password" name="password">
     </form>
