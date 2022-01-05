@@ -1,22 +1,15 @@
 <template>
-  <div class="sign-up">
-    <sect class="registration-Box">
+   <div class=""> 
+    <sect class="flex flex-wrap flex-col">
       <div>
-        <input class="username-input" type="text" placeholder="Username" />
+        <input class="" type="text" placeholder="Username" />
         <input
-          class="
-            h-[5vh]
-            w-[25vw]
-            m-[5vh]
-            mb-[1vh]
-            p-[10px]
-            border-solid border-black border
-          "
+          class=""
           type="password"
           placeholder="Password"
         />
         <button
-          class="bg-sky-300 w-[10vw] h-[5vh] m-[10vw] mt-[5vh] rounded-2xl"
+          class=""
         >
           Log In
         </button>
