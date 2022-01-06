@@ -2,15 +2,51 @@
   <div class="sign-up">
     <sect class="registration-Box">
       <div>
-        <input class="email-input" type="text" placeholder="Email Address" />
-        <input class="username-input" type="text" placeholder="Username" />
         <input
-          class="h-[5vh] w-[25vw] border-solid border-black border"
+          class="
+            h-[5vh]
+            w-[25vw]
+            my-[2rem]
+            mx-[5vw]
+            p-[1rem]
+            border-solid border-black border
+          "
+          type="text"
+          placeholder="Email Address"
+        />
+        <input
+          class="
+            h-[5vh]
+            w-[25vw]
+            mb-[2rem]
+            mx-[5vw]
+            p-[1rem]
+            border-solid border-black border
+          "
+          type="text"
+          placeholder="Username"
+        />
+        <input
+          class="
+            h-[5vh]
+            w-[25vw]
+            mb-[2rem]
+            mx-[5vw]
+            p-[1rem]
+            border-solid border-black border
+          "
           type="password"
           placeholder="Password"
         />
         <input
-          class="passwordConfirm-input"
+          class="
+            h-[5vh]
+            w-[25vw]
+            mb-[2rem]
+            mx-[5vw]
+            p-[1rem]
+            border-solid border-black border
+          "
           type="text"
           placeholder="Confirm Password"
         />
