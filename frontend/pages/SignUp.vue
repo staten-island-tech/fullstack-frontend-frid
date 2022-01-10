@@ -1,23 +1,33 @@
 <template>
   <div class="sign-up">
-    <sect class="registration-Box">
-      <div>
-        <input class="email-input" type="text" placeholder="Email Address" />
-        <input class="username-input" type="text" placeholder="Username" />
+    <div class="flex items-center justify-center h-[100vh]">
+   <div class="border-2 border-black rounded-[1.5rem] flex items-center justify-center flex-col p-[4rem]" > 
+     <input class="mb-[1rem] mt-[2rem] border-2 border-black p-[0.5rem] rounded-md" type="text" placeholder="Email Address" />
+        <input class="mb-[1rem] border-2 border-black p-[0.5rem] rounded-md" type="text" placeholder="Username" />
         <input
-          class="h-[5vh] w-[25vw] border-solid border-black border"
+          class="mb-[1rem] border-2 border-black p-[0.5rem] rounded-md"
           type="password"
           placeholder="Password"
         />
-        <input
-          class="passwordConfirm-input"
-          type="text"
+         <input
+          class="mb-[1rem] border-2 border-black p-[0.5rem] rounded-md"
+          type="password"
           placeholder="Confirm Password"
         />
-        <button class="signup-button">Sign Up</button>
-      </div>
-    </sect>
+        <button
+          class="mt-[1rem] mb-[2rem] border-2 border-black p-[0.5rem] text-[1.65rem]"
+        >
+          Sign Up
+        </button>
+        <NuxtLink to="/Login">
+      Already have an account? Log In
+      </NuxtLink>
+
+    </div>
   </div>
+    
+  </div>
+  
 </template>
 
 <script>
