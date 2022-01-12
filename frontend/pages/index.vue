@@ -1,5 +1,10 @@
 <template>
-  <div><SignUp /></div>
+  <div>
+    <Navbar/>
+      <NuxtLink to="/Login">
+      About (internal link that belongs to the Nuxt App)
+      </NuxtLink>
+  </div>
 </template>
 
 <script>
