@@ -1,9 +1,10 @@
 <template>
   <div>
-    <Navbar/>
-      <NuxtLink to="/Login">
+    <Navbar />
+    <NuxtLink to="/Login">
       About (internal link that belongs to the Nuxt App)
-      </NuxtLink>
+    </NuxtLink>
+    <ProfilePage />
   </div>
 </template>
 

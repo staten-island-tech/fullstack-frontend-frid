@@ -1,7 +1,5 @@
 <template>
-    <div class="border-2 h-[8vh] w-[100vw] bg-slate-400">
-        
-    </div>
+  <div class="border-2 h-[8vh] w-[100vw] bg-slate-400"></div>
 </template>
 
 <script>
