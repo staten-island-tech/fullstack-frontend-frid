@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Navbar />
-    <ProfilePage />
+    <Navbar class="sticky top-0"/>
+    <ProfilePage/>
   </div>
 </template>
 
-<script>
+<script>  
 export default {
   name: "IndexPage",
 };
