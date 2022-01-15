@@ -1,14 +1,11 @@
 <template>
   <div>
-    <Navbar />
-    <NuxtLink to="/Login">
-      About (internal link that belongs to the Nuxt App)
-    </NuxtLink>
-    <ProfilePage />
+    <Navbar class="sticky top-0"/>
+    <ProfilePage/>
   </div>
 </template>
 
-<script>
+<script>  
 export default {
   name: "IndexPage",
 };
