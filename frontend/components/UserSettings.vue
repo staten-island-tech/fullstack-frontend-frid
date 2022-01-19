@@ -1,10 +1,10 @@
 <template>
-  <div class="flex items-center justify-center h-[100vh] text-center">
+  <div class="flex items-center justify-center h-[100vh] text-center flex">
     <div
       class="
         flex flex-row
         items-center
-        justify-evenly
+        justify-center
         h-[10vh]
         w-[50vw]
         left-[5px]

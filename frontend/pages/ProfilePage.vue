@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-400 max-h-max h-screen">
+  <div class="bg-slate-500 max-h-max h-screen text-black">
     <div class="flex justify-center h-[22vh]">
       <div
         class="
@@ -14,6 +14,7 @@
           h-[12vh]
           w-[70vw]
           mx-[2.5vw]
+          bg-[#fcf6f5]
           mb-[3vh]
         "
       ></div>
@@ -25,16 +26,18 @@
         items-center
         justify-center
         h-[78vh]
+        
       "
     >
       <div
         class="
-          border-2 border-slate-400
+          border-2 border-black
           flex flex-col
           items-center
           justify-center
           h-[78vh]
           w-[30vw]
+          
         "
       >
         <button
@@ -51,6 +54,7 @@
             mx-[2.5vw]
             my-[5vh]
             w-[15vw]
+            bg-[#fcf6f5]
           "
         >
           All Posts
@@ -69,6 +73,7 @@
             mx-[2.5vw]
             mb-[5vh]
             w-[15vw]
+            bg-[#fcf6f5]
           "
         >
           Followers <br />
@@ -89,6 +94,7 @@
             mx-[2.5vw]
             mb-[5vh]
             w-[15vw]
+            bg-[#fcf6f5]
           "
         >
           User Settings
@@ -101,6 +107,7 @@
           items-center
           justify-center
           h-[78vh]
+          
         "
       >
         <div
@@ -117,6 +124,7 @@
             w-[70vw]
             mx-[2.5vw]
             mb-[5vh]
+            bg-[#fcf6f5]
           "
         >
           <div v-if="this.allPosts == true">
