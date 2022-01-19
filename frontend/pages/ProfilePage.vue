@@ -1,27 +1,30 @@
 <template>
-  <div class="bg-sky-400">
-    <div
-      class="
-        border-2 border-black
-        rounded-[1.5rem]
-        flex
-        self-end
-        items-center
-        justify-center
-        flex-col
-        p-[4rem]
-        h-[12vh]
-        w-[70vw]
-        mx-[2.5vw]
-      "
-    ></div>
+  <div class="bg-slate-400 max-h-max h-screen">
+    <div class="flex justify-center h-[22vh]">
+      <div
+        class="
+          border-2 border-black
+          rounded-[1.5rem]
+          flex
+          self-end
+          items-center
+          justify-center
+          flex-col
+          p-[4rem]
+          h-[12vh]
+          w-[70vw]
+          mx-[2.5vw]
+          mb-[3vh]
+        "
+      ></div>
+    </div>
     <div
       class="
         border-2 border-black
         flex flex-row
         items-center
         justify-center
-        h-[80vh]
+        h-[78vh]
       "
     >
       <div
@@ -30,11 +33,12 @@
           flex flex-col
           items-center
           justify-center
-          h-[80vh]
+          h-[78vh]
           w-[30vw]
         "
       >
-        <p
+        <button
+          v-on:click="allPostsButton"
           class="
             border-2 border-black
             rounded-[1rem]
@@ -50,8 +54,9 @@
           "
         >
           All Posts
-        </p>
-        <p
+        </button>
+        <button
+          v-on:click="followersFollowingButton"
           class="
             border-2 border-black
             rounded-[1rem]
@@ -69,8 +74,9 @@
           Followers <br />
           & <br />
           Following
-        </p>
-        <p
+        </button>
+        <button
+          v-on:click="userSettingsButton"
           class="
             border-2 border-black
             rounded-[1rem]
@@ -86,7 +92,7 @@
           "
         >
           User Settings
-        </p>
+        </button>
       </div>
       <div
         class="
@@ -94,7 +100,7 @@
           flex flex-col
           items-center
           justify-center
-          h-[80vh]
+          h-[78vh]
         "
       >
         <div
@@ -112,7 +118,21 @@
             mx-[2.5vw]
             mb-[5vh]
           "
-        ></div>
+        >
+          <div v-if="this.allPosts == true">
+            <AllPosts />
+          </div>
+          <div v-else-if="this.followersFollowing == true">
+            <FollowersFollowing />
+          </div>
+          <div v-else-if="this.userSettings == true">
+            <UserSettings />
+          </div>
+          <div v-else>
+            There has been an error loading this part of the site. Please try
+            again Later
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -122,9 +142,28 @@
 export default {
   name: "Profile_Page",
   data() {
-    return {};
+    return {
+      allPosts: true,
+      followersFollowing: false,
+      userSettings: false,
+    };
   },
-  methods: {},
+  methods: {
+    allPostsButton() {
+      this.allPosts = true;
+      this.followersFollowing = false;
+      this.userSettings = false;
+    },
+    followersFollowingButton() {
+      this.allPosts = false;
+      this.followersFollowing = true;
+      this.userSettings = false;
+    },
+    userSettingsButton() {
+      this.allPosts = false;
+      this.followersFollowing = false;
+      this.userSettings = true;
+    },
+  },
 };
 </script>
-
