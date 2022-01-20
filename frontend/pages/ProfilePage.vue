@@ -1,6 +1,7 @@
 <template>
   <div class="bg-slate-500 max-h-max h-screen text-black">
     <div class="flex justify-center h-[22vh]">
+      <v-vanta effect="waves" :options="options"></v-vanta>
       <div
         class="
           border-2 border-black
@@ -26,7 +27,6 @@
         items-center
         justify-center
         h-[78vh]
-        
       "
     >
       <div
@@ -37,7 +37,6 @@
           justify-center
           h-[78vh]
           w-[30vw]
-          
         "
       >
         <button
@@ -107,7 +106,6 @@
           items-center
           justify-center
           h-[78vh]
-          
         "
       >
         <div
@@ -147,13 +145,23 @@
 </template>
 
 <script>
+import VVanta from "veu-vanta";
 export default {
+  components: { VVanta },
   name: "Profile_Page",
   data() {
     return {
       allPosts: true,
       followersFollowing: false,
       userSettings: false,
+      options: {
+        mouseControls: true,
+        touchControls: true,
+        minHeight: 500.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+      },
     };
   },
   methods: {
