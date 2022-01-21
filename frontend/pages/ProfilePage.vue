@@ -15,7 +15,7 @@
           h-[12vh]
           w-[70vw]
           mx-[2.5vw]
-          bg-[#fcf6f5]
+          bg-[#fbf6ea]
           mb-[3vh]
         "
       ></div>
@@ -53,7 +53,7 @@
             mx-[2.5vw]
             my-[5vh]
             w-[15vw]
-            bg-[#fcf6f5]
+            bg-[#fbf6ea]
           "
         >
           All Posts
@@ -72,7 +72,7 @@
             mx-[2.5vw]
             mb-[5vh]
             w-[15vw]
-            bg-[#fcf6f5]
+            bg-[#fbf6ea]
           "
         >
           Followers <br />
@@ -93,7 +93,7 @@
             mx-[2.5vw]
             mb-[5vh]
             w-[15vw]
-            bg-[#fcf6f5]
+            bg-[#fbf6ea]
           "
         >
           User Settings
@@ -145,9 +145,7 @@
 </template>
 
 <script>
-import VVanta from "veu-vanta";
 export default {
-  components: { VVanta },
   name: "Profile_Page",
   data() {
     return {
