@@ -14,10 +14,13 @@
     >
       <div class="flex flex-row items-center justify-between h-[5vh] w-[30vw]">
         <p class="text-[11px] relative">Color Theme</p>
-        <label class="toggle-control">
-          <input type="checkbox" checked="checked" />
-          <span class="control"></span>
-        </label>
+        <button class="dropdown">
+          <span>Mouse over me</span>
+          <div class="dropdown-content">
+            <p class="dropdown-item">Default</p>
+            <p class="dropdown-item">Custom</p>
+          </div>
+        </button>
       </div>
       <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
         <p class="text-[11px] relative top-[5px]">Privacy Policy</p>

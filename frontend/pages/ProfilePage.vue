@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-slate-500 max-h-max h-screen text-black">
-    <div class="flex justify-center h-[22vh]">
+  <div class="max-h-max h-screen text-black">
+    <div class="flex justify-center h-[22vh] bg-[#330066]">
       <div 
         class="
           border-2 border-black
@@ -26,16 +26,17 @@
         items-center
         justify-center
         h-[78vh]
+        w-[100%]
       "
     >
       <div
         class="
-          border-2 border-black
           flex flex-col
           items-center
           justify-center
           h-[78vh]
-          w-[30vw]
+          w-[20vw]
+          bg-[#330066]
         "
       >
         <button
@@ -100,11 +101,11 @@
       </div>
       <div
         class="
-          border-2 border-black
           flex flex-col
           items-center
           justify-center
           h-[78vh]
+          bg-[#330066]
         "
       >
         <div
