@@ -1,21 +1,38 @@
 <template>
-  <div class="flex items-center justify-center h-[100vh] text-center flex">
+  <div
+    class="flex items-center justify-center h-[70vh] w-[70vw] text-center flex"
+  >
     <div
       class="
-        flex flex-row
+        flex flex-col
         items-center
-        justify-center
-        h-[10vh]
-        w-[50vw]
-        left-[5px]
-        top-[5px]
+        justify-content
+        h-[70vh]
+        w-[70vw]
+        p-[10vh]
       "
     >
-      <p>Color Theme</p>
-      <label class="toggle-control">
-        <input type="checkbox" checked="checked" />
-        <span class="control"></span>
-      </label>
+      <div class="flex flex-row items-center justify-between h-[5vh] w-[30vw]">
+        <p class="text-[11px] relative">Color Theme</p>
+        <label class="toggle-control">
+          <input type="checkbox" checked="checked" />
+          <span class="control"></span>
+        </label>
+      </div>
+      <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
+        <p class="text-[11px] relative top-[5px]">Privacy Policy</p>
+        <button class="dropdown">
+          <span>Mouse over me</span>
+          <div class="dropdown-content">
+            <p class="dropdown-item">Set Account to Private</p>
+            <p class="dropdown-item">Only Allow Followers to View</p>
+            <p class="dropdown-item">
+              Only Allow Followers and Followers to View
+            </p>
+            <p class="dropdown-item">Allow Anyone to View</p>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +52,7 @@ export default {
   display: block;
   position: relative;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 11px;
 }
 .toggle-control input {
   opacity: 0;
@@ -44,28 +61,51 @@ export default {
   width: 0;
 }
 .toggle-control input:checked ~ .control {
-  background-color: dodgerblue;
+  background-color: #d1d1d1;
 }
 .toggle-control input:checked ~ .control:after {
-  left: 55px;
+  left: 27px;
 }
 .toggle-control .control {
-  position: absolute;
-  height: 50px;
-  width: 100px;
-  border-radius: 25px;
-  background-color: darkgray;
+  position: relative;
+  height: 25px;
+  width: 50px;
+  border-radius: 12px;
+  background-color: #1e1e1e;
   transition: background-color 0.15s ease-in;
 }
 .toggle-control .control:after {
   content: "";
   position: absolute;
-  left: 5px;
-  top: 5px;
-  width: 40px;
-  height: 40px;
-  border-radius: 25px;
+  width: 20px;
+  height: 20px;
+  border-radius: 12px;
   background: white;
   transition: left 0.15s ease-in;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-size: 11px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown:focus .dropdown-content {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+}
+.dropdown-item:hover {
+  background-color: #f1f1f1;
 }
 </style>
