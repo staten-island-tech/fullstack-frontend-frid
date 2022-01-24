@@ -1,7 +1,7 @@
 <template>
   <div class="bg-slate-500 max-h-max h-screen text-black">
     <div class="flex justify-center h-[22vh]">
-      <div
+      <div 
         class="
           border-2 border-black
           rounded-[1.5rem]
