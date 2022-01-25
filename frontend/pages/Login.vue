@@ -33,6 +33,7 @@
         Log In
       </button>
       <NuxtLink to="/SignUp"> Don't have an account? Sign Up </NuxtLink>
+      <NuxtLink to="/" class="mt-[2vh]"> Browse as guest </NuxtLink>
     </div>
   </div>
 </template>

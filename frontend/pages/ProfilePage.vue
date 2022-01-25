@@ -1,7 +1,9 @@
 <template>
+<div>
+ <Navbar/>
   <div class="max-h-max h-screen text-black">
     <div class="flex justify-center h-[22vh] bg-[#330066]">
-      <div 
+      <div id="blank-white-box"
         class="
           border-2 border-black
           rounded-[1.5rem]
@@ -14,28 +16,27 @@
           h-[12vh]
           w-[70vw]
           mx-[2.5vw]
-          bg-[#fbf6ea]
+          bg-white
           mb-[3vh]
         "
       ></div>
     </div>
-    <div
+    <div id="button/window-frame"
       class="
         border-2 border-black
         flex flex-row
         items-center
-        justify-center
         h-[78vh]
         w-[100%]
       "
     >
-      <div
+      <div id="button-frame"
         class="
           flex flex-col
           items-center
           justify-center
           h-[78vh]
-          w-[20vw]
+          w-[12vw]
           bg-[#330066]
         "
       >
@@ -50,10 +51,10 @@
             justify-center
             flex-col
             p-[1rem]
-            mx-[2.5vw]
-            my-[5vh]
-            w-[15vw]
-            bg-[#fbf6ea]
+            w-[10vw]
+            bg-white
+            my-[2vh]
+
           "
         >
           All Posts
@@ -69,10 +70,10 @@
             justify-center
             flex-col
             p-[1rem]
-            mx-[2.5vw]
-            mb-[5vh]
-            w-[15vw]
-            bg-[#fbf6ea]
+            w-[10vw]
+            bg-white
+            my-[2vh]
+
           "
         >
           Followers <br />
@@ -90,25 +91,26 @@
             justify-center
             flex-col
             p-[1rem]
-            mx-[2.5vw]
-            mb-[5vh]
-            w-[15vw]
-            bg-[#fbf6ea]
+            w-[10vw]
+            bg-white 
+            my-[2vh]
+
           "
         >
           User Settings
         </button>
       </div>
-      <div
+      <div id="window-frame"
         class="
           flex flex-col
           items-center
           justify-center
           h-[78vh]
           bg-[#330066]
+          w-[88vw]
         "
       >
-        <div
+        <div id="window"
           class="
             border-2 border-black
             rounded-[1.5rem]
@@ -122,7 +124,7 @@
             w-[70vw]
             mx-[2.5vw]
             mb-[5vh]
-            bg-[#fcf6f5]
+            bg-white
           "
         >
           <div v-if="this.allPosts == true">
@@ -141,6 +143,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 

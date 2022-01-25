@@ -22,6 +22,7 @@
         <NuxtLink to="/Login">
       Already have an account? Log In
       </NuxtLink>
+      <NuxtLink to="/" class="mt-[2vh]"> Browse as guest </NuxtLink>
 
     </div>
   </div>
