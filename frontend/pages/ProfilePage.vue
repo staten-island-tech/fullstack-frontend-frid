@@ -1,7 +1,7 @@
 <template>
 <div>
  <Navbar/>
-  <div class="max-h-max h-screen text-black">
+  <div class="h-[92vh] text-black">
     <div class="flex justify-center h-[22vh] bg-[#330066]">
       <div id="blank-white-box"
         class="

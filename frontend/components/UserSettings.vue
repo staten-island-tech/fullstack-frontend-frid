@@ -23,7 +23,7 @@
         </button>
       </div>
       <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
-        <p class="text-[11px] relative top-[5px]">Privacy Policy</p>
+        <p class="text-[11px] relative top-[5px]">Privacy Settings</p>
         <button class="dropdown">
           <span>Mouse over me</span>
           <div class="dropdown-content">
@@ -33,6 +33,27 @@
               Only Allow Followers and Followers to View
             </p>
             <p class="dropdown-item">Allow Anyone to View</p>
+          </div>
+        </button>
+      </div>
+      <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
+        <p class="text-[11px] relative top-[5px]">About</p>
+        <button class="dropdown">
+          <span>Mouse over me</span>
+          <div class="dropdown-content">
+            <p class="dropdown-item">Privacy Policy</p>
+            <p class="dropdown-item">Terms of Use</p>
+          </div>
+        </button>
+      </div>
+      <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
+        <p class="text-[11px] relative top-[5px]">Help</p>
+        <button class="dropdown">
+          <span>Mouse over me</span>
+          <div class="dropdown-content">
+            <p class="dropdown-item">Contact Support</p>
+            <p class="dropdown-item">Navigation Help</p>
+            <p class="dropdown-item">Suggestions</p>
           </div>
         </button>
       </div>
