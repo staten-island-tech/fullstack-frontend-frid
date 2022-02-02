@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar class="sticky top-0" />
-    <NuxtLink to="/ProfilePage"> Profile </NuxtLink>
+    <NuxtLink to="/ProfilePage2"> Profile </NuxtLink>
   </div>
 </template>
 
