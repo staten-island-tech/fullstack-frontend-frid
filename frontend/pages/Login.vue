@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center h-[100vh]">
+  <div class="flex items-center justify-center h-[100vh] bg-[#330066]">
     <div
       class="
         border-2 border-black
@@ -9,6 +9,7 @@
         justify-center
         flex-col
         p-[4rem]
+        bg-white
       "
     >
       <input
