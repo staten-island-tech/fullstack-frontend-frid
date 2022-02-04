@@ -4,8 +4,8 @@
     <div id="total-frame" class="flex flex-row">
       <div id="side-navbar" class="flex flex-col w-[12vw] h-[92vh] py-[10rem]">
         <button v-on:click="allPostsButton" class="border-2 bg-[#330066] text-white font-semibold rounded-[1.75rem] m-[2vh] p-[1rem] text-[1.5rem]">All Posts</button>
-        <button v-on:click="followersFollowingButton" class="border-2 bg-[#330066] text-white font-semibold rounded-[1.75rem] m-[2vh] p-[1rem] text-[1.5rem]">Followers</button>
-        <button v-on:click="followersFollowingButton" class="border-2 bg-[#330066] text-white font-semibold rounded-[1.75rem] m-[2vh] p-[1rem] text-[1.5rem]">Following</button>
+        <button v-on:click="followersButton" class="border-2 bg-[#330066] text-white font-semibold rounded-[1.75rem] m-[2vh] p-[1rem] text-[1.5rem]">Followers</button>
+        <button v-on:click="followingButton" class="border-2 bg-[#330066] text-white font-semibold rounded-[1.75rem] m-[2vh] p-[1rem] text-[1.5rem]">Following</button>
         <button v-on:click="userSettingsButton" class="border-2 bg-[#330066] text-white font-semibold rounded-[1.75rem] m-[2vh] p-[1rem] text-[1.5rem]">User Settings</button>
       </div>
       <div id="main-frame" class="w-[88vw] h-[92vh] flex flex-col bg-[#330066] items-center p-[1rem]">
@@ -14,8 +14,11 @@
           <div v-if="this.allPosts == true">
               <AllPosts />
             </div>
-            <div v-else-if="this.followersFollowing == true">
-              <FollowersFollowing />
+            <div v-else-if="this.followers == true">
+              <Followers />
+            </div>
+             <div v-else-if="this.following == true">
+              <Following />
             </div>
             <div v-else-if="this.userSettings == true">
               <UserSettings />
@@ -36,24 +39,34 @@ export default {
   data() {
     return {
       allPosts: true,
-      followersFollowing: false,
+      followers: false,
+      following: false,
       userSettings: false,
     };
   },
   methods: {
     allPostsButton() {
       this.allPosts = true;
-      this.followersFollowing = false;
+      this.followers = false;
+      this.following = false;
       this.userSettings = false;
     },
-    followersFollowingButton() {
+    followersButton() {
       this.allPosts = false;
-      this.followersFollowing = true;
+      this.following = false;
+      this.followers = true;
+      this.userSettings = false;
+    },
+    followingButton() {
+      this.allPosts = false;
+      this.following = true;
+      this.followers = false;
       this.userSettings = false;
     },
     userSettingsButton() {
       this.allPosts = false;
-      this.followersFollowing = false;
+      this.followers = false;
+      this.following = false;
       this.userSettings = true;
     },
   },

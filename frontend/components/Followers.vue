@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center h-[100vh] text-center">
     <p>
-      Followers | Following <br />
+      Followers<br />
       Expected Completion: TBD
     </p>
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "FollowersFollowing",
+  name: "Followers",
   data() {
     return {};
   },
