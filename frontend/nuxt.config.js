@@ -46,4 +46,7 @@ export default {
   build: {
     postcss: { plugins: { tailwindcss: {}, autoprefixer: {} } },
   },
+  server: {
+    port: 8000,
+  },
 };
