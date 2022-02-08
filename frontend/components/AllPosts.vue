@@ -15,15 +15,19 @@ export default {
     return {};
   },
   methods: {
-    test: async function () {
-      try {
-        const res = fetch("http://127.0.0.1:3000/api/v1/posts");
-        console.log(res);
-        const data = await res.json;
-        console.log(data);
-      } catch (error) {
-        cosnole.log(error);
-      }
+    test() {
+      var requestOptions = {
+        method: "GET",
+        redirect: "manual",
+      };
+
+      fetch(
+        "http://127.0.0.1:3000/api/v1/posts/61f8189703d081773c990899",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
     },
   },
 };
