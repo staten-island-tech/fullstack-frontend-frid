@@ -30,7 +30,7 @@
       <span v-on:click="downvote" class="text-red-500 text-3xl cursor-pointer"
         >&#8595;</span
       >
-      <span v-if="(comments = true)" class="text-sm p-[6vw]">
+      <span v-if="(comments === true)" class="text-sm p-[6vw]">
         There are {{ commentCount }} comments
       </span>
       <div v-else>There are no comments yet.</div>
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       comments: true,
-      commentCount: 17,
+      commentCount: 0,
       Musics: [
         {
           name: "Piano Concerto No.21 in C Major, K.467: II. Andante",
@@ -70,7 +70,12 @@ export default {
           artist: "Wolfgang Amadeus Mozart",
           duration: "8:37",
         },
+       
       ],
+       requestOptions: {
+        method: "GET",
+        redirect: "follow",
+      },
     };
   },
   methods: {
@@ -79,11 +84,27 @@ export default {
       console.log(nameTest);
     },
     upvote() {
-      console.log("upvote");
+      //console.log("upvote");  
+      fetch(
+        "http://127.0.0.1:3000/api/v1/posts/61f8189703d081773c990899",
+        this.requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => console.log(result.data.post.totalLikes))
+        .catch((error) => console.log("error", error));
+
     },
     downvote() {
       console.log("downvote");
     },
+    commentFunction() {
+      if (this.commentCount === 0 ){
+        this.comments === false
+      } 
+    },
+  },
+  created () {
+    this.commentFunction();
   },
 };
 </script>
