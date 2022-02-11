@@ -24,10 +24,10 @@
     </div>
     <section class="bg-black h-[1px]"></section>
     <div class="bg-white h-[6vh] w-[30vw]">
-      <span v-on:click="upvote" class="text-red-500 text-3xl cursor-pointer"
+      <span v-on:click="like" class="text-red-500 text-3xl cursor-pointer"
         >&#8593;</span
       >
-      <span v-on:click="downvote" class="text-red-500 text-3xl cursor-pointer"
+      <span v-on:click="dislike" class="text-red-500 text-3xl cursor-pointer"
         >&#8595;</span
       >
       <span v-if="(comments === true)" class="text-sm p-[6vw]">
@@ -83,8 +83,8 @@ export default {
       const nameTest = Object.values(this.Musics);
       console.log(nameTest);
     },
-    upvote() {
-      //console.log("upvote");  
+    like() {
+      //console.log("like");  
       fetch(
         "http://127.0.0.1:3000/api/v1/posts/61f8189703d081773c990899",
         this.requestOptions
@@ -94,8 +94,8 @@ export default {
         .catch((error) => console.log("error", error));
 
     },
-    downvote() {
-      console.log("downvote");
+    dislike() {
+      console.log("dislike");
     },
     commentFunction() {
       if (this.commentCount === 0 ){
