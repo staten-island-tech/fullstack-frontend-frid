@@ -24,7 +24,7 @@
     </div>
     <section class="bg-black h-[1px]"></section>
     <div class="bg-white h-[6vh] w-[30vw]">
-      <span v-on:click="like" class="text-red-500 text-3xl cursor-pointer"
+      <span v-on:click="like" @mouseover="getLikes" class="text-red-500 text-3xl cursor-pointer"
         >&#8593;</span
       >
       <span v-on:click="dislike" class="text-red-500 text-3xl cursor-pointer"
@@ -84,27 +84,70 @@ export default {
       console.log(nameTest);
     },
     like() {
-      //console.log("like");  
-      fetch(
-        "http://127.0.0.1:3000/api/v1/posts/61f8189703d081773c990899",
-        this.requestOptions
-      )
-        .then((response) => response.json())
-        .then((result) => console.log(result.data.post.totalLikes))
-        .catch((error) => console.log("error", error));
 
-    },
-    dislike() {
-      console.log("dislike");
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "totalLikes": 7000
+});
+
+var requestOptions = {
+  method: 'PATCH',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://127.0.0.1:3000/api/v1/posts/61f818b832b4834430359865", requestOptions)
+  .then(response => response.json())
+  .then(result => console.log("There are " + result.data.post.totalLikes + " likes"))
+  .catch(error => console.log('error', error));
     },
     commentFunction() {
       if (this.commentCount === 0 ){
         this.comments === false
       } 
     },
+
+    dislike() {
+      
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "totalDislikes": 2500
+});
+
+var requestOptions = {
+  method: 'PATCH',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://127.0.0.1:3000/api/v1/posts/61f818b832b4834430359865", requestOptions)
+  .then(response => response.json())
+  .then(result => console.log("There are " + result.data.post.totalDislikes + " dislikes"))
+  .catch(error => console.log('error', error));
+    },
+
   },
   created () {
     this.commentFunction();
+  },
+  getLikes () {
+    var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+   fetch(
+        "http://127.0.0.1:3000/api/v1/posts/61f818b832b4834430359865",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => console.log(result.data.post.totalLikes))
+        .catch((error) => console.log("error", error));
   },
 };
 </script>
