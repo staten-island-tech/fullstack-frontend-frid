@@ -22,7 +22,7 @@ export default {
   methods: {
     test() {
       fetch(
-        "http://127.0.0.1:3000/api/v1/posts/61f8189703d081773c990899",
+        "http://127.0.0.1:3000/api/v1/posts/61f818b832b4834430359865",
         this.requestOptions
       )
         .then((response) => response.json())
