@@ -79,8 +79,13 @@ export default {
         requestOptionsOne
       )
         .then((response) => response.json())
-        .then((result) => console.log(result.data.post.totalLikes))
-        .then 
+        .then((result) => this.likes == result.data.post.totalLikes)
+        .catch((error) => console.log("error", error));
+        console.log(this.likes);
+  
+        
+    },
+    dislike() {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
