@@ -40,11 +40,11 @@ export default {
         method: "GET",
         redirect: "follow",
       },
-      likes: null,
+      likes: 0,
     };
   },
   methods: {
-    like() {
+    like: async function() {
       // var myHeaders = new Headers();
       // myHeaders.append("Content-Type", "application/json");
 
@@ -74,14 +74,24 @@ export default {
         redirect: "follow",
       };
 
-      fetch(
-        "http://127.0.0.1:3000/api/v1/posts/61f818b832b4834430359865",
-        requestOptionsOne
-      )
-        .then((response) => response.json())
-        .then((result) => this.likes == result.data.post.totalLikes)
-        .catch((error) => console.log("error", error));
-        console.log(this.likes);
+      var requestOptionsTwo = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch("http://127.0.0.1:3000/api/v1/posts/61f818b832b4834430359865",requestOptionsOne);
+        const result = await response.json();
+        const ogLikes = result.data.post.totalLikes;
+        console.log(ogLikes);
+        this.likes = ogLikes + 1;
+        console.log(this.likes)
+      } catch (error) {
+        console.log(error)
+      };
+     
   
         
     },
