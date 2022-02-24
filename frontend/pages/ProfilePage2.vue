@@ -8,7 +8,7 @@
         <button v-on:click="followingButton" class="border-2 bg-[#330066] text-white font-semibold rounded-[1.75rem] m-[2vh] p-[1rem] text-[1.5rem]">Following</button>
         <button v-on:click="userSettingsButton" class="border-2 bg-[#330066] text-white font-semibold rounded-[1.75rem] m-[2vh] p-[1rem] text-[1.5rem]">User Settings</button>
       </div>
-      <div id="main-frame" class="w-[88vw] h-[92vh] flex flex-col bg-[#330066] items-center p-[1rem]">
+      <div id="main-frame" class="rounded-tl-[5.13rem] w-[88vw] h-[92vh] flex flex-col bg-[#330066] items-center p-[1rem]">
         <div id="blank-box" class="w-[70vw] border-2 bg-white h-[12vh] rounded-[1.5rem] my-[1rem]"></div>  
         <div id="window" class="w-[70vw] border-2 bg-white h-[70vh] rounded-[1.5rem] mt-[1rem] flex items-center justify-center">
           <div v-if="this.allPosts == true">
