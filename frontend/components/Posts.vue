@@ -45,12 +45,12 @@ export default {
   },
   methods: {
     like: async function() {
-      // var myHeaders = new Headers();
-      // myHeaders.append("Content-Type", "application/json");
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-      // var raw = JSON.stringify({
-      //   totalLikes: 7000,
-      // });
+      var raw = JSON.stringify({
+        totalLikes: 7000,
+      });
 
       // var requestOptions = {
       //   method: "PATCH",
@@ -82,7 +82,7 @@ export default {
       };
 
       try {
-        const response = await fetch("http://127.0.0.1:3000/api/v1/posts/61f818b832b4834430359865",requestOptionsOne);
+        const response = await fetch("http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",requestOptionsOne);
         const result = await response.json();
         const ogLikes = result.data.post.totalLikes;
         console.log(ogLikes);
