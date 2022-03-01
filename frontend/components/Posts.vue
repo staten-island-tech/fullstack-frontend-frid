@@ -41,6 +41,7 @@ export default {
         redirect: "follow",
       },
       likes: 0,
+      test: 400,
     };
   },
   methods: {
@@ -49,48 +50,55 @@ export default {
       myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
-        totalLikes: 7000,
+        totalLikes: this.test,
       });
 
-      // var requestOptions = {
-      //   method: "PATCH",
-      //   headers: myHeaders,
-      //   body: raw,
-      //   redirect: "follow",
-      // };
-
-      // fetch(
-      //   "http://127.0.0.1:3000/api/v1/posts/61f818b832b4834430359865",
-      //   requestOptions
-      // )
-      //   .then((response) => response.json())
-      //   .then((result) =>
-      //     console.log("There are " + result.data.post.totalLikes + " likes")
-      //   )
-      //   .catch((error) => console.log("error", error));
-
-      var requestOptionsOne = {
-        method: "GET",
-        redirect: "follow",
-      };
-
-      var requestOptionsTwo = {
+      var requestOptions = {
         method: "PATCH",
         headers: myHeaders,
         body: raw,
         redirect: "follow",
       };
 
-      try {
-        const response = await fetch("http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",requestOptionsOne);
-        const result = await response.json();
-        const ogLikes = result.data.post.totalLikes;
-        console.log(ogLikes);
-        this.likes = ogLikes + 1;
-        console.log(this.likes)
-      } catch (error) {
-        console.log(error)
-      };
+      fetch(
+        "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) =>
+          console.log("There are " + result.data.post.totalLikes + " likes")
+        )
+        .catch((error) => console.log("error", error));
+
+      // var requestOptionsOne = {
+      //   method: "GET",
+      //   redirect: "follow",
+      // };
+
+      // var requestOptionsTwo = {
+      //   method: "PATCH",
+      //   headers: myHeaders,
+      //   body: raw,
+      //   redirect: "follow",
+      // };
+
+      // try {
+      //   const response = await fetch("http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",requestOptionsOne);
+      //   const result = await response.json();
+      //   const ogLikes = result.data.post.totalLikes;
+      //   console.log(ogLikes);
+      //   this.likes = ogLikes + 1;
+      //   console.log(this.likes)
+      // } catch (error) {
+      //   console.log(error)
+      // };
+
+      // var myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "application/json");
+
+      // // var raw = JSON.stringify({
+      // // totalLikes: this.test,
+      // //  });
      
   
         
@@ -111,7 +119,7 @@ export default {
       };
 
       fetch(
-        "http://127.0.0.1:3000/api/v1/posts/61f818b832b4834430359865",
+        "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
         requestOptions
       )
         .then((response) => response.json())
