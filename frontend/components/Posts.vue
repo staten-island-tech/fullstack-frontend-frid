@@ -35,13 +35,22 @@
 <script>
 export default {
   data() {
+    
     return {
-      requestOptions: {
+      likes: 0,
+      localLikes: null,
+      test: null,
+      requestOptionsPatch = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      },
+      requestOptionsGet = {
         method: "GET",
         redirect: "follow",
       },
-      likes: 0,
-      test: 400,
+
     };
   },
   methods: {
@@ -49,26 +58,41 @@ export default {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
+
+      try { 
+      const response = await fetch(
+        "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+        this.requestOptionsGet
+      );
+      const result = await response.json()
+      console.log("There are " + result.data.post.totalLikes + " likes" )
+      this.localLikes = result.data.post.totalLikes;
+
+      } catch (error) {
+        console.log(error)
+      };
+
+      
+
+
+      this.test = this.localLikes + 1; 
+
       var raw = JSON.stringify({
         totalLikes: this.test,
       });
 
-      var requestOptions = {
-        method: "PATCH",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-      };
 
-      fetch(
+      try { 
+      const response = await fetch(
         "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((result) =>
-          console.log("There are " + result.data.post.totalLikes + " likes")
-        )
-        .catch((error) => console.log("error", error));
+        this.requestOptionsPatch
+      );
+      const result = await response.json()
+      console.log("There are " + result.data.post.totalLikes + " likes" )
+
+      } catch (error) {
+        console.log(error)
+      };
 
       // var requestOptionsOne = {
       //   method: "GET",
