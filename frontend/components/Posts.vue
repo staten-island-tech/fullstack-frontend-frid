@@ -25,7 +25,7 @@
       <span v-on:click="dislike" class="text-red-500 text-3xl cursor-pointer"
         >&#8595;</span
       >
-      <span class="text-sm p-[6vw]">
+      <span v-on:click="commentStylesOpen" class="text-sm p-[6vw]">
         There are 0 comments
       </span>
     </div>
@@ -37,20 +37,20 @@ export default {
   data() {
     
     return {
-      likes: 0,
       localLikes: null,
-      test: null,
-      requestOptionsPatch = {
-        method: "PATCH",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
+      localDislikes: null,
+      tempLikes: null,
+      tempDislikes: null,
+      localComments: null,
+      commentStyle: {
+        display: "none",
       },
-      requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
+      commentStyleOpen: {
+        display: "flex",
       },
-
+      commentStyleClosed: {
+        display: "none",
+      },
     };
   },
   methods: {
@@ -58,11 +58,16 @@ export default {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
+      
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
 
       try { 
       const response = await fetch(
         "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-        this.requestOptionsGet
+        requestOptionsGet
       );
       const result = await response.json()
       console.log("There are " + result.data.post.totalLikes + " likes" )
@@ -75,17 +80,24 @@ export default {
       
 
 
-      this.test = this.localLikes + 1; 
+      this.tempLikes = this.localLikes + 1; 
 
       var raw = JSON.stringify({
-        totalLikes: this.test,
+        totalLikes: this.tempLikes,
       });
+
+      var requestOptionsPatch = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
 
 
       try { 
       const response = await fetch(
         "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-        this.requestOptionsPatch
+        requestOptionsPatch
       );
       const result = await response.json()
       console.log("There are " + result.data.post.totalLikes + " likes" )
@@ -93,67 +105,65 @@ export default {
       } catch (error) {
         console.log(error)
       };
-
-      // var requestOptionsOne = {
-      //   method: "GET",
-      //   redirect: "follow",
-      // };
-
-      // var requestOptionsTwo = {
-      //   method: "PATCH",
-      //   headers: myHeaders,
-      //   body: raw,
-      //   redirect: "follow",
-      // };
-
-      // try {
-      //   const response = await fetch("http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",requestOptionsOne);
-      //   const result = await response.json();
-      //   const ogLikes = result.data.post.totalLikes;
-      //   console.log(ogLikes);
-      //   this.likes = ogLikes + 1;
-      //   console.log(this.likes)
-      // } catch (error) {
-      //   console.log(error)
-      // };
-
-      // var myHeaders = new Headers();
-      // myHeaders.append("Content-Type", "application/json");
-
-      // // var raw = JSON.stringify({
-      // // totalLikes: this.test,
-      // //  });
      
-  
-        
     },
-    dislike() {
+
+     dislike: async function() {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
+      
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try { 
+      const response = await fetch(
+        "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+        requestOptionsGet
+      );
+      const result = await response.json()
+      console.log("There are " + result.data.post.totalDislikes + " dislikes" )
+      this.localDislikes = result.data.post.totalDislikes;
+
+      } catch (error) {
+        console.log(error)
+      };
+
+      
+
+
+      this.tempDislikes = this.localDislikes + 1; 
+
       var raw = JSON.stringify({
-        totalDislikes: 2500,
+        totalDislikes: this.tempDislikes,
       });
 
-      var requestOptions = {
+      var requestOptionsPatch = {
         method: "PATCH",
         headers: myHeaders,
         body: raw,
         redirect: "follow",
       };
 
-      fetch(
+
+      try { 
+      const response = await fetch(
         "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((result) =>
-          console.log(
-            "There are " + result.data.post.totalDislikes + " dislikes"
-          )
-        )
-        .catch((error) => console.log("error", error));
+        requestOptionsPatch
+      );
+      const result = await response.json()
+      console.log("There are " + result.data.post.totalDislikes + " dislikes" )
+
+      } catch (error) {
+        console.log(error)
+      };
+     
     },
+
+
+   
   },
 };
 </script>
