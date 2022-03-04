@@ -3,6 +3,7 @@
     id="main-div"
     class="bg-slate-500 h-[42vh] w-[30vw] flex flex-col justify-center border-2 border-red-500"
   >
+    <div id="userName" class="">{{this.userName}}</div>
     <div class="bg-white h-[4vh] w-[30vw]"></div>
     <section class="bg-black h-[1px]"></section>
     <div class="bg-white h-[32vh] w-[30vw]">
@@ -25,9 +26,15 @@
       <span v-on:click="dislike" class="text-red-500 text-3xl cursor-pointer"
         >&#8595;</span
       >
+    <div
+      id="form"
+      class="flex flex-col w-[100vw] h-[50vh] bg-slate-200 items-center"
+      v-bind:style="commentStyle"
+    ></div>
       <span v-on:click="commentStylesOpen" class="text-sm p-[6vw]">
         There are 0 comments
       </span>
+      <button v-on:click="commentStylesClosed">X</button>
     </div>
   </div>
 </template>
@@ -42,6 +49,7 @@ export default {
       tempLikes: null,
       tempDislikes: null,
       localComments: null,
+      userName: null,
       commentStyle: {
         display: "none",
       },
@@ -54,6 +62,29 @@ export default {
     };
   },
   methods: {
+
+    username: async function() {
+       var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try { 
+      const response = await fetch(
+        "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+        requestOptionsGet
+      );
+      const result = await response.json()
+      console.log(result.data.post.userName)
+      this.userName = result.data.post.userName;
+
+      } catch (error) {
+        console.log(error)
+      };
+
+
+    },
+
     like: async function() {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -162,8 +193,19 @@ export default {
      
     },
 
+    commentStylesOpen() {
+      this.commentStyle = this.commentStyleOpen;
+    },
+    commentStylesClosed() {
+      this.commentStyle = this.commentStyleClosed;
+    },
+
 
    
+  },
+
+  created () {
+    this.username();
   },
 };
 </script>
