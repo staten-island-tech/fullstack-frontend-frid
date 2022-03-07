@@ -28,9 +28,23 @@
       >
     <div
       id="form"
-      class="flex flex-col w-[100vw] h-[50vh] bg-slate-200 items-center"
+      class="flex flex-col w-[100vw] h-[10vh] bg-slate-200 items-center"
       v-bind:style="commentStyle"
-    ></div>
+    >
+      <div id="input-container" class="flex flex-col w-[50vw] items-center mt-[1rem]">
+          <div class="h-[35vh]">
+            <div class="flex flex-row">
+              <input
+                type="text"
+                placeholder="Write Comment"
+                class="w-[50vw] mx-[1vw]"
+                v-model="commentInput"
+              />
+              <button @click="addComment">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <span v-on:click="commentStylesOpen" class="text-sm p-[6vw]">
         There are 0 comments
       </span>
@@ -50,6 +64,8 @@ export default {
       tempDislikes: null,
       localComments: null,
       userName: null,
+      comments: [],
+      commentInput: null,
       commentStyle: {
         display: "none",
       },
@@ -190,7 +206,6 @@ export default {
       } catch (error) {
         console.log(error)
       };
-     
     },
 
     commentStylesOpen() {
@@ -199,9 +214,10 @@ export default {
     commentStylesClosed() {
       this.commentStyle = this.commentStyleClosed;
     },
-
-
-   
+    addComment() {
+      this.comments.push(this.commentInput);
+      console.log(this.comments);
+    },   
   },
 
   created () {
