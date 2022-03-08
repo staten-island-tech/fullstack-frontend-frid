@@ -20,6 +20,7 @@
     <div class="bg-white h-[6vh] w-[30vw]">
       <span
         v-on:click="like"
+        v-on:hover=""
         class="text-red-500 text-3xl cursor-pointer"
         >&#8593;</span
       >
@@ -64,6 +65,7 @@ export default {
       tempDislikes: null,
       localComments: null,
       userName: null,
+      hover: false,
       comments: [],
       commentInput: null,
       commentStyle: {
@@ -79,6 +81,8 @@ export default {
   },
   methods: {
 
+
+
     username: async function() {
        var requestOptionsGet = {
         method: "GET",
@@ -93,6 +97,7 @@ export default {
       const result = await response.json()
       console.log(result.data.post.userName)
       this.userName = result.data.post.userName;
+      console.log(this.userName)
 
       } catch (error) {
         console.log(error)
@@ -153,6 +158,12 @@ export default {
         console.log(error)
       };
      
+    },
+
+    likesHover: function(){
+      if (this.hover = false)
+
+      
     },
 
      dislike: async function() {
