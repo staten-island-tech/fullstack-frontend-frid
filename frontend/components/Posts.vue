@@ -18,14 +18,16 @@
     </div>
     <section class="bg-black h-[1px]"></section>
     <div class="bg-white h-[6vh] w-[30vw]">
-      <span
+      <button
         v-on:click="like"
-        v-on:hover=""
+        v-on:mouseover="active = !active"
         class="text-red-500 text-3xl cursor-pointer"
-        >&#8593;</span
+        >&#8593;</button
       >
-      <span v-on:click="dislike" class="text-red-500 text-3xl cursor-pointer"
-        >&#8595;</span
+      <span v-if="active">{{this.tempLikes}}</span>
+
+      <button v-on:click="dislike" class="text-red-500 text-3xl cursor-pointer"
+        >&#8595;</button
       >
     <div
       id="form"
@@ -65,7 +67,7 @@ export default {
       tempDislikes: null,
       localComments: null,
       userName: null,
-      hover: false,
+      active: false,
       comments: [],
       commentInput: null,
       commentStyle: {
@@ -80,7 +82,6 @@ export default {
     };
   },
   methods: {
-
 
 
     username: async function() {
@@ -158,12 +159,6 @@ export default {
         console.log(error)
       };
      
-    },
-
-    likesHover: function(){
-      if (this.hover = false)
-
-      
     },
 
      dislike: async function() {
