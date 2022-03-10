@@ -116,6 +116,57 @@
   </div> -->
   <div>
     <Navbar />
+    <div id="sidecar" class="flex flex-col w-[10vw] h-[80vh]">
+      <span class="w-[10vw] h-[15vh] bg-[#eeeeee]"></span>
+      <button
+        class="
+          mx-[1rem]
+          text-[1.25rem]
+          p-[0.75rem]
+          text-[#3a2d80]
+          font-semibold
+          w-[10vw]
+        "
+      >
+        Followers
+      </button>
+      <button
+        class="
+          mx-[1rem]
+          text-[1.25rem]
+          p-[0.75rem]
+          text-[#3a2d80]
+          font-semibold
+          w-[10vw]
+        "
+      >
+        All Posts
+      </button>
+      <button
+        class="
+          mx-[1rem]
+          text-[1.25rem]
+          p-[0.75rem]
+          text-[#3a2d80]
+          font-semibold
+          w-[10vw]
+        "
+      >
+        Following
+      </button>
+      <button
+        class="
+          mx-[1rem]
+          text-[1.25rem]
+          p-[0.75rem]
+          text-[#3a2d80]
+          font-semibold
+          w-[10vw]
+        "
+      >
+        User Settings
+      </button>
+    </div>
   </div>
 </template>
 
