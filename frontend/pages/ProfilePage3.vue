@@ -114,55 +114,111 @@
       </div>
     </div>
   </div> -->
-  <div>
+  <div class="bg-[#eeeeee]">
     <Navbar />
-    <div id="sidecar" class="flex flex-col w-[10vw] h-[80vh]">
-      <span class="w-[10vw] h-[15vh] bg-[#eeeeee]"></span>
+    <div id="sidecar" class="flex flex-col align-center w-[10vw] h-[92vh]">
+      <span
+        class="
+          w-[7.5vw]
+          h-[12.5vh]
+          bg-[#6957e7]
+          rounded-[15rem]
+          mx-[2.5vw]
+          mt-[5vh]
+          mb-[2.5vh]
+        "
+      ></span>
+      <div>
+        <p
+          id="username"
+          class="
+            mx-[1rem]
+            text-[.85rem] text-[#3a2d80]
+            font-semibold
+            w-[7.5vw]
+            flex
+            relative
+            left-[1.5vw]
+            font-lora
+            brightness-50
+          "
+        >
+          Ox2bc#3253
+        </p>
+        <p
+          id="bio"
+          class="
+            mx-[1rem]
+            text-[.75rem] text-[#3a2d80]
+            font-normal
+            w-[7.5vw]
+            flex
+            relative
+            left-[1.5vw]
+            font-lora
+            brightness-50
+          "
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </p>
+      </div>
       <button
         class="
           mx-[1rem]
-          text-[1.25rem]
-          p-[0.75rem]
-          text-[#3a2d80]
-          font-semibold
+          my-[2rem]
+          text-[1.25rem] text-[#3a2d80]
+          font-medium
           w-[10vw]
+          inline-block
+          relative
+          font-lora
         "
+        id="hover-underline-animation"
       >
         Followers
       </button>
       <button
         class="
           mx-[1rem]
-          text-[1.25rem]
-          p-[0.75rem]
-          text-[#3a2d80]
-          font-semibold
+          my-[2rem]
+          text-[1.25rem] text-[#3a2d80]
+          font-medium
           w-[10vw]
+          inline-block
+          relative
+          font-lora
         "
-      >
-        All Posts
-      </button>
-      <button
-        class="
-          mx-[1rem]
-          text-[1.25rem]
-          p-[0.75rem]
-          text-[#3a2d80]
-          font-semibold
-          w-[10vw]
-        "
+        id="hover-underline-animation"
       >
         Following
       </button>
       <button
         class="
           mx-[1rem]
-          text-[1.25rem]
-          p-[0.75rem]
-          text-[#3a2d80]
-          font-semibold
+          my-[2rem]
+          text-[1.25rem] text-[#3a2d80]
+          font-medium
           w-[10vw]
+          inline-block
+          relative
+          font-lora
         "
+        id="hover-underline-animation"
+      >
+        All Posts
+      </button>
+      <button
+        class="
+          mx-[1rem]
+          my-[2rem]
+          text-[1.25rem] text-[#3a2d80]
+          font-medium
+          w-[10vw]
+          inline-block
+          relative
+          font-lora
+        "
+        id="hover-underline-animation"
       >
         User Settings
       </button>
@@ -209,3 +265,23 @@ export default {
   },
 };
 </script>
+
+<style>
+#hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #3a2d80;
+  transform-origin: bottom right;
+  transition: transform 0.35s ease-out;
+}
+
+#hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+</style>
