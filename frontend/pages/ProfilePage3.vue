@@ -119,10 +119,10 @@
     <div id="sidecar" class="flex flex-col align-center w-[10vw] h-[92vh]">
       <span
         class="
-          w-[7.5vw]
+          w-[12.5vh]
           h-[12.5vh]
           bg-[#6957e7]
-          rounded-[15rem]
+          rounded-[100%]
           mx-[2.5vw]
           mt-[5vh]
           mb-[2.5vh]
@@ -133,7 +133,7 @@
           id="username"
           class="
             mx-[1rem]
-            text-[.85rem] text-[#3a2d80]
+            text-[.95rem] text-[#3a2d80]
             font-semibold
             w-[7.5vw]
             flex
@@ -159,7 +159,8 @@
             brightness-50
           "
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit
         </p>
       </div>
       <button
