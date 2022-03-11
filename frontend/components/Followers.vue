@@ -4,6 +4,7 @@
       Followers<br />
       Expected Completion: TBD
     </p>
+    <button @click="spotifyTest">SPOTIFy test</button>
   </div>
 </template>
 
@@ -13,6 +14,21 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    spotifyTest: async function () {
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch("", requestOptionsGet);
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 };
 </script>
