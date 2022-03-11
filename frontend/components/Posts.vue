@@ -4,6 +4,7 @@
     class="bg-slate-500 h-[42vh] w-[30vw] flex flex-col justify-center border-2 border-red-500"
   >
     <div id="userName" class="">{{this.userName}}</div>
+    <div id="postName" class="">{{this.postName}}</div> 
     <div class="bg-white h-[4vh] w-[30vw]"></div>
     <section class="bg-black h-[1px]"></section>
     <div class="bg-white h-[32vh] w-[30vw]">
@@ -68,6 +69,7 @@ export default {
       tempDislikes: null,
       localComments: null,
       userName: null,
+      postName: null,
       songList: null,
       comments: [],
       commentInput: null,
@@ -108,6 +110,28 @@ export default {
 
     },
 
+    postname: async function() {
+       var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try { 
+      const response = await fetch(
+        "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+        requestOptionsGet
+      );
+      const result = await response.json()
+      this.postName = result.data.post.postName;
+      console.log(this.postName)
+
+      } catch (error) {
+        console.log(error)
+      };
+
+
+    },
+
     songs: async function() {
       var requestOptionsGet = {
         method: "GET",
@@ -120,7 +144,7 @@ export default {
         requestOptionsGet
       );
       const result = await response.json()
-      console.log(result.data.post.songs)
+      console.log(result.data.post)
       // this.songList = result.data.post.songs.songName;
 
       } catch (error) {
@@ -249,6 +273,7 @@ export default {
 
   created () {
     this.username();
+    this.postname();
     this.songs();
   },
 };
