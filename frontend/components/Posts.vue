@@ -10,7 +10,8 @@
       <ul
         id="track-list"
         class="text-xs max-h-[32vh] overflow-y-scroll overflow-x-scroll"
-      >
+      >{{this.songList}}
+        
         <!-- <li v-for="Music in Musics" :key="Music">
           {{ Music.name }} - {{ Music.artist }} - {{ Music.duration }}
         </li> -->
@@ -20,15 +21,15 @@
     <div class="bg-white h-[6vh] w-[30vw]">
       <button
         v-on:click="like"
-        v-on:mouseover="active = !active"
         class="text-red-500 text-3xl cursor-pointer"
         >&#8593;</button
       >
-      <span v-if="active">{{this.tempLikes}}</span>
+      <span>{{this.tempLikes}}</span>
 
       <button v-on:click="dislike" class="text-red-500 text-3xl cursor-pointer"
         >&#8595;</button
       >
+      <span>{{this.tempDislikes}}</span>
     <div
       id="form"
       class="flex flex-col w-[100vw] h-[10vh] bg-slate-200 items-center"
@@ -67,7 +68,7 @@ export default {
       tempDislikes: null,
       localComments: null,
       userName: null,
-      active: false,
+      songList: null,
       comments: [],
       commentInput: null,
       commentStyle: {
@@ -105,6 +106,26 @@ export default {
       };
 
 
+    },
+
+    songs: async function() {
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try { 
+      const response = await fetch(
+        "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+        requestOptionsGet
+      );
+      const result = await response.json()
+      console.log(result.data.post.songs)
+      // this.songList = result.data.post.songs.songName;
+
+      } catch (error) {
+        console.log(error)
+      };
     },
 
     like: async function() {
@@ -228,6 +249,7 @@ export default {
 
   created () {
     this.username();
+    this.songs();
   },
 };
 </script>
