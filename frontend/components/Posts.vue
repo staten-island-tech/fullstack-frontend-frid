@@ -4,13 +4,15 @@
     class="bg-slate-500 h-[42vh] w-[30vw] flex flex-col justify-center border-2 border-red-500"
   >
     <div id="userName" class="">{{this.userName}}</div>
+    <div id="postName" class="">{{this.postName}}</div> 
     <div class="bg-white h-[4vh] w-[30vw]"></div>
     <section class="bg-black h-[1px]"></section>
     <div class="bg-white h-[32vh] w-[30vw]">
       <ul
         id="track-list"
         class="text-xs max-h-[32vh] overflow-y-scroll overflow-x-scroll"
-      >
+      >{{this.songList}}
+        
         <!-- <li v-for="Music in Musics" :key="Music">
           {{ Music.name }} - {{ Music.artist }} - {{ Music.duration }}
         </li> -->
@@ -18,19 +20,36 @@
     </div>
     <section class="bg-black h-[1px]"></section>
     <div class="bg-white h-[6vh] w-[30vw]">
-      <span
+      <button
         v-on:click="like"
         class="text-red-500 text-3xl cursor-pointer"
-        >&#8593;</span
+        >&#8593;</button
       >
-      <span v-on:click="dislike" class="text-red-500 text-3xl cursor-pointer"
-        >&#8595;</span
+      <span>{{this.tempLikes}}</span>
+
+      <button v-on:click="dislike" class="text-red-500 text-3xl cursor-pointer"
+        >&#8595;</button
       >
+      <span>{{this.tempDislikes}}</span>
     <div
       id="form"
-      class="flex flex-col w-[100vw] h-[50vh] bg-slate-200 items-center"
+      class="flex flex-col w-[100vw] h-[10vh] bg-slate-200 items-center"
       v-bind:style="commentStyle"
-    ></div>
+    >
+      <div id="input-container" class="flex flex-col w-[50vw] items-center mt-[1rem]">
+          <div class="h-[35vh]">
+            <div class="flex flex-row">
+              <input
+                type="text"
+                placeholder="Write Comment"
+                class="w-[50vw] mx-[1vw]"
+                v-model="commentInput"
+              />
+              <button @click="addComment">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <span v-on:click="commentStylesOpen" class="text-sm p-[6vw]">
         There are 0 comments
       </span>
@@ -50,6 +69,10 @@ export default {
       tempDislikes: null,
       localComments: null,
       userName: null,
+      postName: null,
+      songList: null,
+      comments: [],
+      commentInput: null,
       commentStyle: {
         display: "none",
       },
@@ -62,6 +85,7 @@ export default {
     };
   },
   methods: {
+
 
     username: async function() {
        var requestOptionsGet = {
@@ -77,12 +101,55 @@ export default {
       const result = await response.json()
       console.log(result.data.post.userName)
       this.userName = result.data.post.userName;
+      console.log(this.userName)
 
       } catch (error) {
         console.log(error)
       };
 
 
+    },
+
+    postname: async function() {
+       var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try { 
+      const response = await fetch(
+        "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+        requestOptionsGet
+      );
+      const result = await response.json()
+      this.postName = result.data.post.postName;
+      console.log(this.postName)
+
+      } catch (error) {
+        console.log(error)
+      };
+
+
+    },
+
+    songs: async function() {
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try { 
+      const response = await fetch(
+        "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+        requestOptionsGet
+      );
+      const result = await response.json()
+      console.log(result.data.post)
+      // this.songList = result.data.post.songs.songName;
+
+      } catch (error) {
+        console.log(error)
+      };
     },
 
     like: async function() {
@@ -190,7 +257,6 @@ export default {
       } catch (error) {
         console.log(error)
       };
-     
     },
 
     commentStylesOpen() {
@@ -199,13 +265,16 @@ export default {
     commentStylesClosed() {
       this.commentStyle = this.commentStyleClosed;
     },
-
-
-   
+    addComment() {
+      this.comments.push(this.commentInput);
+      console.log(this.comments);
+    },   
   },
 
   created () {
     this.username();
+    this.postname();
+    this.songs();
   },
 };
 </script>
