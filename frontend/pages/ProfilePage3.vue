@@ -142,14 +142,32 @@
             <img src="../assets/tagged-posts.svg" alt="Logo" class="h-[5vh]" />
           </div>
         </div>
-        <div id="main-container" class="w-[80vw] h-[75vh] bg-[#eeeeee]"></div>
+        <div
+          id="main-container"
+          class="
+            w-[80vw]
+            h-[75vh]
+            bg-[#eeeeee]
+            flex flex-row
+            justify-evenly
+            flex-wrap
+            overflow-y-scroll
+          "
+        >
+          <Posts />
+          <Posts />
+          <Posts />
+          <Posts />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Posts from "../components/Posts.vue";
 export default {
+  components: { Posts },
   name: "Profile_Page3",
   data() {
     return {};
