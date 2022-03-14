@@ -72,6 +72,7 @@
       brightness-[105%]
       rounded-[5%]
       my-[2.5vh]
+      mx-[2.5vw]
     "
   >
     <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
