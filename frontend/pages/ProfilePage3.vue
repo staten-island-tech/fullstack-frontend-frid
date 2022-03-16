@@ -89,10 +89,14 @@
             relative
             font-lora
           "
+          @click="openModal"
           id="hover-underline-animation"
         >
           User Settings
-        </button>
+        </button> 
+        
+        <Modal v-if="modalOpen = true"></Modal>
+        <div v-else></div>
       </div>
       <div id="main-content" class="px-[5vw]">
         <div
@@ -167,12 +171,18 @@
 <script>
 import Posts from "../components/Posts.vue";
 export default {
-  components: { Posts },
+  components: { Posts,},
   name: "Profile_Page3",
   data() {
-    return {};
+    return {
+      modalOpen: false,
+    };
   },
-  methods: {},
+  methods: {
+    openModal() {
+      this.modalOpen = !this.modalOpen;
+    }
+  },
 };
 </script>
 
