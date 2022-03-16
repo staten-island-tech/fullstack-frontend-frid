@@ -116,12 +116,31 @@
       class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
     ></div>
     <div id="reactions-and-tags">
-      <button id="like-button">
-        <img src="../assets/like.svg" alt="Logo" class="h-[3.5vh]" />
-      </button>
-      <button id="dislike-button">
-        <img src="../assets/dislike.svg" alt="Logo" class="h-[3.5vh]" />
-      </button>
+      <div id="reactions">
+        <button id="like-button">
+          <img src="../assets/like.svg" alt="Logo" class="h-[3.5vh]" />
+        </button>
+        <button id="dislike-button">
+          <img src="../assets/dislike.svg" alt="Logo" class="h-[3.5vh]" />
+        </button>
+      </div>
+      <div id="tags">
+        <ul>
+          <li
+            v-for="tag in tags"
+            :key="tag"
+            class="
+              flex flex-row
+              h-[5vh]
+              text-[2.5vh]
+              hover:bg-[#dddddd]
+              font-lora
+            "
+          >
+            {{ tag }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -138,6 +157,7 @@ export default {
       userName: null,
       postName: null,
       songs: null,
+      tags: null,
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -211,11 +231,30 @@ export default {
         console.log(error);
       }
     },
+    tagRetriever: async function () {
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        this.tags = result.data.post.tags;
+        console.log(this.tags);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   created() {
     this.username();
     this.postname();
     this.songRetriever();
+    this.tagRetriever();
   },
 };
 </script>
