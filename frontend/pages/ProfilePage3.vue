@@ -89,15 +89,18 @@
             relative
             font-lora
           "
-          @click="openModal"
+          
           id="hover-underline-animation"
         >
-          User Settings
+          <NuxtLink to="/UserSettingsPage">User Settings</NuxtLink>
+          
         </button> 
         
-        <Modal v-if="modalOpen = true"></Modal>
-        <div v-else></div>
       </div>
+
+      <!-- <Modal v-show="modalOpen"/> -->
+      <!-- @click="openModal" -->
+
       <div id="main-content" class="px-[5vw]">
         <div
           id="main-menu-container"
@@ -162,6 +165,7 @@
           <Posts />
           <Posts />
           <Posts />
+          
         </div>
       </div>
     </div>
@@ -171,17 +175,17 @@
 <script>
 import Posts from "../components/Posts.vue";
 export default {
-  components: { Posts,},
+  components: { Posts},
   name: "Profile_Page3",
   data() {
     return {
-      modalOpen: false,
+      // modalOpen: false,
     };
   },
   methods: {
-    openModal() {
-      this.modalOpen = !this.modalOpen;
-    }
+    // openModal() {
+    //   this.modalOpen = !this.modalOpen;
+    // }
   },
 };
 </script>

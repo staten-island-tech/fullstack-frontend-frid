@@ -1,7 +1,17 @@
 <template>
-  <div class="modal">
-    <div class="container">
-      <div class="modal__title">Settings</div>
+  <div id="modal" class="fixed m-0px flex content-center">
+    <div id="modal-container" class="container">
+
+  <!-- position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #000000da; -->
+
+      <div id="modal-title" class="">Settings</div>
       <!-- <p>Get a direction with your favourite apps</p>
           <a href="#" class="btn gmaps">
             <img src="https://img.icons8.com/color/420/google-maps.png"> Google Maps
