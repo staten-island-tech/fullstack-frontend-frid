@@ -4,16 +4,18 @@
   >
     <div
       class="
-        flex flex-col
+        border-2 border-black
+        rounded-[1.5rem]
+        flex
         items-center
-        justify-content
-        h-[70vh]
-        w-[70vw]
-        p-[10vh]
+        justify-center
+        flex-col
+        p-[4rem]
+        bg-white
       "
     >
       <div class="flex flex-row items-center justify-between h-[5vh] w-[30vw]">
-        <p class="text-[11px] relative">Color Theme</p>
+        <p class="text-[15px] relative font-bold">Color Theme</p>
         <button class="dropdown">
           <span>Mouse over me</span>
           <div class="dropdown-content">
@@ -23,7 +25,7 @@
         </button>
       </div>
       <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
-        <p class="text-[11px] relative top-[5px]">Privacy Settings</p>
+        <p class="text-[15px] relative top-[5px] font-bold">Privacy Settings</p>
         <button class="dropdown">
           <span>Mouse over me</span>
           <div class="dropdown-content">
@@ -37,7 +39,7 @@
         </button>
       </div>
       <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
-        <p class="text-[11px] relative top-[5px]">About</p>
+        <p class="text-[15px] relative top-[5px] font-bold">About</p>
         <button class="dropdown">
           <span>Mouse over me</span>
           <div class="dropdown-content">
@@ -46,8 +48,8 @@
           </div>
         </button>
       </div>
-      <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
-        <p class="text-[11px] relative top-[5px]">Help</p>
+      <div class="flex flex-row justify-between h-[5vh] w-[30vw] mb-[5vh]">
+        <p class="text-[15px] relative top-[5px] font-bold">Help</p>
         <button class="dropdown">
           <span>Mouse over me</span>
           <div class="dropdown-content">
@@ -57,6 +59,7 @@
           </div>
         </button>
       </div>
+      <NuxtLink to="/ProfilePage3" class="mt-[5vh]"> Back </NuxtLink>
     </div>
   </div>
 </template>
@@ -132,4 +135,5 @@ export default {
 .dropdown-item:hover {
   background-color: #f1f1f1;
 }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center h-[100vh] bg-[#6957e7]">
-      <div
+      <!-- <div
       class="
         border-2 border-black
         rounded-[1.5rem]
@@ -11,9 +11,10 @@
         p-[4rem]
         bg-white
       "
-    >
+    > -->
         <UserSettings/>
-      </div>
+        <!-- <NuxtLink to="/ProfilePage3" class="mt-[2vh]"> Back </NuxtLink> -->
+      <!-- </div> -->
     <!-- <div
       class="
         border-2 border-black
@@ -50,6 +51,7 @@
       <NuxtLink to="/SignUp"> Don't have an account? Sign Up </NuxtLink>
       <NuxtLink to="/" class="mt-[2vh]"> Browse as guest </NuxtLink>
     </div> -->
+    
   </div>
 </template>
 
