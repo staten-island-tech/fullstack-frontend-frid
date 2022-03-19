@@ -116,13 +116,15 @@
       id="divider"
       class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
     ></div>
-    <div id="reactions-and-tags">
-      <button id="like-button">
+    <div id="reactions-and-tags" class="flex flex-row">
+      <button id="like-button" v-on:click="like" class="mx-[0.6vw]">
         <img src="../assets/like.svg" alt="Logo" class="h-[3.5vh]" />
       </button>
-      <button id="dislike-button">
+      <span id="like-count">{{ this.tempLikes }}</span>
+      <button id="dislike-button" v-on:click="dislike" class="mx-[0.6vw]">
         <img src="../assets/dislike.svg" alt="Logo" class="h-[3.5vh]" />
       </button>
+      <span id="dislike-count">{{ this.tempDislikes }}</span>
     </div>
   </div>
 </template>
@@ -131,10 +133,10 @@
 export default {
   data() {
     return {
-      // localLikes: null,
-      // localDislikes: null,
-      // tempLikes: null,
-      // tempDislikes: null,
+      localLikes: null,
+      localDislikes: null,
+      tempLikes: null,
+      tempDislikes: null,
       // localComments: null,
       userName: null,
       postName: null,
@@ -208,6 +210,102 @@ export default {
         // this.songs.forEach((element) => {
         //   console.log(element.songName);
         // });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    like: async function () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log("There are " + result.data.post.totalLikes + " likes");
+        this.localLikes = result.data.post.totalLikes;
+      } catch (error) {
+        console.log(error);
+      }
+
+      this.tempLikes = this.localLikes + 1;
+
+      var raw = JSON.stringify({
+        totalLikes: this.tempLikes,
+      });
+
+      var requestOptionsPatch = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsPatch
+        );
+        const result = await response.json();
+        console.log("There are " + result.data.post.totalLikes + " likes");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    dislike: async function () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(
+          "There are " + result.data.post.totalDislikes + " dislikes"
+        );
+        this.localDislikes = result.data.post.totalDislikes;
+      } catch (error) {
+        console.log(error);
+      }
+
+      this.tempDislikes = this.localDislikes + 1;
+
+      var raw = JSON.stringify({
+        totalDislikes: this.tempDislikes,
+      });
+
+      var requestOptionsPatch = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsPatch
+        );
+        const result = await response.json();
+        console.log(
+          "There are " + result.data.post.totalDislikes + " dislikes"
+        );
       } catch (error) {
         console.log(error);
       }

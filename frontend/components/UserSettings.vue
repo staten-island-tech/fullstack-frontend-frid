@@ -12,22 +12,23 @@
         flex-col
         p-[4rem]
         bg-white
+        w-[25vw]
       "
     >
-      <div class="flex flex-row items-center justify-between h-[5vh] w-[30vw]">
-        <p class="text-[15px] relative font-bold">Color Theme</p>
+      <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
         <button class="dropdown">
-          <span>Mouse over me</span>
+          <!-- <span>Mouse over me</span> -->
+          <p class="text-[15px] relative font-bold">Color Theme</p>
           <div class="dropdown-content">
             <p class="dropdown-item">Default</p>
             <p class="dropdown-item">Custom</p>
           </div>
         </button>
       </div>
-      <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
-        <p class="text-[15px] relative top-[5px] font-bold">Privacy Settings</p>
+      <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
         <button class="dropdown">
-          <span>Mouse over me</span>
+          <p class="text-[15px] relative top-[5px] font-bold">Privacy Settings</p>
+          <!-- <span>Mouse over me</span> -->
           <div class="dropdown-content">
             <p class="dropdown-item">Set Account to Private</p>
             <p class="dropdown-item">Only Allow Followers to View</p>
@@ -38,20 +39,20 @@
           </div>
         </button>
       </div>
-      <div class="flex flex-row justify-between h-[5vh] w-[30vw]">
-        <p class="text-[15px] relative top-[5px] font-bold">About</p>
+      <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
         <button class="dropdown">
-          <span>Mouse over me</span>
+          <!-- <span>Mouse over me</span> -->
+          <p class="text-[15px] relative top-[5px] font-bold">About</p>
           <div class="dropdown-content">
             <p class="dropdown-item">Privacy Policy</p>
             <p class="dropdown-item">Terms of Use</p>
           </div>
         </button>
       </div>
-      <div class="flex flex-row justify-between h-[5vh] w-[30vw] mb-[5vh]">
-        <p class="text-[15px] relative top-[5px] font-bold">Help</p>
+      <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
         <button class="dropdown">
-          <span>Mouse over me</span>
+          <!-- <span>Mouse over me</span> -->
+          <p class="text-[15px] relative top-[5px] font-bold">Help</p>
           <div class="dropdown-content">
             <p class="dropdown-item">Contact Support</p>
             <p class="dropdown-item">Navigation Help</p>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center h-[100vh] bg-[#6957e7]">
+  <div class="flex items-center justify-center h-[100vh] bg-[#330066]">
       <!-- <div
       class="
         border-2 border-black
