@@ -116,34 +116,15 @@
       id="divider"
       class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
     ></div>
-    <div id="reactions-and-tags">
-      <div id="reactions">
-        <button id="like-button" v-on:click="like" class="mx-[0.6vw]">
-          <img src="../assets/like.svg" alt="Logo" class="h-[3.5vh]" />
-        </button>
-        <span id="like-count">{{ this.tempLikes }}</span>
-        <button id="dislike-button" v-on:click="like" class="mx-[0.6vw]">
-          <img src="../assets/dislike.svg" alt="Logo" class="h-[3.5vh]" />
-        </button>
-        <span id="dislike-count">{{ this.tempDislikes }}</span>
-      </div>
-      <div id="tags">
-        <ul>
-          <li
-            v-for="tag in tags"
-            :key="tag"
-            class="
-              flex flex-row
-              h-[5vh]
-              text-[2.5vh]
-              hover:bg-[#dddddd]
-              font-lora
-            "
-          >
-            {{ tag }}
-          </li>
-        </ul>
-      </div>
+    <div id="reactions-and-tags" class="flex flex-row">
+      <button id="like-button" v-on:click="like" class="mx-[0.6vw]">
+        <img src="../assets/like.svg" alt="Logo" class="h-[3.5vh]" />
+      </button>
+      <span id="like-count">{{ this.tempLikes }}</span>
+      <button id="dislike-button" v-on:click="dislike" class="mx-[0.6vw]">
+        <img src="../assets/dislike.svg" alt="Logo" class="h-[3.5vh]" />
+      </button>
+      <span id="dislike-count">{{ this.tempDislikes }}</span>
     </div>
   </div>
 </template>
@@ -160,7 +141,6 @@ export default {
       userName: null,
       postName: null,
       songs: null,
-      tags: null,
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -326,55 +306,142 @@ export default {
         console.log(
           "There are " + result.data.post.totalDislikes + " dislikes"
         );
-      
       } catch (error) {
         console.log(error);
       }
     },
-
-    tagRetriever: async function () {
-        this.tags = result.data.post.tags;
-        console.log(this.tags);
   },
   created() {
     this.username();
     this.postname();
     this.songRetriever();
-    this.tagRetriever();
   },
-},
-}
-
-// songs: async function () {
-//       var requestOptionsGet = {
-//         method: "GET",
-//         redirect: "follow",
-//       };
-
-//       try {
-//         const response = await fetch(
-//           "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-//           requestOptionsGet
-//         );
-//         const result = await response.json();
-//         console.log(result.data.post.songs);
-//         // this.songList = result.data.post.songs.songName;
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     },
-
-//     commentStylesOpen() {
-//       this.commentStyle = this.commentStyleOpen;
-//     },
-//     commentStylesClosed() {
-//       this.commentStyle = this.commentStyleClosed;
-//     },
-//     addComment() {
-//       this.comments.push(this.commentInput);
-//       console.log(this.comments);
-//     }
-
+};
 </script>
 
 
+songs: async function () {
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result.data.post.songs);
+        // this.songList = result.data.post.songs.songName;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    like: async function () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log("There are " + result.data.post.totalLikes + " likes");
+        this.localLikes = result.data.post.totalLikes;
+      } catch (error) {
+        console.log(error);
+      }
+
+      this.tempLikes = this.localLikes + 1;
+
+      var raw = JSON.stringify({
+        totalLikes: this.tempLikes,
+      });
+
+      var requestOptionsPatch = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsPatch
+        );
+        const result = await response.json();
+        console.log("There are " + result.data.post.totalLikes + " likes");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    dislike: async function () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(
+          "There are " + result.data.post.totalDislikes + " dislikes"
+        );
+        this.localDislikes = result.data.post.totalDislikes;
+      } catch (error) {
+        console.log(error);
+      }
+
+      this.tempDislikes = this.localDislikes + 1;
+
+      var raw = JSON.stringify({
+        totalDislikes: this.tempDislikes,
+      });
+
+      var requestOptionsPatch = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsPatch
+        );
+        const result = await response.json();
+        console.log(
+          "There are " + result.data.post.totalDislikes + " dislikes"
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    commentStylesOpen() {
+      this.commentStyle = this.commentStyleOpen;
+    },
+    commentStylesClosed() {
+      this.commentStyle = this.commentStyleClosed;
+    },
+    addComment() {
+      this.comments.push(this.commentInput);
+      console.log(this.comments);
+    },
