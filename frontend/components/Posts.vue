@@ -121,11 +121,12 @@
         <button id="like-button" v-on:click="like" class="mx-[0.6vw]">
           <img src="../assets/like.svg" alt="Logo" class="h-[3.5vh]" />
         </button>
-        <span id="like-count">{{ this.tempLikes }}</span>
+        <span id="like-count"> {{ this.currentLikes }} </span>
         <button id="dislike-button" v-on:click="dislike" class="mx-[0.6vw]">
           <img src="../assets/dislike.svg" alt="Logo" class="h-[3.5vh]" />
         </button>
-        <span id="dislike-count">{{ this.tempDislikes }}</span>
+        <span id="dislike-count"> {{ this.tempDislikes }} </span>
+        <span id="like-count"> {{ this.currentDislikes }} </span>
       </div>
       <div id="tags">
         <ul>
@@ -156,10 +157,13 @@ export default {
       localDislikes: null,
       tempLikes: null,
       tempDislikes: null,
+      currentLikes: null,
+      currentDislikes: null,
       // localComments: null,
       userName: null,
       postName: null,
       songs: null,
+      tags: null,
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -234,6 +238,48 @@ export default {
       }
     },
 
+    currentLike: async function () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        this.currentLikes = result.data.post.totalLikes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    currentDislike: async function () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        this.currentDislikes = result.data.post.totalDislikes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     like: async function () {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -255,7 +301,9 @@ export default {
         console.log(error);
       }
 
-      this.tempLikes = this.localLikes + 1;
+      this.currentLikes = this.currentLikes + 1;
+
+      this.currentLikes = this.tempLikes;
 
       var raw = JSON.stringify({
         totalLikes: this.tempLikes,
@@ -278,6 +326,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+
+
+
     },
 
     dislike: async function () {
@@ -356,6 +407,8 @@ export default {
     this.postname();
     this.songRetriever();
     this.tagRetriever();
+    this.currentLike();
+    this.currentDislike();
   },
 };
 </script>
