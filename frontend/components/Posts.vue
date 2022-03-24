@@ -128,7 +128,7 @@
         <span id="dislike-count"> {{ this.tempDislikes }} </span>
       </div>
       <div id="tags" class="flex flex-row items-center ml-[2vw]">
-        <ul class="columns-3">
+        <ul class="columns-4">
           <li
             v-for="tag in tags"
             :key="tag"
