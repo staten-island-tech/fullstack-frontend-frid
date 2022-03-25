@@ -63,83 +63,80 @@
       <button v-on:click="commentStylesClosed">X</button>
     </div>
   </div> -->
-  <div
-    id="post-container"
-    class="
-      h-[40vh]
-      w-[32vw]
-      bg-[#eeeeee]
-      brightness-[105%]
-      rounded-[5%]
-      my-[2.5vh]
-      mx-[2.5vw]
-    "
-  >
-    <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
-      {{ postName }}
-    </div>
-    <div id="user-name-container" class="flex flex-row items-center">
-      <span
-        id="pfp"
-        class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
-      ></span>
-      <div id="username" class="text-[1rem] font-lora">
-        {{ userName }}
-      </div>
-    </div>
+  <div>
     <div
-      id="divider"
-      class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
-    ></div>
-    <div id="post-content" class="h-[27.5vh]">
-      <ul>
-        <li
-          v-for="song in songs"
-          :key="song"
-          class="
-            flex flex-row
-            h-[5vh]
-            text-[2.5vh]
-            hover:bg-[#dddddd]
-            font-lora
-          "
-        >
-          <div class="w-[13.5vw] pl-[1.5vw] truncate">{{ song.songName }}</div>
-          <div class="flex justify-center w-[4vw]">{{ song.duration }}</div>
-          <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
-            {{ song.artist }}
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div
-      id="divider"
-      class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
-    ></div>
-    <div id="reactions-and-tags" class="flex flex-row items-center mt-[1vh]">
-      <div id="reactions" class="flex flex-row items-center">
-        <button id="like-button" v-on:click="like" class="mx-[0.6vw]">
-          <img src="../assets/like.svg" alt="Logo" class="h-[3.5vh] mx-[0.5vw] " />
-        </button>
-        <span id="like-count"> {{ this.tempLikes }} </span>
-        <button id="dislike-button" v-on:click="dislike" class="mx-[0.6vw]">
-          <img src="../assets/dislike.svg" alt="Logo" class="h-[3.5vh] mx-[0.5vw]" />
-        </button>
-        <span id="dislike-count"> {{ this.tempDislikes }} </span>
+      id="post-container"
+      class="h-[40vh] w-[32vw] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
+    >
+      <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
+        {{ postName }}
       </div>
-      <div id="tags" class="flex flex-row items-center ml-[2vw]">
-        <ul class="columns-4">
+      <div id="user-name-container" class="flex flex-row items-center">
+        <span
+          id="pfp"
+          class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
+        ></span>
+        <div id="username" class="text-[1rem] font-lora">
+          {{ userName }}
+        </div>
+      </div>
+      <div
+        id="divider"
+        class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
+      ></div>
+      <div id="post-content" class="h-[27.5vh]">
+        <ul>
           <li
-            v-for="tag in tags"
-            :key="tag"
-            class="
-              text-[2vh]
-            "
+            v-for="song in songs"
+            :key="song"
+            class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
           >
-            #{{ tag.tagName }}
+            <div class="w-[13.5vw] pl-[1.5vw] truncate">
+              {{ song.songName }}
+            </div>
+            <div class="flex justify-center w-[4vw]">{{ song.duration }}</div>
+            <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
+              {{ song.artist }}
+            </div>
           </li>
         </ul>
       </div>
+      <div
+        id="divider"
+        class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
+      ></div>
+      <div id="reactions-and-tags" class="flex flex-row items-center mt-[1vh]">
+        <div id="reactions" class="flex flex-row items-center">
+          <button id="like-button" v-on:click="like" class="mx-[0.6vw]">
+            <img
+              src="../assets/like.svg"
+              alt="Logo"
+              class="h-[3.5vh] mx-[0.5vw]"
+            />
+          </button>
+          <span id="like-count"> {{ this.tempLikes }} </span>
+          <button id="dislike-button" v-on:click="dislike" class="mx-[0.6vw]">
+            <img
+              src="../assets/dislike.svg"
+              alt="Logo"
+              class="h-[3.5vh] mx-[0.5vw]"
+            />
+          </button>
+          <span id="dislike-count"> {{ this.tempDislikes }} </span>
+        </div>
+        <div id="tags" class="flex flex-row items-center ml-[2vw]">
+          <ul class="columns-4">
+            <li v-for="tag in tags" :key="tag" class="text-[2vh]">
+              #{{ tag.tagName }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="comments">
+      <button v-on:click="openComments">Comments</button>
+        <div v-if="this.showComments = true">hello</div>
+          <button v-on:click="closeComments">X</button>
     </div>
   </div>
 </template>
@@ -169,6 +166,7 @@ export default {
       // commentStyleClosed: {
       //   display: "none",
       // },
+      showComments: false,
     };
   },
   methods: {
@@ -273,156 +271,6 @@ export default {
     //   }
     // },
 
-      like: async function () {
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-          requestOptionsGet
-        );
-        const result = await response.json();
-        console.log(
-          "There are " + result.data.post.totalLikes + " likes"
-        );
-        this.localLikes = result.data.post.totalLikes;
-      } catch (error) {
-        console.log(error);
-      }
-
-      this.tempLikes = this.localLikes + 1;
-
-      var raw = JSON.stringify({
-        totalLikes: this.tempLikes,
-      });
-
-      var requestOptionsPatch = {
-        method: "PATCH",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-          requestOptionsPatch
-        );
-        const result = await response.json();
-        console.log(
-          "There are " + result.data.post.totalLikes + " likes"
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    dislike: async function () {
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-          requestOptionsGet
-        );
-        const result = await response.json();
-        console.log(
-          "There are " + result.data.post.totalDislikes + " dislikes"
-        );
-        this.localDislikes = result.data.post.totalDislikes;
-      } catch (error) {
-        console.log(error);
-      }
-
-      this.tempDislikes = this.localDislikes + 1;
-
-      var raw = JSON.stringify({
-        totalDislikes: this.tempDislikes,
-      });
-
-      var requestOptionsPatch = {
-        method: "PATCH",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-          requestOptionsPatch
-        );
-        const result = await response.json();
-        console.log(
-          "There are " + result.data.post.totalDislikes + " dislikes"
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    tagRetriever: async function () {
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
-      };
- 
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-          requestOptionsGet
-        );
-        const result = await response.json();
-        this.tags = result.data.post.tags;
-        console.log(this.tags);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-
-  },
-  created() {
-    this.username();
-    this.postname();
-    this.songRetriever();
-    this.tagRetriever();
-  },
-};
-</script>
-
-
-songs: async function () {
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
-          requestOptionsGet
-        );
-        const result = await response.json();
-        console.log(result.data.post.songs);
-        // this.songList = result.data.post.songs.songName;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
     like: async function () {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -519,13 +367,74 @@ songs: async function () {
       }
     },
 
-    commentStylesOpen() {
-      this.commentStyle = this.commentStyleOpen;
+    tagRetriever: async function () {
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        this.tags = result.data.post.tags;
+        console.log(this.tags);
+      } catch (error) {
+        console.log(error);
+      }
     },
-    commentStylesClosed() {
-      this.commentStyle = this.commentStyleClosed;
+
+    openComments: function () {
+        this.showComments = false;
     },
-    addComment() {
-      this.comments.push(this.commentInput);
-      console.log(this.comments);
-    },
+    closeComments: function () {
+       this.showComments = false;
+     }
+  },
+  created() {
+    this.username();
+    this.postname();
+    this.songRetriever();
+    this.tagRetriever();
+  },
+};
+</script>
+
+songs: async function () { var requestOptionsGet = { method: "GET", redirect:
+"follow", }; try { const response = await fetch(
+"http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9", requestOptionsGet
+); const result = await response.json(); console.log(result.data.post.songs); //
+this.songList = result.data.post.songs.songName; } catch (error) {
+console.log(error); } }, like: async function () { var myHeaders = new
+Headers(); myHeaders.append("Content-Type", "application/json"); var
+requestOptionsGet = { method: "GET", redirect: "follow", }; try { const response
+= await fetch( "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+requestOptionsGet ); const result = await response.json(); console.log("There
+are " + result.data.post.totalLikes + " likes"); this.localLikes =
+result.data.post.totalLikes; } catch (error) { console.log(error); }
+this.tempLikes = this.localLikes + 1; var raw = JSON.stringify({ totalLikes:
+this.tempLikes, }); var requestOptionsPatch = { method: "PATCH", headers:
+myHeaders, body: raw, redirect: "follow", }; try { const response = await fetch(
+"http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+requestOptionsPatch ); const result = await response.json(); console.log("There
+are " + result.data.post.totalLikes + " likes"); } catch (error) {
+console.log(error); } }, dislike: async function () { var myHeaders = new
+Headers(); myHeaders.append("Content-Type", "application/json"); var
+requestOptionsGet = { method: "GET", redirect: "follow", }; try { const response
+= await fetch( "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+requestOptionsGet ); const result = await response.json(); console.log( "There
+are " + result.data.post.totalDislikes + " dislikes" ); this.localDislikes =
+result.data.post.totalDislikes; } catch (error) { console.log(error); }
+this.tempDislikes = this.localDislikes + 1; var raw = JSON.stringify({
+totalDislikes: this.tempDislikes, }); var requestOptionsPatch = { method:
+"PATCH", headers: myHeaders, body: raw, redirect: "follow", }; try { const
+response = await fetch(
+"http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+requestOptionsPatch ); const result = await response.json(); console.log( "There
+are " + result.data.post.totalDislikes + " dislikes" ); } catch (error) {
+console.log(error); } }, commentStylesOpen() { this.commentStyle =
+this.commentStyleOpen; }, commentStylesClosed() { this.commentStyle =
+this.commentStyleClosed; }, addComment() {
+this.comments.push(this.commentInput); console.log(this.comments); },
