@@ -17,6 +17,7 @@ export default {
         method: "GET",
         redirect: "follow",
       },
+      fetchedPostID: "61f818b832b4834430359865",
     };
   },
   methods: {
