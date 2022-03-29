@@ -25,7 +25,19 @@
             </ul>
           </div>
         </div>
-        <input type="text" placeholder="Caption" />
+        <div id="tag-input-container">
+          <div class="flex flex-row">
+            <input type="text" placeholder="Tags" v-model="tagInput" />
+            <button @click="addTag">Add</button>
+          </div>
+          <div id="tag-list">
+            <ul>
+              <li v-for="tag in tags" :key="tag">
+                #{{ tag }}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <button v-on:click="formStylesOpen">Open</button>
@@ -49,6 +61,8 @@ export default {
       },
       songs: [],
       songInput: null,
+      tags: [],
+      tagInput: null,
     };
   },
   methods: {
@@ -62,6 +76,11 @@ export default {
       this.songs.push(this.songInput);
       console.log(this.songs);
     },
+    addTag() {
+      this.tags.push(this.tagInput);
+      console.log(this.tags);
+    },
   },
 };
 </script>
+

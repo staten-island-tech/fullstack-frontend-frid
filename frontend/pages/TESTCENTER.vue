@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row justify-center">
-    <Posts />
+    <PostCreate />
   </div>
 </template>
 
