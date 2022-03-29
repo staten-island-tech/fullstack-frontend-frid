@@ -149,6 +149,7 @@ export default {
       postName: null,
       songs: null,
       tags: null,
+      fetchedPostID: '61f5d9d9000fb29e24d1bad9'
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -172,7 +173,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -191,7 +192,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -209,7 +210,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
           requestOptionsGet
         );
         const result = await response.json();
