@@ -277,7 +277,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -302,7 +302,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
           requestOptionsPatch
         );
         const result = await response.json();
@@ -323,7 +323,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -350,7 +350,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
           requestOptionsPatch
         );
         const result = await response.json();
@@ -370,7 +370,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -392,20 +392,20 @@ export default {
 
 songs: async function () { var requestOptionsGet = { method: "GET", redirect:
 "follow", }; try { const response = await fetch(
-"http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9", requestOptionsGet
+"http://localhost:3000/api/v1/posts/" + this.fetchedPostID, requestOptionsGet
 ); const result = await response.json(); console.log(result.data.post.songs); //
 this.songList = result.data.post.songs.songName; } catch (error) {
 console.log(error); } }, like: async function () { var myHeaders = new
 Headers(); myHeaders.append("Content-Type", "application/json"); var
 requestOptionsGet = { method: "GET", redirect: "follow", }; try { const response
-= await fetch( "http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+= await fetch( "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
 requestOptionsGet ); const result = await response.json(); console.log("There
 are " + result.data.post.totalLikes + " likes"); this.localLikes =
 result.data.post.totalLikes; } catch (error) { console.log(error); }
 this.tempLikes = this.localLikes + 1; var raw = JSON.stringify({ totalLikes:
 this.tempLikes, }); var requestOptionsPatch = { method: "PATCH", headers:
 myHeaders, body: raw, redirect: "follow", }; try { const response = await fetch(
-"http://localhost:3000/api/v1/posts/61f5d9d9000fb29e24d1bad9",
+"http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
 requestOptionsPatch ); const result = await response.json(); console.log("There
 are " + result.data.post.totalLikes + " likes"); } catch (error) {
 console.log(error); } }, dislike: async function () { var myHeaders = new
