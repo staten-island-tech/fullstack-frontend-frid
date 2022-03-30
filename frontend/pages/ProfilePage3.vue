@@ -161,10 +161,10 @@
             overflow-y-scroll
           "
         >
-          <!-- <Posts />
           <Posts />
           <Posts />
-          <Posts /> -->
+          <Posts />
+          <Posts />
           <button v-on:click="getPosts">testclcikmagik?</button>
           <!-- <li :v-for="allPostsID in allPostsIDs" :key="allPostsID">
             {{this.allPostsIDs}}
@@ -193,27 +193,12 @@ export default {
     // }
     getPosts: async function() {
       console.log("button worked")
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
       var requestOptionsGet = {
         method: "GET",
         redirect: "follow",
       };
 
       try {
-        // const response = await fetch(
-        //   "http://localhost:3000/api/v1/posts/",
-        //   requestOptionsGet
-        // );
-        // const result = await response.json();
-        // console.log(
-        // //   "There are " + result.data.post._id + " posts"
-        // // );
-        //   "There are " + result.data.posts._id + " posts"
-        // ),
-        // .then(this.allPostsIDs = result.data.posts._id),
-
         const response = await fetch(
           "http://localhost:3000/api/v1/posts/",
           requestOptionsGet
@@ -221,37 +206,46 @@ export default {
           // .then((res) => res.json())
           // .then(data => this.postAPI = data)
           // .catch(err => console.log(err.message))
-        const result = await response.json();
-        this.allPostsIDs = result.data.posts;
-        // this.allPostsIDs = this.postAPI.posts
-        // console.log(this.allPostsIDs)
-
-        // postIds.map(id => {
-        //   url = `http://localhost:3000/api/v1/posts/${id}`;
-
-        //   fetch(url)
-        //   .then(response => response.json())
-        //   .then(data => postData(data))
-        //   .catch(error => console.error(error));
+        // const result = await response.json();
+        // this.allPostsIDs = result.data.posts;
+        // // console.log(this.allPostsIDs)
+        // this.allPostsIDs.forEach((element) => {
+        //   console.log(element._id);
         // });
-        // const postData = data => {
-        //   const reports = data.cars[0].car.car_makes;
-
-        //   let result = reports.reduce(function(r, a) {
-        //     if(r["car_make_id"] != a.car_make_id){
-        //       r["car_make_id"] = a.car_make_id;
-        //       r["values"] = [];
-        //     }
-        //     r["values"].push(a.car_model);
-        //     return r;
-        //   }, {});
-        // };
-        // console.log(this.postAPI)
-        console.log(this.allPostsIDs)
+        const result = await response.json();
+        this.postAPI = result.data.posts;
+        // console.log(this.allPostsIDs)
+        this.postAPI.forEach((element) => {
+          console.log(element._id);
+          this.allPostsIDs.push(element._id);
+        });
       } catch (error) {
         console.log(error);
       }
+
+
     }
+    // songRetriever: async function () {
+    //   var requestOptionsGet = {
+    //     method: "GET",
+    //     redirect: "follow",
+    //   };
+
+    //   try {
+    //     const response = await fetch(
+    //       "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+    //       requestOptionsGet
+    //     );
+    //     const result = await response.json();
+    //     this.songs = result.data.post.songs;
+    //     console.log(this.songs);
+    //     // this.songs.forEach((element) => {
+    //     //   console.log(element.songName);
+    //     // });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
   },
 };
 </script>
