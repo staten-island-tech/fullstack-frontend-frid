@@ -3,7 +3,6 @@
     <div
       id="form"
       class="flex flex-col w-[100vw] h-[50vh] bg-slate-200 items-center"
-      v-bind:style="formStyle"
     >
       <h3>Create a Post</h3>
       <div id="input-container" class="flex flex-col w-[50vw] items-center">
@@ -27,8 +26,9 @@
         </div>
         <div id="tag-input-container">
           <div class="flex flex-row">
-            <input type="text" placeholder="Tags" v-model="tagInput" />
-            <button @click="addTag">Add</button>
+            <input type="text" placeholder="Tags" v-model="tagInput" class="mx-[1vw]"/>
+                <button @click="addTag">Add</button>
+              <div v-if="this.tagsLength = 4"></div>
           </div>
           <div id="tag-list">
             <ul>
@@ -40,9 +40,6 @@
         </div>
       </div>
     </div>
-    <button v-on:click="formStylesOpen">Open</button>
-    <button v-on:click="formStylesClosed">Closed</button>
-    <div id="button"></div>
   </div>
 </template>
 
@@ -63,15 +60,16 @@ export default {
       songInput: null,
       tags: [],
       tagInput: null,
+      tagsLength: null,
     };
   },
   methods: {
-    formStylesOpen() {
-      this.formStyle = this.formStyleOpen;
-    },
-    formStylesClosed() {
-      this.formStyle = this.formStyleClosed;
-    },
+    // formStylesOpen() {
+    //   this.formStyle = this.formStyleOpen;
+    // },
+    // formStylesClosed() {
+    //   this.formStyle = this.formStyleClosed;
+    // },
     addSong() {
       this.songs.push(this.songInput);
       console.log(this.songs);
@@ -80,7 +78,14 @@ export default {
       this.tags.push(this.tagInput);
       console.log(this.tags);
     },
+    tagsLength() {
+      this.tagsLength = this.tags.length
+    },
   },
 };
 </script>
 
+v-bind:style="formStyle"
+<button v-on:click="formStylesOpen">Open</button>
+    <button v-on:click="formStylesClosed">Closed</button>
+    <div id="button"></div>
