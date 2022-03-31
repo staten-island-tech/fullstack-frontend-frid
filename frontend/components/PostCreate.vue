@@ -1,17 +1,17 @@
 <template>
-  <div id="main-container">
+  <div id="main-container" class="flex items-center justify-center h-[100vh]">
     <div
-      id="form"
-      class="flex flex-col w-[100vw] h-[50vh] bg-slate-200 items-center"
+      id="form" 
+      class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center rounded-[5rem]"
     >
       <h3>Create a Post</h3>
-      <div id="input-container" class="flex flex-col w-[50vw] items-center">
-        <div class="h-[35vh]">
+      <div id="input-container" class="flex flex-col w-[30vw] items-center">
+        <div class="my-[5vh] h-[10vh] overflow-y-scroll w-[30vw]">
           <div class="flex flex-row">
             <input
               type="text"
               placeholder="Search by Song Name or Artist to add songs to your playlist"
-              class="w-[50vw] mx-[1vw]"
+              class="w-[25vw] mx-[1vw] rounded-md"
               v-model="songInput"
             />
             <button @click="addSong">Add</button>
@@ -26,9 +26,8 @@
         </div>
         <div id="tag-input-container">
           <div class="flex flex-row">
-            <input type="text" placeholder="Tags" v-model="tagInput" class="mx-[1vw]"/>
+            <input type="text" placeholder="Tags" v-model="tagInput" class="mx-[1vw] rounded-md"/>
                 <button @click="addTag">Add</button>
-              <div v-if="this.tagsLength = 4"></div>
           </div>
           <div id="tag-list">
             <ul>
@@ -45,6 +44,8 @@
 
 <script>
 export default {
+
+  name: 'PostCreate',
   data() {
     return {
       formStyle: {
@@ -60,7 +61,7 @@ export default {
       songInput: null,
       tags: [],
       tagInput: null,
-      tagsLength: null,
+      // tagsLength: null,
     };
   },
   methods: {
@@ -78,9 +79,12 @@ export default {
       this.tags.push(this.tagInput);
       console.log(this.tags);
     },
-    tagsLength() {
-      this.tagsLength = this.tags.length
-    },
+    close() {
+        this.$emit('close');
+      },
+    // tagsLength() {
+    //   this.tagsLength = this.tags.length
+    // },
   },
 };
 </script>
