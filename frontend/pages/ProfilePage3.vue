@@ -163,12 +163,11 @@
         >
           <Posts />
           <Posts />
-          <Posts />
-          <Posts />
-          <button v-on:click="getPosts">testclcikmagik?</button>
+          <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
           <!-- <li :v-for="allPostsID in allPostsIDs" :key="allPostsID">
-            {{this.allPostsIDs}}
+            {{ allPostsIDs }}
           </li> -->
+          <button v-on:click="test1">test1(deleate later)</button>
         </div>
       </div>
     </div>
@@ -183,70 +182,41 @@ export default {
   data() {
     return {
       // modalOpen: false,
-      allPostsIDs: null,
-      postAPI:null,
+      allPostsIDs: [],
+      postAPI:[],
     };
   },
   methods: {
-    // openModal() {
-    //   this.modalOpen = !this.modalOpen;
-    // }
     getPosts: async function() {
-      console.log("button worked")
+      console.log("getPosts function run!!!")
       var requestOptionsGet = {
         method: "GET",
         redirect: "follow",
       };
-
       try {
         const response = await fetch(
           "http://localhost:3000/api/v1/posts/",
           requestOptionsGet
         )
-          // .then((res) => res.json())
-          // .then(data => this.postAPI = data)
-          // .catch(err => console.log(err.message))
-        // const result = await response.json();
-        // this.allPostsIDs = result.data.posts;
-        // // console.log(this.allPostsIDs)
-        // this.allPostsIDs.forEach((element) => {
-        //   console.log(element._id);
-        // });
         const result = await response.json();
         this.postAPI = result.data.posts;
-        // console.log(this.allPostsIDs)
         this.postAPI.forEach((element) => {
-          console.log(element._id);
+          // console.log(element._id);
           this.allPostsIDs.push(element._id);
         });
+        console.log(this.allPostsIDs)
       } catch (error) {
         console.log(error);
       }
-
-
+    },
+    test1: function() {
+      console.log('test run')
+      console.log(Posts.fetchedPostID)
     }
-    // songRetriever: async function () {
-    //   var requestOptionsGet = {
-    //     method: "GET",
-    //     redirect: "follow",
-    //   };
-
-    //   try {
-    //     const response = await fetch(
-    //       "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
-    //       requestOptionsGet
-    //     );
-    //     const result = await response.json();
-    //     this.songs = result.data.post.songs;
-    //     console.log(this.songs);
-    //     // this.songs.forEach((element) => {
-    //     //   console.log(element.songName);
-    //     // });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
   },
+  mounted() {
+    this.getPosts()
+  }
 };
 </script>
 
