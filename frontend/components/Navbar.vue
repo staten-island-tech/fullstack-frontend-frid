@@ -9,6 +9,7 @@
       flex
       items-center
       brightness-[97%]
+      z-[2]
     "
   >
     <NuxtLink to="/" class="w-[20rem] ml-[4rem] my-[2rem]"

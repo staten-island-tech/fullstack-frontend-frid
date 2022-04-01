@@ -1,5 +1,5 @@
 <template>
-  <div id="main-container" class="flex items-center justify-center h-[100vh]">
+  <div id="main-container" class="flex items-center justify-center h-[100vh]" v-show="value">
     <div
       id="form" 
       class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center rounded-[5rem]"
@@ -39,6 +39,8 @@
         </div>
       </div>
     </div>
+    <button @click.prevent="close"
+    class="mt-3 border-b border-teal font-semibold">Close</button>
   </div>
 </template>
 
@@ -46,6 +48,11 @@
 export default {
 
   name: 'PostCreate',
+  props: {
+                value: {
+                    required: true
+                }
+            },
   data() {
     return {
       formStyle: {
@@ -80,8 +87,9 @@ export default {
       console.log(this.tags);
     },
     close() {
-        this.$emit('close');
-      },
+                  this.$emit("input", !this.value);
+                } ,
+
     // tagsLength() {
     //   this.tagsLength = this.tags.length
     // },
