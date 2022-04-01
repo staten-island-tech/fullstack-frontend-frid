@@ -164,9 +164,9 @@
           <Posts />
           <Posts />
           <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
-          <!-- <li :v-for="allPostsID in allPostsIDs" :key="allPostsID">
-            {{ allPostsIDs }}
-          </li> -->
+          <li :v-for="allPostsID in allPostsIDs" :key="allPostsID">
+            <Posts/>
+            </li>
           <button v-on:click="test1">test1(deleate later)</button>
         </div>
       </div>
@@ -214,7 +214,7 @@ export default {
       console.log(Posts.fetchedPostID)
     }
   },
-  mounted() {
+  created() {
     this.getPosts()
   }
 };
