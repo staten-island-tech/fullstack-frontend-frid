@@ -163,9 +163,11 @@
         >
           <Posts />
           <Posts />
-          <Posts />
-          <Posts />
-          
+          <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
+          <li :v-for="allPostsID in allPostsIDs" :key="allPostsID">
+            <Posts/>
+            </li>
+          <button v-on:click="test1">test1(deleate later)</button>
         </div>
       </div>
     </div>
@@ -180,13 +182,41 @@ export default {
   data() {
     return {
       // modalOpen: false,
+      allPostsIDs: [],
+      postAPI:[],
     };
   },
   methods: {
-    // openModal() {
-    //   this.modalOpen = !this.modalOpen;
-    // }
+    getPosts: async function() {
+      console.log("getPosts function run!!!")
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/",
+          requestOptionsGet
+        )
+        const result = await response.json();
+        this.postAPI = result.data.posts;
+        this.postAPI.forEach((element) => {
+          // console.log(element._id);
+          this.allPostsIDs.push(element._id);
+        });
+        console.log(this.allPostsIDs)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    test1: function() {
+      console.log('test run')
+      console.log(Posts.fetchedPostID)
+    }
   },
+  created() {
+    this.getPosts()
+  }
 };
 </script>
 

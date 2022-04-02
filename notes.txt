@@ -1,3 +1,15 @@
 cd frontend
 
 npm run dev
+
+
+
+post IDs
+61f5d9d9000fb29e24d1bad9      //main test id
+621fa85976c0d14a70e0662e
+62263bb06270e80b242548e5
+
+
+Material for investigation
+
+https://uploadcare.com/upload_api_cloud_storage_and_cdn/

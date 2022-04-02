@@ -10,19 +10,17 @@
 </template>
 
 <script>
-
 export default {
   name: "IndexPage",
-  data()
-     {
-        return {
-            modalOpen: false
-        }
+  data() {
+    return {
+      modalOpen: false,
+    };
+  },
+  methods: {
+    openModal() {
+      this.modalOpen = !this.modalOpen;
     },
-    methods: {
-        openModal() {
-            this.modalOpen = !this.modalOpen;
-        }    
-    }
+  },
 };
 </script>
