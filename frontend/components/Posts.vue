@@ -107,7 +107,7 @@
       ></div>
       <div id="reactions-and-tags" class="flex flex-row items-center mt-[1vh]">
         <div id="reactions" class="flex flex-row items-center">
-          <button id="like-button" v-on:click="like" class="mx-[0.6vw]">
+          <button :disabled="isActive" id="like-button" v-on:click="like" class="mx-[0.6vw]">
             <img
               src="../assets/like.svg"
               alt="Logo"
@@ -115,7 +115,7 @@
             />
           </button>
           <span id="like-count"> {{ this.tempLikes }} </span>
-          <button id="dislike-button" v-on:click="dislike" class="mx-[0.6vw]">
+          <button :disabled="isActive" id="dislike-button" v-on:click="dislike" class="mx-[0.6vw]">
             <img
               src="../assets/dislike.svg"
               alt="Logo"
@@ -149,6 +149,7 @@ export default {
       postName: null,
       songs: null,
       tags: null,
+<<<<<<< Updated upstream
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -161,6 +162,10 @@ export default {
       // commentStyleClosed: {
       //   display: "none",
       // },
+=======
+      fetchedPostID: "61f5d9d9000fb29e24d1bad9",
+      isActive: false,
+>>>>>>> Stashed changes
     };
   },
   methods: {
@@ -266,6 +271,9 @@ export default {
     // },
 
     like: async function () {
+
+      this.isActive = true
+
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -312,6 +320,9 @@ export default {
     },
 
     dislike: async function () {
+
+      this.isActive = true
+
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
