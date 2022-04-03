@@ -149,7 +149,6 @@ export default {
       postName: null,
       songs: null,
       tags: null,
-<<<<<<< Updated upstream
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -162,10 +161,8 @@ export default {
       // commentStyleClosed: {
       //   display: "none",
       // },
-=======
       fetchedPostID: "61f5d9d9000fb29e24d1bad9",
       isActive: false,
->>>>>>> Stashed changes
     };
   },
   methods: {
