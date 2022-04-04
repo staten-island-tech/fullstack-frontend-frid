@@ -1,8 +1,9 @@
 <template>
-  <div id="main-container" class="flex items-center justify-center h-[100vh]" v-show="value">
+  <div id="main-container" class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]" v-show="value">
     <div
       id="form" 
-      class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center rounded-[5rem]"
+      class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center border-2 border-black
+        rounded-[1.5rem]"
     >
       <h3>Create a Post</h3>
       <div id="input-container" class="flex flex-col w-[30vw] items-center">
@@ -10,11 +11,11 @@
           <div class="flex flex-row">
             <input
               type="text"
-              placeholder="Search by Song Name or Artist to add songs to your playlist"
+              placeholder="Search by Song Name or Artist"
               class="w-[25vw] mx-[1vw] rounded-md"
               v-model="songInput"
             />
-            <button @click="addSong">Add</button>
+            <button class="mx-[1vw]" @click="addSong">Add</button>
           </div>
           <div id="song-list">
             <ul>
@@ -27,20 +28,20 @@
         <div id="tag-input-container">
           <div class="flex flex-row">
             <input type="text" placeholder="Tags" v-model="tagInput" class="mx-[1vw] rounded-md"/>
-                <button @click="addTag">Add</button>
+                <button :disabled="isActive" @click="addTag">Add</button>
           </div>
           <div id="tag-list">
             <ul>
               <li v-for="tag in tags" :key="tag">
-                #{{ tag }}
+                {{ tag }}
               </li>
             </ul>
           </div>
         </div>
       </div>
+      <button @click.prevent="close"
+    class="mt-[4vh] font-semibold">Close</button>
     </div>
-    <button @click.prevent="close"
-    class="mt-3 border-b border-teal font-semibold">Close</button>
   </div>
 </template>
 
@@ -68,6 +69,7 @@ export default {
       songInput: null,
       tags: [],
       tagInput: null,
+      isActive: false,
       // tagsLength: null,
     };
   },
@@ -85,14 +87,18 @@ export default {
     addTag() {
       this.tags.push(this.tagInput);
       console.log(this.tags);
+
+      if (this.tags.length > 3) {
+          this.isActive = true
+      }
     },
     close() {
                   this.$emit("input", !this.value);
                 } ,
 
-    // tagsLength() {
-    //   this.tagsLength = this.tags.length
-    // },
+  //  tagsLength() {
+  //    this.tagsLength = this.tags.length
+  //    },
   },
 };
 </script>
