@@ -161,13 +161,10 @@
             overflow-y-scroll
           "
         >
-          <Posts />
-          <Posts />
           <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
-          <li :v-for="allPostsID in allPostsIDs" :key="allPostsID">
+          <li v-for="allPostsID in allPostsIDs" :key="allPostsID">
             <Posts/>
             </li>
-          <button v-on:click="test1">test1(deleate later)</button>
         </div>
       </div>
     </div>
@@ -188,7 +185,6 @@ export default {
   },
   methods: {
     getPosts: async function() {
-      console.log("getPosts function run!!!")
       var requestOptionsGet = {
         method: "GET",
         redirect: "follow",
@@ -201,7 +197,6 @@ export default {
         const result = await response.json();
         this.postAPI = result.data.posts;
         this.postAPI.forEach((element) => {
-          // console.log(element._id);
           this.allPostsIDs.push(element._id);
         });
         console.log(this.allPostsIDs)
@@ -209,10 +204,6 @@ export default {
         console.log(error);
       }
     },
-    test1: function() {
-      console.log('test run')
-      console.log(Posts.fetchedPostID)
-    }
   },
   created() {
     this.getPosts()
