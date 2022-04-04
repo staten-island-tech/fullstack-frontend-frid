@@ -40,7 +40,9 @@
         </div>
       </div>
       <button @click.prevent="close"
-    class="mt-[4vh] font-semibold">Close</button>
+      class="mt-[4vh] font-semibold">Post</button>
+      <button @click.prevent="close"
+      class="mt-[2vh]">Cancel</button>
     </div>
   </div>
 </template>
