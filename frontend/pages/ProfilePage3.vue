@@ -174,7 +174,7 @@
 <script>
 import Posts from "../components/Posts.vue";
 export default {
-  components: { Posts},
+  components: { Posts },
   name: "Profile_Page3",
   data() {
     return {

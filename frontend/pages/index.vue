@@ -20,12 +20,17 @@
     <button class="" @click="openModal">Create Post</button>
     <PostCreate v-model="modalOpen"></PostCreate>
     <div class="bg-slate-400 h-[5vh]"></div>
+    <button v-on:click="test">testclcikmagik?</button>
   </div>
 </template>
 
 <script>
+import Posts from "../components/Posts.vue";
+// import fetchedPostID from "@/components/Posts.vue";
 export default {
+  components: { Posts },
   name: "IndexPage",
+  props: ['fetchedPostID'],
   data() {
     return {
       modalOpen: false,
@@ -57,6 +62,9 @@ export default {
         console.log(error);
       }
     },
+    test () {
+      console.log(this.fetchedPostID)
+    }
   },
   created() {
     this.getPosts()
