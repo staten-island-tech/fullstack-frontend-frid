@@ -25,10 +25,12 @@
 </template>
 
 <script>
-import Posts from "../components/Posts.vue";
+import Posts from "@/components/Posts.vue";
 // import fetchedPostID from "@/components/Posts.vue";
 export default {
-  components: { Posts },
+  components: {
+    Posts 
+  },
   name: "IndexPage",
   props: ['fetchedPostID'],
   data() {
@@ -63,6 +65,7 @@ export default {
       }
     },
     test () {
+      this.$parent.fetchedPostID = "62320e70a36256662057f5c3"
       console.log(this.fetchedPostID)
     }
   },

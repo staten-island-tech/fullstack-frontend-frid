@@ -88,6 +88,7 @@
 
 <script>
 export default {
+  name: 'posts',
   data() {
     return {
       localLikes: null,
@@ -110,9 +111,8 @@ export default {
       // commentStyleClosed: {
       //   display: "none",
       // },
-      fetchedPostID: "61f5d9d9000fb29e24d1bad9",
+      fetchedPostID: ["61f5d9d9000fb29e24d1bad9"],
       isActive: false,
-      likeClick: 0,
     };
   },
   methods: {
@@ -174,8 +174,6 @@ export default {
     like: async function () {
 
       this.isActive = true
-      this.likeClick += 1
-      console.log(this.likeClick)
 
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
