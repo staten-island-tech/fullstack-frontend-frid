@@ -3,9 +3,8 @@
     <Navbar class="sticky top-0" />
     <NuxtLink to="/ProfilePage3"> Profile </NuxtLink>
     <Posts />
-    <button class="" @click="openModal">Create Post</button>
+    <button class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]" @click="openModal">&#43;</button>
     <PostCreate v-model="modalOpen"></PostCreate>
-    <div class="bg-slate-400 h-[5vh]"></div>
   </div>
 </template>
 
