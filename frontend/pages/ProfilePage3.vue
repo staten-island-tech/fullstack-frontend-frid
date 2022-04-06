@@ -89,10 +89,10 @@
             relative
             font-lora
           "
-          
+          @click="openModal"
           id="hover-underline-animation"
         >
-          <NuxtLink to="/UserSettingsPage">User Settings</NuxtLink>
+          <NuxtLink v-model="modalOpen">User Settings</NuxtLink>
           
         </button> 
         
@@ -181,6 +181,7 @@ export default {
   data() {
     return {
       // modalOpen: false,
+      modalOpen: false,
       allPostsIDs: [],
       postAPI:[],
     };

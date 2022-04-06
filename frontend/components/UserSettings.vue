@@ -1,66 +1,62 @@
 <template>
-  <div
-    class="flex items-center justify-center h-[70vh] w-[70vw] text-center flex"
-  >
+  <div id="main-container"
+    class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]"
+    v-show="value">
     <div
-      class="
-        border-2 border-black
-        rounded-[1.5rem]
-        flex
-        items-center
-        justify-center
-        flex-col
-        p-[4rem]
-        bg-white
-        w-[25vw]
-      "
+      class="flex items-center justify-center h-[70vh] w-[70vw] text-center flex"
     >
-      <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
-        <button class="dropdown">
-          <!-- <span>Mouse over me</span> -->
-          <p class="text-[15px] relative font-bold">Color Theme</p>
-          <div class="dropdown-content">
-            <p class="dropdown-item">Default</p>
-            <p class="dropdown-item">Custom</p>
-          </div>
-        </button>
-      </div>
-      <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
-        <button class="dropdown">
-          <p class="text-[15px] relative top-[5px] font-bold">Privacy Settings</p>
-          <!-- <span>Mouse over me</span> -->
-          <div class="dropdown-content">
-            <p class="dropdown-item">Set Account to Private</p>
-            <p class="dropdown-item">Only Allow Followers to View</p>
-            <p class="dropdown-item">
-              Only Allow Followers and Followers to View
+      <div
+        class="border-2 border-black rounded-[1.5rem] flex items-center justify-center flex-col p-[4rem] bg-white w-[25vw]"
+      >
+        <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
+          <button class="dropdown">
+            <!-- <span>Mouse over me</span> -->
+            <p class="text-[15px] relative font-bold">Color Theme</p>
+            <div class="dropdown-content">
+              <p class="dropdown-item">Default</p>
+              <p class="dropdown-item">Custom</p>
+            </div>
+          </button>
+        </div>
+        <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
+          <button class="dropdown">
+            <p class="text-[15px] relative top-[5px] font-bold">
+              Privacy Settings
             </p>
-            <p class="dropdown-item">Allow Anyone to View</p>
-          </div>
-        </button>
+            <!-- <span>Mouse over me</span> -->
+            <div class="dropdown-content">
+              <p class="dropdown-item">Set Account to Private</p>
+              <p class="dropdown-item">Only Allow Followers to View</p>
+              <p class="dropdown-item">
+                Only Allow Followers and Followers to View
+              </p>
+              <p class="dropdown-item">Allow Anyone to View</p>
+            </div>
+          </button>
+        </div>
+        <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
+          <button class="dropdown">
+            <!-- <span>Mouse over me</span> -->
+            <p class="text-[15px] relative top-[5px] font-bold">About</p>
+            <div class="dropdown-content">
+              <p class="dropdown-item">Privacy Policy</p>
+              <p class="dropdown-item">Terms of Use</p>
+            </div>
+          </button>
+        </div>
+        <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
+          <button class="dropdown">
+            <!-- <span>Mouse over me</span> -->
+            <p class="text-[15px] relative top-[5px] font-bold">Help</p>
+            <div class="dropdown-content">
+              <p class="dropdown-item">Contact Support</p>
+              <p class="dropdown-item">Navigation Help</p>
+              <p class="dropdown-item">Suggestions</p>
+            </div>
+          </button>
+        </div>
+        <button @click.prevent="close" class="mt-[5vh]">Close</button>
       </div>
-      <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
-        <button class="dropdown">
-          <!-- <span>Mouse over me</span> -->
-          <p class="text-[15px] relative top-[5px] font-bold">About</p>
-          <div class="dropdown-content">
-            <p class="dropdown-item">Privacy Policy</p>
-            <p class="dropdown-item">Terms of Use</p>
-          </div>
-        </button>
-      </div>
-      <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
-        <button class="dropdown">
-          <!-- <span>Mouse over me</span> -->
-          <p class="text-[15px] relative top-[5px] font-bold">Help</p>
-          <div class="dropdown-content">
-            <p class="dropdown-item">Contact Support</p>
-            <p class="dropdown-item">Navigation Help</p>
-            <p class="dropdown-item">Suggestions</p>
-          </div>
-        </button>
-      </div>
-      <NuxtLink to="/ProfilePage3" class="mt-[5vh]"> Back </NuxtLink>
     </div>
   </div>
 </template>
@@ -71,7 +67,14 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    close() {
+      this.$emit("input", !this.value);
+    },
+    openModal() {
+      this.modalOpen = !this.modalOpen;
+    },
+  },
 };
 </script>
 
@@ -136,5 +139,4 @@ export default {
 .dropdown-item:hover {
   background-color: #f1f1f1;
 }
-
 </style>
