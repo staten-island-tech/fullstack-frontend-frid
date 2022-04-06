@@ -89,6 +89,9 @@
 <script>
 export default {
   name: 'posts',
+  props: [
+    'fetchedPostID'
+  ],
   data() {
     return {
       localLikes: null,
@@ -111,7 +114,7 @@ export default {
       // commentStyleClosed: {
       //   display: "none",
       // },
-      fetchedPostID: ["61f5d9d9000fb29e24d1bad9"],
+      // fetchedPostID: ["61f5d9d9000fb29e24d1bad9"],
       isActive: false,
     };
   },
