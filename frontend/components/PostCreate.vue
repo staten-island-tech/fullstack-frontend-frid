@@ -1,9 +1,12 @@
 <template>
-  <div id="main-container" class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]" v-show="value">
+  <div
+    id="main-container"
+    class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]"
+    v-show="value"
+  >
     <div
-      id="form" 
-      class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center border-2 border-black
-        rounded-[1.5rem]"
+      id="form"
+      class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center border-2 border-black rounded-[1.5rem]"
     >
       <h3>Create a Post</h3>
       <div id="input-container" class="flex flex-col w-[30vw] items-center">
@@ -27,8 +30,13 @@
         </div>
         <div id="tag-input-container">
           <div class="flex flex-row">
-            <input type="text" placeholder="Tags" v-model="tagInput" class="mx-[1vw] rounded-md"/>
-                <button :disabled="isActive" @click="addTag">Add</button>
+            <input
+              type="text"
+              placeholder="Tags"
+              v-model="tagInput"
+              class="mx-[1vw] rounded-md"
+            />
+            <button :disabled="isActive" @click="addTag">Add</button>
           </div>
           <div id="tag-list">
             <ul>
@@ -39,23 +47,22 @@
           </div>
         </div>
       </div>
-      <button @click.prevent="close"
-      class="mt-[4vh] font-semibold">Post</button>
-      <button @click.prevent="close"
-      class="mt-[2vh]">Cancel</button>
+      <button @click.prevent="close" class="mt-[4vh] font-semibold">
+        Post
+      </button>
+      <button @click.prevent="close" class="mt-[2vh]">Cancel</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
-  name: 'PostCreate',
+  name: "PostCreate",
   props: {
-                value: {
-                    required: true
-                }
-            },
+    value: {
+      required: true,
+    },
+  },
   data() {
     return {
       formStyle: {
@@ -91,21 +98,21 @@ export default {
       console.log(this.tags);
 
       if (this.tags.length > 3) {
-          this.isActive = true
+        this.isActive = true;
       }
     },
     close() {
-                  this.$emit("input", !this.value);
-                } ,
+      this.$emit("input", !this.value);
+    },
 
-  //  tagsLength() {
-  //    this.tagsLength = this.tags.length
-  //    },
+    //  tagsLength() {
+    //    this.tagsLength = this.tags.length
+    //    },
   },
 };
 </script>
 
 v-bind:style="formStyle"
 <button v-on:click="formStylesOpen">Open</button>
-    <button v-on:click="formStylesClosed">Closed</button>
-    <div id="button"></div>
+<button v-on:click="formStylesClosed">Closed</button>
+<div id="button"></div>

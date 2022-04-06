@@ -10,9 +10,6 @@
         <app-posts v-bind:fetchedPostID=allPostsID></app-posts>
       </li>
     </div>
-    <button class="" @click="openModal">Create Post</button>
-    <PostCreate v-model="modalOpen"></PostCreate>
-    <div class="bg-slate-400 h-[5vh]"></div>
     <button v-on:click="test">testclcikmagik?</button>
     <button
       class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"

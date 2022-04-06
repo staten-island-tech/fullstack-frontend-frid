@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#330066]">
+  <div class="bg-[#6957e7]">
     <div class="flex items-center justify-center h-[100vh] ">
    <div class="border-2 border-black rounded-[1.5rem] flex items-center justify-center flex-col p-[4rem] bg-white" > 
      <input class="mb-[1rem] mt-[2rem] border-2 border-black p-[0.5rem] rounded-md" type="text" placeholder="Email Address" />
