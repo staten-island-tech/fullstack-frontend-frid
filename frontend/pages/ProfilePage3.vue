@@ -163,8 +163,8 @@
         >
           <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
           <li v-for="allPostsID in allPostsIDs" :key="allPostsID">
-            <Posts/>
-            </li>
+            <app-posts v-bind:fetchedPostID=allPostsID></app-posts>
+          </li>
         </div>
       </div>
     </div>
@@ -174,7 +174,9 @@
 <script>
 import Posts from "../components/Posts.vue";
 export default {
-  components: { Posts },
+  components: {
+    'app-posts': Posts,
+  },
   name: "Profile_Page3",
   data() {
     return {

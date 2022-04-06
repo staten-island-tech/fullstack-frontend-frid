@@ -7,7 +7,7 @@
       class="w-[80vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
     >
       <li v-for="allPostsID in allPostsIDs" :key="allPostsID">
-        <app-posts fetchedPostID="61f5d9d9000fb29e24d1bad9"></app-posts>
+        <app-posts v-bind:fetchedPostID=allPostsID></app-posts>
       </li>
     </div>
     <button class="" @click="openModal">Create Post</button>
