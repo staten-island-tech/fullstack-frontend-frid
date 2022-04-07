@@ -8,7 +8,7 @@
       id="form"
       class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center border-2 border-black rounded-[1.5rem]"
     >
-      <h3>Create a Post</h3>
+      <button @click=createPost>Create a Post</button>
       <div id="input-container" class="flex flex-col w-[30vw] items-center">
         <div class="my-[5vh] h-[10vh] overflow-y-scroll w-[30vw]">
           <div class="flex flex-row">
@@ -104,6 +104,27 @@ export default {
     close() {
       this.$emit("input", !this.value);
     },
+    createPost: async function() {
+      console.log("createPost function ran")
+      var requestOptionsPost = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      try {
+        const response = await post(
+          "http://localhost:3000/api/v1/posts/create",
+          requestOptionsPost
+        );
+        const result = await response.json();
+        console.log("Created post with this id: " + result._id);
+      } catch (error) {
+        console.log(error);
+        alert("Did you fill in all the proper information?");
+      }
+    }
 
     //  tagsLength() {
     //    this.tagsLength = this.tags.length

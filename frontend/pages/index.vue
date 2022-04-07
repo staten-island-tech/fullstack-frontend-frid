@@ -10,7 +10,6 @@
         <app-posts v-bind:fetchedPostID=allPostsID></app-posts>
       </li>
     </div>
-    <button v-on:click="test">testclcikmagik?</button>
     <button
       class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
       @click="openModal"
@@ -61,10 +60,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-    test() {
-      this.fetchedPostID='61f5d9d9000fb29e24d1bad9',
-      console.log(this.fetchedPostID);
     },
   },
   created() {
