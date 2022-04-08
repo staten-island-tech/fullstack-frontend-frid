@@ -54,8 +54,7 @@
               class="h-[3.5vh] mx-[0.5vw]"
             />
           </button>
-          <span id="like-count" v-if="liked = true"> {{ this.tempLikes }} </span>
-          <span v-else>{{ this.existingLikes }}</span>
+          <span id="like-count"> {{ this.tempLikes }} </span>
           <button
             id="dislike-button"
             v-on:click="dislike"
@@ -110,7 +109,6 @@ export default {
       // fetchedPostID: ["61f5d9d9000fb29e24d1bad9"],
       liked: false,
       disliked: false,
-      existingLikes: null,
     };
   },
   methods: {
@@ -168,28 +166,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-
-    existingLike: async function () {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var requestOptionsGet = {
-          method: "GET",
-          redirect: "follow",
-        };
-
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
-            requestOptionsGet
-          );
-          const result = await response.json();
-          console.log("There are " + result.data.post.totalLikes + " likes");
-          this.existingLikes = result.data.post.totalLikes;
-        } catch (error) {
-          console.log(error);
-        }
     },
 
     like: async function () {
@@ -413,7 +389,6 @@ export default {
     this.postname();
     this.songRetriever();
     this.tagRetriever();
-    this.existingLike();
   },
 };
 </script>

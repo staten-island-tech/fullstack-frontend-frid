@@ -6,7 +6,7 @@
       id="main-container"
       class="w-[80vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
     >
-      <li v-for="allPostsID in allPostsIDs" :key="allPostsID">
+      <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
         <app-posts v-bind:fetchedPostID=allPostsID></app-posts>
       </li>
     </div>

@@ -2,7 +2,7 @@
   <div class="bg-[#eeeeee]">
     <Navbar />
     <div class="flex flex-row">
-      <div id="sidecar" class="flex flex-col align-center w-[10vw] h-[92vh]">
+      <div id="sidecar" class="flex flex-col align-center w-[12vw] h-[92vh]">
         <span
           class="
             w-[12.5vh]
@@ -100,7 +100,7 @@
       <!-- <Modal v-show="modalOpen"/> -->
       <!-- @click="openModal" -->
 
-      <div id="main-content" class="px-[5vw]">
+      <div id="main-content" class="px-[5vw] bg-gradient-to-r from-violet-500 to-fuchsia-500">
         <div
           id="main-menu-container"
           class="flex flex-row justify-center w-[80vw] h-[8.25vh] mt-[7.5vh]"
@@ -153,7 +153,7 @@
           class="
             w-[80vw]
             h-[75vh]
-            bg-[#eeeeee]
+            bg-gradient-to-r from-violet-500 to-fuchsia-500
             flex flex-row
             justify-evenly
             flex-wrap
@@ -161,7 +161,7 @@
           "
         >
           <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
-          <li v-for="allPostsID in allPostsIDs" :key="allPostsID">
+          <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
             <app-posts v-bind:fetchedPostID=allPostsID></app-posts>
           </li>
         </div>
