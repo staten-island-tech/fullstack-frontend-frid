@@ -91,11 +91,10 @@
           "
           @click="openModal"
           id="hover-underline-animation"
-        >
-          <NuxtLink v-model="modalOpen">User Settings</NuxtLink>
+        >User Settings
           
         </button> 
-        
+        <UserSettings class="z-50" v-model="modalOpen"></UserSettings>
       </div>
 
       <!-- <Modal v-show="modalOpen"/> -->
@@ -187,6 +186,9 @@ export default {
     };
   },
   methods: {
+    openModal() {
+      this.modalOpen = !this.modalOpen;
+    },
     getPosts: async function() {
       var requestOptionsGet = {
         method: "GET",
