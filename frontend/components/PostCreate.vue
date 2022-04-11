@@ -76,9 +76,13 @@ export default {
       },
       songs: [],
       songInput: null,
+      songAmount: 0,
       tags: [],
       tagInput: null,
+      totalTags: 0,
       isActive: false,
+      userPosting: "Bobby2000",
+      postName: null,
       // tagsLength: null,
     };
   },
@@ -115,8 +119,18 @@ export default {
 
       try {
         const response = await post(
-          "http://localhost:3000/api/v1/posts/create",
-          requestOptionsPost
+          "http://localhost:3000/api/v1/posts/create", {
+            postName: this.postName,
+            userName: this.userPosting,
+            tags: this.tags,
+            songs: this.songs,
+            totalLikes: 0,
+            totalDislikes: 0,
+            totalComments: 0,
+            totalTags: this.totalTags,
+            songAmount: this.songAmount,
+
+          }, requestOptionsPost
         );
         const result = await response.json();
         console.log("Created post with this id: " + result._id);

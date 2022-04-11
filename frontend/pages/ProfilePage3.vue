@@ -29,7 +29,7 @@
               brightness-50
             "
           >
-            Ox2bc#3253
+            Bobby2000
           </p>
           <p
             id="bio"
