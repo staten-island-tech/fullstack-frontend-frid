@@ -8,8 +8,12 @@
       id="form"
       class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center border-2 border-black rounded-[1.5rem]"
     >
-      <button @click=createPost>Create a Post</button>
+      <h1 class="underline mt-[7vh] font-semibold">Creating new post!</h1>
       <div id="input-container" class="flex flex-col w-[30vw] items-center">
+        <div class="">
+          <label for="postName">Post Name</label>
+          <input v-model="postName" type="text" class="" placeholder="edit me" />
+        </div>
         <div class="my-[5vh] h-[10vh] overflow-y-scroll w-[30vw]">
           <div class="flex flex-row">
             <input
@@ -47,10 +51,10 @@
           </div>
         </div>
       </div>
-      <button @click.prevent="close" class="mt-[4vh] font-semibold">
+      <button @click=createPost  class="mt-[4vh] font-semibold">
         Post
       </button>
-      <button @click.prevent="close" class="mt-[2vh]">Cancel</button>
+      <button @click.prevent="close" class="mt-[2vh] font-semibold">Cancel</button>
     </div>
   </div>
 </template>
@@ -96,6 +100,7 @@ export default {
     addSong() {
       this.songs.push(this.songInput);
       console.log(this.songs);
+      this.songAmount = this.songAmount + 1;
     },
     addTag() {
       this.tags.push(this.tagInput);
