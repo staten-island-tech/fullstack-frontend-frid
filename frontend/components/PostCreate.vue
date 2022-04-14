@@ -6,7 +6,7 @@
   >
     <div
       id="form"
-      class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center border-2 border-black rounded-[1.5rem]"
+      class="flex flex-col w-[50vw] h-[50vh] bg-gradient-to-r from-violet-500 to-fuchsia-500 flex items-center justify-center border-2 border-black rounded-[1.5rem]"
     >
       <h1 class="underline mt-[7vh] font-semibold">Creating new post!</h1>
       <div id="input-container" class="flex flex-col w-[30vw] items-center">
