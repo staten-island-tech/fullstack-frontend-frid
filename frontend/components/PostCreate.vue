@@ -79,7 +79,12 @@ export default {
         display: "none",
       },
       songs: [],
-      songInput: null,
+      songInput: {
+        songName: null,
+        songNumber: null,
+        artist: null,
+        duration: null,
+      },
       songAmount: 0,
       tags: [],
       tagInput: null,
@@ -101,10 +106,13 @@ export default {
       this.songs.push(this.songInput);
       console.log(this.songs);
       this.songAmount = this.songAmount + 1;
+      console.log(this.songAmount)
     },
     addTag() {
       this.tags.push(this.tagInput);
       console.log(this.tags);
+      this.totalTags = this.totalTags + 1;
+      console.log(this.totalTags)
 
       if (this.tags.length > 3) {
         this.isActive = true;
@@ -115,12 +123,6 @@ export default {
     },
     createPost: async function() {
       console.log("createPost function ran")
-      var requestOptionsPost = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-      };
 
       try {
         const response = await post(
@@ -135,7 +137,7 @@ export default {
             totalTags: this.totalTags,
             songAmount: this.songAmount,
 
-          }, requestOptionsPost
+          },
         );
         const result = await response.json();
         console.log("Created post with this id: " + result._id);
