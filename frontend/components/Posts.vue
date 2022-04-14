@@ -44,6 +44,7 @@
       <div id="reactions-and-tags" class="flex flex-row items-center mt-[1vh]">
         <div id="reactions" class="flex flex-row items-center">
           <button
+            :disabled="disliked"
             id="like-button"
             v-on:click="like"
             class="mx-[0.6vw]"
@@ -51,11 +52,19 @@
             <img
               src="../assets/like.svg"
               alt="Logo"
-              class="h-[3.5vh] mx-[0.5vw]"
+              class="h-[3.5vh] mx-[0.5vw] invert sepia saturate-10000% hue-rotate-0"
+              v-if="liked"
             />
+            <img
+              src="../assets/like.svg"
+              alt="Logo"
+              class="h-[3.5vh] mx-[0.5vw]"
+              v-else            
+              />
           </button>
           <span id="like-count"> {{ this.tempLikes }} </span>
           <button
+            :disabled="liked"
             id="dislike-button"
             v-on:click="dislike"
             class="mx-[0.6vw]"
@@ -63,7 +72,14 @@
             <img
               src="../assets/dislike.svg"
               alt="Logo"
+              class="h-[3.5vh] mx-[0.5vw] bg-[red]"
+              v-if="disliked"
+            />
+            <img
+              src="../assets/dislike.svg"
+              alt="Logo"
               class="h-[3.5vh] mx-[0.5vw]"
+              v-else
             />
           </button>
           <span id="dislike-count"> {{ this.tempDislikes }} </span>
@@ -382,7 +398,6 @@ export default {
         console.log(error);
       }
     },
-    
   },
   created() {
     this.username();
