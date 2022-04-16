@@ -50,19 +50,20 @@
             class="mx-[0.6vw]"
           >
             <img
-              src="../assets/like.svg"
+              src="../assets/like1.svg"
               alt="Logo"
-              class="h-[3.5vh] mx-[0.5vw] invert sepia saturate-10000% hue-rotate-0"
+              class="h-[3.5vh] mx-[0.5vw]"
               v-if="liked"
             />
             <img
               src="../assets/like.svg"
               alt="Logo"
               class="h-[3.5vh] mx-[0.5vw]"
-              v-else            
-              />
+              v-else
+            />
           </button>
-          <span id="like-count"> {{ this.tempLikes }} </span>
+          <span id="like-count" v-if="liked"> {{ this.tempLikes }} </span>
+          <span id="like-count" v-else> {{ this.localLikes }} </span>
           <button
             :disabled="liked"
             id="dislike-button"
@@ -70,9 +71,9 @@
             class="mx-[0.6vw]"
           >
             <img
-              src="../assets/dislike.svg"
+              src="../assets/dislike1.svg"
               alt="Logo"
-              class="h-[3.5vh] mx-[0.5vw] bg-[red]"
+              class="h-[3.5vh] mx-[0.5vw]"
               v-if="disliked"
             />
             <img
@@ -82,7 +83,8 @@
               v-else
             />
           </button>
-          <span id="dislike-count"> {{ this.tempDislikes }} </span>
+          <span id="like-count" v-if="disliked"> {{ this.tempDislikes }} </span>
+          <span id="like-count" v-else> {{ this.localDislikes }} </span>
         </div>
         <div id="tags" class="flex flex-row items-center ml-[2vw]">
           <ul class="columns-4">
@@ -184,6 +186,28 @@ export default {
       }
     },
 
+    displayLikes: async function () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log("There are " + result.data.post.totalLikes + " likes");
+        this.localLikes = result.data.post.totalLikes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     like: async function () {
       this.liked = !this.liked;
 
@@ -191,22 +215,22 @@ export default {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        var requestOptionsGet = {
-          method: "GET",
-          redirect: "follow",
-        };
+        // var requestOptionsGet = {
+        //   method: "GET",
+        //   redirect: "follow",
+        // };
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
-            requestOptionsGet
-          );
-          const result = await response.json();
-          console.log("There are " + result.data.post.totalLikes + " likes");
-          this.localLikes = result.data.post.totalLikes;
-        } catch (error) {
-          console.log(error);
-        }
+        // try {
+        //   const response = await fetch(
+        //     "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+        //     requestOptionsGet
+        //   );
+        //   const result = await response.json();
+        //   console.log("There are " + result.data.post.totalLikes + " likes");
+        //   this.localLikes = result.data.post.totalLikes;
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
         this.tempLikes = this.localLikes + 1;
 
@@ -231,58 +255,55 @@ export default {
         } catch (error) {
           console.log(error);
         }
-      } else {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+      // } else {
+      //   var myHeaders = new Headers();
+      //   myHeaders.append("Content-Type", "application/json");
 
-        var requestOptionsGet = {
-          method: "GET",
-          redirect: "follow",
-        };
+      //   var requestOptionsGet = {
+      //     method: "GET",
+      //     redirect: "follow",
+      //   };
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
-            requestOptionsGet
-          );
-          const result = await response.json();
-          console.log("There are " + result.data.post.totalLikes + " likes");
-          this.localLikes = result.data.post.totalLikes;
-        } catch (error) {
-          console.log(error);
-        }
+      //   try {
+      //     const response = await fetch(
+      //       "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+      //       requestOptionsGet
+      //     );
+      //     const result = await response.json();
+      //     console.log("There are " + result.data.post.totalLikes + " likes");
+      //     this.localLikes = result.data.post.totalLikes;
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
 
-        this.tempLikes = this.localLikes - 1;
+      //   this.tempLikes = this.localLikes - 1;
 
-        var raw = JSON.stringify({
-          totalLikes: this.tempLikes,
-        });
+      //   var raw = JSON.stringify({
+      //     totalLikes: this.tempLikes,
+      //   });
 
-        var requestOptionsPatch = {
-          method: "PATCH",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
+      //   var requestOptionsPatch = {
+      //     method: "PATCH",
+      //     headers: myHeaders,
+      //     body: raw,
+      //     redirect: "follow",
+      //   };
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
-            requestOptionsPatch
-          );
-          const result = await response.json();
-          console.log("There are " + result.data.post.totalLikes + " likes");
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    },
+      //   try {
+      //     const response = await fetch(
+      //       "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+      //       requestOptionsPatch
+      //     );
+      //     const result = await response.json();
+      //     console.log("There are " + result.data.post.totalLikes + " likes");
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // }
+    }},
 
-    dislike: async function () {
-      this.disliked = !this.disliked;
-
-      if (this.disliked == true) {
-        var myHeaders = new Headers();
+    displayDislikes: async function () {
+      var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var requestOptionsGet = {
@@ -303,6 +324,33 @@ export default {
         } catch (error) {
           console.log(error);
         }
+    },
+
+    dislike: async function () {
+      this.disliked = !this.disliked;
+
+      if (this.disliked == true) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        // var requestOptionsGet = {
+        //   method: "GET",
+        //   redirect: "follow",
+        // };
+
+        // try {
+        //   const response = await fetch(
+        //     "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+        //     requestOptionsGet
+        //   );
+        //   const result = await response.json();
+        //   console.log(
+        //     "There are " + result.data.post.totalDislikes + " dislikes"
+        //   );
+        //   this.localDislikes = result.data.post.totalDislikes;
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
         this.tempDislikes = this.localDislikes + 1;
 
@@ -329,54 +377,54 @@ export default {
         } catch (error) {
           console.log(error);
         }
-      } else {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+      // } else {
+      //   var myHeaders = new Headers();
+      //   myHeaders.append("Content-Type", "application/json");
 
-        var requestOptionsGet = {
-          method: "GET",
-          redirect: "follow",
-        };
+      //   var requestOptionsGet = {
+      //     method: "GET",
+      //     redirect: "follow",
+      //   };
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
-            requestOptionsGet
-          );
-          const result = await response.json();
-          console.log(
-            "There are " + result.data.post.totalDislikes + " dislikes"
-          );
-          this.localDislikes = result.data.post.totalDislikes;
-        } catch (error) {
-          console.log(error);
-        }
+      //   try {
+      //     const response = await fetch(
+      //       "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+      //       requestOptionsGet
+      //     );
+      //     const result = await response.json();
+      //     console.log(
+      //       "There are " + result.data.post.totalDislikes + " dislikes"
+      //     );
+      //     this.localDislikes = result.data.post.totalDislikes;
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
 
-        this.tempDislikes = this.localDislikes - 1;
+      //   this.tempDislikes = this.localDislikes - 1;
 
-        var raw = JSON.stringify({
-          totalDislikes: this.tempDislikes,
-        });
+      //   var raw = JSON.stringify({
+      //     totalDislikes: this.tempDislikes,
+      //   });
 
-        var requestOptionsPatch = {
-          method: "PATCH",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
+      //   var requestOptionsPatch = {
+      //     method: "PATCH",
+      //     headers: myHeaders,
+      //     body: raw,
+      //     redirect: "follow",
+      //   };
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
-            requestOptionsPatch
-          );
-          const result = await response.json();
-          console.log(
-            "There are " + result.data.post.totalDislikes + " dislikes"
-          );
-        } catch (error) {
-          console.log(error);
-        }
+      //   try {
+      //     const response = await fetch(
+      //       "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+      //       requestOptionsPatch
+      //     );
+      //     const result = await response.json();
+      //     console.log(
+      //       "There are " + result.data.post.totalDislikes + " dislikes"
+      //     );
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
       }
     },
 
@@ -404,6 +452,8 @@ export default {
     this.postname();
     this.songRetriever();
     this.tagRetriever();
+    this.displayLikes();
+    this.displayDislikes();
   },
 };
 </script>
