@@ -7,7 +7,9 @@
       class="w-[80vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
     >
       <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
-        <app-posts v-bind:fetchedPostID=allPostsID></app-posts>
+        <button @click="openModalLargePost">
+          <app-posts v-bind:fetchedPostID=allPostsID></app-posts>        
+        </button>
       </li>
     </div>
     <button
@@ -17,13 +19,12 @@
       &#43;
     </button>
     <PostCreate v-model="modalOpen"></PostCreate>
-    <!-- <app-posts fetchedPostID="61f5d9d9000fb29e24d1bad9"></app-posts> -->
+    <LModalPost v-model="modalLargePostOpen"></LModalPost>
   </div>
 </template>
 
 <script>
 import Posts from "../components/Posts.vue";
-// import fetchedPostID from "@/components/Posts.vue";
 export default {
   components: {
     'app-posts': Posts,
@@ -32,6 +33,7 @@ export default {
   data() {
     return {
       modalOpen: false,
+      modalLargePostOpen: false,
       allPostsIDs: [],
       postAPI: [],
       fetchedPostID: "",
@@ -40,6 +42,10 @@ export default {
   methods: {
     openModal() {
       this.modalOpen = !this.modalOpen;
+    },
+    openModalLargePost() {
+      console.log("attempting to open Modal for Large Post")
+      this.modalLargePostOpen = !this.modalLargePostOpen;
     },
     getPosts: async function () {
       var requestOptionsGet = {

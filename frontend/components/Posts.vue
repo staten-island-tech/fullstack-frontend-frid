@@ -42,6 +42,15 @@
         class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
       ></div>
       <div id="reactions-and-tags" class="flex flex-row items-center mt-[1vh]">
+        <div id="tags" class="flex flex-row items-center ml-[2vw]">
+          <ul class="columns-4">
+            <li v-for="tag in tags" :key="tag" class="text-[2vh]">
+              #{{ tag.tagName }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="reactions-and-tags" class="flex flex-row items-center mt-[1vh]">
         <div id="reactions" class="flex flex-row items-center">
           <button
             :disabled="disliked"
@@ -86,12 +95,18 @@
           <span id="like-count" v-if="disliked"> {{ this.tempDislikes }} </span>
           <span id="like-count" v-else> {{ this.localDislikes }} </span>
         </div>
-        <div id="tags" class="flex flex-row items-center ml-[2vw]">
-          <ul class="columns-4">
-            <li v-for="tag in tags" :key="tag" class="text-[2vh]">
-              #{{ tag.tagName }}
-            </li>
-          </ul>
+        <div>
+          <button
+            id="comments-button"
+            class="mx-[0.6vw]"
+          >
+            <img
+              src="../assets/comments.svg"
+              alt="Logo"
+              class="h-[3.5vh] mx-[0.5vw]"
+            />
+          </button>
+          <span id="comment-count"> {{ this.localTotalComments }} </span>
         </div>
       </div>
     </div>
@@ -112,6 +127,7 @@ export default {
       postName: null,
       songs: null,
       tags: null,
+      localTotalComments: null,
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -446,6 +462,29 @@ export default {
         console.log(error);
       }
     },
+    displayTotalComments: async function () {
+      var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var requestOptionsGet = {
+          method: "GET",
+          redirect: "follow",
+        };
+
+        try {
+          const response = await fetch(
+            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+            requestOptionsGet
+          );
+          const result = await response.json();
+          console.log(
+            "There are " + result.data.post.totalComments + " comments in total"
+          );
+          this.localTotalComments = result.data.post.totalComments;
+        } catch (error) {
+          console.log(error);
+        }
+    },
   },
   created() {
     this.username();
@@ -454,6 +493,7 @@ export default {
     this.tagRetriever();
     this.displayLikes();
     this.displayDislikes();
+    this.displayTotalComments();
   },
 };
 </script>
