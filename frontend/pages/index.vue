@@ -19,7 +19,7 @@
       &#43;
     </button>
     <PostCreate v-model="modalOpen"></PostCreate>
-    <LModalPost v-model="modalLargePostOpen"></LModalPost>
+    <!-- <LModalPost v-model="modalLargePostOpen"></LModalPost> -->
   </div>
 </template>
 

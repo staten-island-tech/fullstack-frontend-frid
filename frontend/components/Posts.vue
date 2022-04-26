@@ -21,7 +21,22 @@
         class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
       ></div>
       <div id="post-content" class="h-[27.5vh] overflow-y-scroll">
-        <ul>
+        <ul v-if="commentsClicked">
+          <li
+            v-for="comment in comments"
+            :key="comment"
+            class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
+          >
+            <div class="w-[13.5vw] pl-[1.5vw] ">
+              {{ comment.commentContent }}
+            </div>
+            <!-- <div class="flex justify-center w-[4vw]">{{ comment.commentNumber }}</div> -->
+            <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
+              {{ comment.commentUserName }}
+            </div>
+          </li>
+        </ul>
+        <ul v-else>
           <li
             v-for="song in songs"
             :key="song"
@@ -96,7 +111,7 @@
           <span id="like-count" v-else> {{ this.localDislikes }} </span>
         </div>
         <div>
-          <button
+          <button v-on:click="commentsClickedF"
             id="comments-button"
             class="mx-[0.6vw]"
           >
@@ -128,6 +143,7 @@ export default {
       songs: null,
       tags: null,
       localTotalComments: null,
+      comments: null,
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -143,6 +159,7 @@ export default {
       // fetchedPostID: ["61f5d9d9000fb29e24d1bad9"],
       liked: false,
       disliked: false,
+      commentsClicked: false,
     };
   },
   methods: {
@@ -197,6 +214,24 @@ export default {
         const result = await response.json();
         this.songs = result.data.post.songs;
         console.log(this.songs);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    commentRetriever: async function () {
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        this.comments = result.data.post.comments;
+        console.log(this.comments);
       } catch (error) {
         console.log(error);
       }
@@ -485,11 +520,15 @@ export default {
           console.log(error);
         }
     },
+    commentsClickedF: async function(){
+      this.commentsClicked = !this.commentsClicked
+    }
   },
   created() {
     this.username();
     this.postname();
     this.songRetriever();
+    this.commentRetriever();
     this.tagRetriever();
     this.displayLikes();
     this.displayDislikes();
