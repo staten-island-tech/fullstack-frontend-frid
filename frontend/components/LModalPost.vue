@@ -127,7 +127,8 @@
 
 <script>
 export default {
-  name: "PostCreate",
+  name: "posts",
+  props: ["modalLargePostOpenID"],
   props: {
     value: {
       required: true,
@@ -135,17 +136,6 @@ export default {
   },
   data() {
     return {
-      formStyle: {
-        display: "none",
-      },
-      formStyleOpen: {
-        display: "flex",
-      },
-      formStyleClosed: {
-        display: "none",
-      },
-      isActive: false,
-// ---------------------------
       localLikes: null,
       localDislikes: null,
       tempLikes: null,
@@ -155,9 +145,23 @@ export default {
       songs: null,
       tags: null,
       localTotalComments: null,
+      comments: null,
+      // songList: null,
+      // comments: [],
+      // commentInput: null,
+      // commentStyle: {
+      //   display: "none",
+      // },
+      // commentStyleOpen: {
+      //   display: "flex",
+      // },
+      // commentStyleClosed: {
+      //   display: "none",
+      // },
+      // fetchedPostID: ["61f5d9d9000fb29e24d1bad9"],
       liked: false,
       disliked: false,
-
+      commentsClicked: false,
     };
   },
   methods: {
@@ -172,7 +176,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -191,7 +195,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -209,7 +213,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -230,7 +234,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -262,7 +266,7 @@ export default {
 
         try {
           const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+            "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
             requestOptionsPatch
           );
           const result = await response.json();
@@ -283,7 +287,7 @@ export default {
 
         try {
           const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+            "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
             requestOptionsGet
           );
           const result = await response.json();
@@ -317,7 +321,7 @@ export default {
 
         try {
           const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+            "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
             requestOptionsPatch
           );
           const result = await response.json();
@@ -337,7 +341,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -358,7 +362,7 @@ export default {
 
         try {
           const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+            "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
             requestOptionsGet
           );
           const result = await response.json();
