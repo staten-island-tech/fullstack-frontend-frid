@@ -7,7 +7,7 @@
       class="w-[80vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
     >
       <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
-        <button @click="openModalLargePost" v-bind:fetchedPostID=allPostsID>
+        <button @click="openModalLargePost" v-bind:modalLargePostOpenID=allPostsID>
           <app-posts v-bind:fetchedPostID=allPostsID></app-posts>        
         </button>
       </li>
@@ -46,8 +46,8 @@ export default {
     },
     openModalLargePost() {
       console.log("attempting to open Modal for Large Post")
-      this.modalLargePostOpenID = this.fetchedPostID;
       this.modalLargePostOpen = !this.modalLargePostOpen;
+      console.log(this.modalLargePostOpenID)
     },
     getPosts: async function () {
       var requestOptionsGet = {
