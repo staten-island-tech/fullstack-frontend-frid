@@ -6,12 +6,12 @@
   >
     <div
       id="form"
-      class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center border-2 border-black rounded-[1.5rem]"
+      class="flex flex-col w-[75vw] h-[85%] bg-[#6957e7] flex items-center justify-center border-2 border-black rounded-[1.5rem]"
     >
 <!-- ------------------------------- -->
       <div
         id="post-container"
-        class="h-[40vh] w-[32vw] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
+        class="h-[90%] w-[80%] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
       >
         <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
           {{ postName }}
@@ -27,20 +27,20 @@
         </div>
         <div
           id="divider"
-          class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
+          class="flex h-[1px] w-full bg-[#000000] "
         ></div>
-        <div id="post-content" class="h-[27.5vh] overflow-y-scroll">
+        <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
           <ul>
             <li
               v-for="song in songs"
               :key="song"
               class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
             >
-              <div class="w-[13.5vw] pl-[1.5vw] truncate">
+              <div class="w-[60%] pl-[1.5vw] truncate">
                 {{ song.songName }}
               </div>
-              <div class="flex justify-center w-[4vw]">{{ song.duration }}</div>
-              <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
+              <div class="flex justify-center w-[10%]">{{ song.duration }}</div>
+              <div class="flex justify-end w-[30%] pr-[1.5vw]">
                 {{ song.artist }}
               </div>
             </li>
@@ -48,19 +48,17 @@
         </div>
         <div
           id="divider"
-          class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
+          class="flex h-[1px] w-full bg-[#000000] "
         ></div>
-        <div id="reactions-and-tags" class="flex flex-row items-center mt-[1vh]">
-          <div id="tags" class="flex flex-row items-center ml-[2vw]">
+        <div id="reactions-and-tags" class="flex flex-wrap items-center mt-[1vh]">
+          <div id="tags" class="flex flex-row items-center ml-[2vw] min-w-15vh">
             <ul class="columns-4">
               <li v-for="tag in tags" :key="tag" class="text-[2vh]">
                 #{{ tag.tagName }}
               </li>
             </ul>
           </div>
-        </div>
-        <div id="reactions-and-tags" class="flex flex-row items-center mt-[1vh]">
-          <div id="reactions" class="flex flex-row items-center">
+          <div id="reactions" class="flex flex-row items-center min-w-15vh">
             <button
               :disabled="disliked"
               id="like-button"
@@ -103,20 +101,89 @@
             </button>
             <span id="like-count" v-if="disliked"> {{ this.tempDislikes }} </span>
             <span id="like-count" v-else> {{ this.localDislikes }} </span>
-          </div>
-          <div>
-            <button
-              id="comments-button"
-              class="mx-[0.6vw]"
-            >
-              <img
-                src="../assets/comments.svg"
-                alt="Logo"
-                class="h-[3.5vh] mx-[0.5vw]"
-              />
-            </button>
+            <img
+              src="../assets/comments.svg"
+              alt="Logo"
+              class="h-[3.5vh] mx-[0.5vw]"
+            />
             <span id="comment-count"> {{ this.localTotalComments }} </span>
           </div>
+        </div>
+        <div
+          id="divider"
+          class="flex h-[1px] w-full bg-[#000000] "
+        ></div>
+        <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
+          <ul>
+            <li
+              v-for="comment in comments"
+              :key="comment"
+              class=" text-[2.5vh] hover:bg-[#dddddd] font-lora"
+            >
+              <div class="flex flex-col h-[flex flex-col h-[5vh]vh]">
+                <div class="">
+                  <p class="w-full pl-[1.5vw]">
+                    {{ comment.commentContent }}
+                  </p>
+                </div>
+                <div class="flex flex-row h-[5vh] ">
+                  <div class="w-[10%] pl-[1.5vw] ">
+                    #{{ comment.commentNumber }}
+                  </div>
+                  <div class="w-[30%] pl-[1.5vw] ">
+                    <button
+                      :disabled="disliked"
+                      id="like-button"
+                      v-on:click="likeComment"
+                      class="mx-[0.6vw]"
+                    >
+                      <img
+                        src="../assets/like1.svg"
+                        alt="Logo"
+                        class="h-[3.5vh] mx-[0.5vw]"
+                        v-if="likedComment"
+                      />
+                      <img
+                        src="../assets/like.svg"
+                        alt="Logo"
+                        class="h-[3.5vh] mx-[0.5vw]"
+                        v-else
+                      />
+                    </button>
+                    {{ comment.commentLikes }}
+                  </div>
+                  <div class="w-[30%] pl-[1.5vw] ">
+                    <button
+                      id="dislike-button"
+                      v-on:click="dislikeComment"
+                      class="mx-[0.6vw]"
+                    >
+                      <img
+                        src="../assets/dislike1.svg"
+                        alt="Logo"
+                        class="h-[3.5vh] mx-[0.5vw]"
+                        v-if="dislikedComment"
+                      />
+                      <img
+                        src="../assets/dislike.svg"
+                        alt="Logo"
+                        class="h-[3.5vh] mx-[0.5vw]"
+                        v-else
+                      />
+                    </button>
+                    {{ comment.commentDisLikes }}
+                  </div>
+                  <div class="flex justify-end w-[30%] pr-[1.5vw]">
+                    {{ comment.commentUserName }}
+                  </div>
+                </div>
+              </div>
+              <div
+                id="divider"
+                class="flex justify-center h-[1px] w-[80%] bg-[#000000] "
+              ></div>
+            </li>
+          </ul>
         </div>
       </div>
 <!-- ------------------------------- -->
@@ -162,6 +229,7 @@ export default {
       liked: false,
       disliked: false,
       commentsClicked: false,
+      modalLargePostOpenID: ["61f5d9d9000fb29e24d1bad9"]
     };
   },
   methods: {
@@ -374,6 +442,24 @@ export default {
           console.log(error);
         }
     },
+    commentRetriever: async function () {
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        this.comments = result.data.post.comments;
+        console.log(this.comments);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   created() {
     this.username();
@@ -383,6 +469,7 @@ export default {
     this.displayLikes();
     this.displayDislikes();
     this.displayTotalComments();
+    this.commentRetriever();
   },
 };
 </script>
