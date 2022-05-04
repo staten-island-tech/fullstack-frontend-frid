@@ -12,7 +12,12 @@
       <div id="input-container" class="flex flex-col w-[30vw] items-center">
         <div class="">
           <label for="postName">Post Name</label>
-          <input v-model="postName" type="text" class="" placeholder="edit me" />
+          <input
+            v-model="postName"
+            type="text"
+            class=""
+            placeholder="edit me"
+          />
         </div>
         <div class="my-[5vh] h-[10vh] overflow-y-scroll w-[30vw]">
           <div class="flex flex-row">
@@ -22,7 +27,7 @@
               class="w-[25vw] mx-[1vw] rounded-md"
               v-model="songInput"
             />
-            <button class="mx-[1vw]" @click="addSong">Add</button>
+            <button class="mx-[1vw]" @click="search">Search</button>
           </div>
           <div id="song-list">
             <ul>
@@ -51,10 +56,10 @@
           </div>
         </div>
       </div>
-      <button @click=createPost  class="mt-[4vh] font-semibold">
-        Post
+      <button @click="createPost" class="mt-[4vh] font-semibold">Post</button>
+      <button @click.prevent="close" class="mt-[2vh] font-semibold">
+        Cancel
       </button>
-      <button @click.prevent="close" class="mt-[2vh] font-semibold">Cancel</button>
     </div>
   </div>
 </template>
@@ -79,7 +84,8 @@ export default {
         display: "none",
       },
       songs: [],
-      songInput: {
+      songInput: null,
+      songInfo: {
         songName: null,
         songNumber: null,
         artist: null,
@@ -96,61 +102,80 @@ export default {
     };
   },
   methods: {
-    // formStylesOpen() {
-    //   this.formStyle = this.formStyleOpen;
+    // addSong() {
+    //   this.songs.push(this.songInfo);
+    //   console.log(this.songs);
+    //   this.songAmount = this.songAmount + 1;
+    //   console.log(this.songAmount)
     // },
-    // formStylesClosed() {
-    //   this.formStyle = this.formStyleClosed;
-    // },
-    addSong() {
-      this.songs.push(this.songInput);
-      console.log(this.songs);
-      this.songAmount = this.songAmount + 1;
-      console.log(this.songAmount)
-    },
-    addTag() {
-      this.tags.push(this.tagInput);
-      console.log(this.tags);
-      this.totalTags = this.totalTags + 1;
-      console.log(this.totalTags)
+    search: async function () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-      if (this.tags.length > 3) {
-        this.isActive = true;
-      }
-    },
-    close() {
-      this.$emit("input", !this.value);
-    },
-    createPost: async function() {
-      console.log("createPost function ran")
+      var raw = JSON.stringify({
+        search: this.songInput,
+      });
+
+      var requestOptionsPatch = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
 
       try {
-        const response = await post(
-          "http://localhost:3000/api/v1/posts/create", {
-            postName: this.postName,
-            userName: this.userPosting,
-            tags: this.tags,
-            songs: this.songs,
-            totalLikes: 0,
-            totalDislikes: 0,
-            totalComments: 0,
-            totalTags: this.totalTags,
-            songAmount: this.songAmount,
-
-          },
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/searchTracks",
+          requestOptionsPatch
         );
         const result = await response.json();
-        console.log("Created post with this id: " + result._id);
+        console.log(result);
+        console.log("succSess")
       } catch (error) {
         console.log(error);
-        alert("Did you fill in all the proper information?");
       }
-    }
-
-    //  tagsLength() {
-    //    this.tagsLength = this.tags.length
-    //    },
+    },
   },
+
+  addTag() {
+    this.tags.push(this.tagInput);
+    console.log(this.tags);
+    this.totalTags = this.totalTags + 1;
+    console.log(this.totalTags);
+
+    if (this.tags.length > 3) {
+      this.isActive = true;
+    }
+  },
+  close() {
+    this.$emit("input", !this.value);
+  },
+  createPost: async function () {
+    console.log("createPost function ran");
+
+    try {
+      const response = await post("http://localhost:3000/api/v1/posts/create", {
+        postName: this.postName,
+        userName: this.userPosting,
+        tags: this.tags,
+        songs: this.songs,
+        totalLikes: 0,
+        totalDislikes: 0,
+        totalComments: 0,
+        totalTags: this.totalTags,
+        songAmount: this.songAmount,
+      });
+      const result = await response.json();
+      console.log("Created post with this id: " + result._id);
+    } catch (error) {
+      console.log(error);
+      alert("Did you fill in all the proper information?");
+    }
+  },
+
+  //  tagsLength() {
+  //    this.tagsLength = this.tags.length
+  //    },
 };
 </script>
 
@@ -158,3 +183,5 @@ v-bind:style="formStyle"
 <button v-on:click="formStylesOpen">Open</button>
 <button v-on:click="formStylesClosed">Closed</button>
 <div id="button"></div>
+
+<button class="mx-[1vw]" @click="addSong">Add</button>
