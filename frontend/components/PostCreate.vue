@@ -129,8 +129,9 @@ export default {
           requestOptionsPatch
         );
         const result = await response.json();
-        console.log(result);
-        console.log("succSess")
+        var logger = result.status;
+        logger.forEach(element => console.log(element.name))
+        logger.forEach(element => console.log(element.artists[0].name))
       } catch (error) {
         console.log(error);
       }
