@@ -2,7 +2,6 @@
   <div
     id="main-container"
     class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]"
-    v-show="value"
   >
     <div
       id="form"
@@ -187,14 +186,14 @@
         </div>
       </div>
 <!-- ------------------------------- -->
-      <button @click.prevent="close" class="mt-[2vh] font-semibold">Close</button>
+      <button @click="closeLM" class="mt-[2vh] font-semibold">Close</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "posts",
+  name: "lmpost",
   props: ["modalLargePostOpenID"],
   props: {
     value: {
@@ -233,8 +232,8 @@ export default {
     };
   },
   methods: {
-    close() {
-      this.$emit("input", !this.value);
+    closeLM() {
+      this.$emit("closeLM");
     },
     username: async function () {
       var requestOptionsGet = {
