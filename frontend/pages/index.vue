@@ -43,8 +43,28 @@ export default {
     };
   },
   methods: {
-    openModal() {
+    openModal: async function() {
       this.modalOpen = !this.modalOpen;
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptionsGet = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/spotifyToken",
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
     },
     openModalLargePost() {
       // console.log("attempting to open Modal for Large Post")
