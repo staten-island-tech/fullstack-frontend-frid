@@ -19,15 +19,17 @@
       &#43;
     </button>
     <PostCreate v-model="modalOpen"></PostCreate>
-    <LModalPost v-model="modalLargePostOpen"></LModalPost>
+    <LModalPost v-show="modalLargePostOpen" @closeLM ="closeModalLargePost"></LModalPost>
   </div>
 </template>
 
 <script>
 import Posts from "../components/Posts.vue";
+import LModalPost from "../components/LModalPost.vue";
 export default {
   components: {
     'app-posts': Posts,
+    'LModalPost': LModalPost,
 
   },
   data() {
@@ -65,9 +67,12 @@ export default {
       }
     },
     openModalLargePost() {
-      console.log("attempting to open Modal for Large Post")
-      this.modalLargePostOpen = !this.modalLargePostOpen;
-      console.log(this.modalLargePostOpenID)
+      // console.log("attempting to open Modal for Large Post")
+      this.modalLargePostOpen = true;
+    },
+    closeModalLargePost() {
+      // console.log("attempting to close Modal for Large Post")
+      this.modalLargePostOpen = false;
     },
     getPosts: async function () {
       var requestOptionsGet = {
