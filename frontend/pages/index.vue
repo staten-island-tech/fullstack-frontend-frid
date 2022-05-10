@@ -7,9 +7,7 @@
       class="w-[80vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
     >
       <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
-        <button @click="openModalLargePost" v-bind:modalLargePostOpenID=allPostsID>
           <app-posts v-bind:fetchedPostID=allPostsID></app-posts>        
-        </button>
       </li>
     </div>
     <button
@@ -19,7 +17,7 @@
       &#43;
     </button>
     <PostCreate v-model="modalOpen"></PostCreate>
-    <LModalPost v-show="modalLargePostOpen" @closeLM ="closeModalLargePost"></LModalPost>
+    <!-- <LModalPost v-show="modalLargePostOpen" @closeLM ="closeModalLargePost"></LModalPost> -->
   </div>
 </template>
 
@@ -35,8 +33,8 @@ export default {
   data() {
     return {
       modalOpen: false,
-      modalLargePostOpen: false,
-      modalLargePostOpenID: "",
+      // modalLargePostOpen: false,
+      // modalLargePostOpenID: "",
       allPostsIDs: [],
       postAPI: [],
       fetchedPostID: "",
@@ -66,14 +64,14 @@ export default {
         console.log(error);
       }
     },
-    openModalLargePost() {
-      // console.log("attempting to open Modal for Large Post")
-      this.modalLargePostOpen = true;
-    },
-    closeModalLargePost() {
-      // console.log("attempting to close Modal for Large Post")
-      this.modalLargePostOpen = false;
-    },
+    // openModalLargePost() {
+    //   // console.log("attempting to open Modal for Large Post")
+    //   this.modalLargePostOpen = true;
+    // },
+    // closeModalLargePost() {
+    //   // console.log("attempting to close Modal for Large Post")
+    //   this.modalLargePostOpen = false;
+    // },
     getPosts: async function () {
       var requestOptionsGet = {
         method: "GET",

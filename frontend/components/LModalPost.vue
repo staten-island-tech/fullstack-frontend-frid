@@ -1,7 +1,7 @@
 <template>
   <div
     id="main-container"
-    class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]"
+    class="fixed flex items-center z-50 justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]"
   >
     <div
       id="form"
@@ -247,9 +247,7 @@ export default {
           requestOptionsGet
         );
         const result = await response.json();
-        console.log(result.data.post.userName);
         this.userName = result.data.post.userName;
-        console.log(this.userName);
       } catch (error) {
         console.log(error);
       }
@@ -285,7 +283,6 @@ export default {
         );
         const result = await response.json();
         this.songs = result.data.post.songs;
-        console.log(this.songs);
       } catch (error) {
         console.log(error);
       }
@@ -305,7 +302,6 @@ export default {
           requestOptionsGet
         );
         const result = await response.json();
-        console.log("There are " + result.data.post.totalLikes + " likes");
         this.localLikes = result.data.post.totalLikes;
       } catch (error) {
         console.log(error);
@@ -358,9 +354,6 @@ export default {
             requestOptionsGet
           );
           const result = await response.json();
-          console.log(
-            "There are " + result.data.post.totalDislikes + " dislikes"
-          );
           this.localDislikes = result.data.post.totalDislikes;
         } catch (error) {
           console.log(error);
@@ -391,10 +384,6 @@ export default {
             "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
             requestOptionsPatch
           );
-          const result = await response.json();
-          console.log(
-            "There are " + result.data.post.totalDislikes + " dislikes"
-          );
         } catch (error) {
           console.log(error);
         }
@@ -413,7 +402,6 @@ export default {
         );
         const result = await response.json();
         this.tags = result.data.post.tags;
-        console.log(this.tags);
       } catch (error) {
         console.log(error);
       }
@@ -433,9 +421,6 @@ export default {
             requestOptionsGet
           );
           const result = await response.json();
-          console.log(
-            "There are " + result.data.post.totalComments + " comments in total"
-          );
           this.localTotalComments = result.data.post.totalComments;
         } catch (error) {
           console.log(error);
@@ -454,7 +439,6 @@ export default {
         );
         const result = await response.json();
         this.comments = result.data.post.comments;
-        console.log(this.comments);
       } catch (error) {
         console.log(error);
       }
