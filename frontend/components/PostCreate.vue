@@ -39,20 +39,23 @@
         </div>
         <div id="tag-input-container">
           <div class="flex flex-row">
-            <input
+            <button class="dropdown">
+              Tags
+              <div id="tag-list" class="dropdown-content">
+                <ul class="dropdown-content overflow-y-scroll h-[27vh]">
+                  <li v-for="tag in tags" :key="tag" class="hover:bg-slate-300">
+                    {{ tag }}
+                  </li>
+                </ul>
+              </div>
+            </button>
+            <!-- <input
               type="text"
               placeholder="Tags"
               v-model="tagInput"
               class="mx-[1vw] rounded-md"
             />
-            <button :disabled="isActive" @click="addTag">Add</button>
-          </div>
-          <div id="tag-list">
-            <ul>
-              <li v-for="tag in tags" :key="tag">
-                {{ tag }}
-              </li>
-            </ul>
+            <button :disabled="isActive" @click="addTag">Add</button> -->
           </div>
         </div>
       </div>
@@ -165,8 +168,8 @@ export default {
         );
         const result = await response.json();
         var logger = result.status;
-        logger.forEach(element => console.log(element.name))
-        logger.forEach(element => console.log(element.artists[0].name))
+        logger.forEach((element) => console.log(element.name));
+        logger.forEach((element) => console.log(element.artists[0].name));
       } catch (error) {
         console.log(error);
       }
@@ -214,6 +217,34 @@ export default {
   //    },
 };
 </script>
+
+<style>
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-size: 5rem;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 10vw;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown:focus .dropdown-content {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+}
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+</style>
 
 v-bind:style="formStyle"
 <button v-on:click="formStylesOpen">Open</button>
