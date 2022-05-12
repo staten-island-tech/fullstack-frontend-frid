@@ -34,21 +34,24 @@
                 Search
               </button>
             </div>
-            <div id="song-results" v-show="displayResults">
-              <!-- <ul>
-                <li v-for="logger in loggers" :key="logger">
-                  {{ logger.name }}
-                </li>
-              </ul> -->
-              {{ responseLog }}
-            </div>
           </div>
-          <div id="song-list">
-            <ul>
-              <li v-for="song in songs" :key="song">
-                {{ song }}
-              </li>
-            </ul>
+          <div
+            class="flex flex-row justify-center content-center h-[25vh] overflow-y-scroll mt-[2rem]"
+          >
+            <div id="song-results" class="">
+              <ul>
+                <li v-for="songResult in songResults" :key="songResult">
+                  {{ songResult }}
+                </li>
+              </ul>
+            </div>
+            <div id="artist-results" class="">
+              <ul>
+                <li v-for="artistResult in artistResults" :key="artistResult">
+                  {{ artistResult }}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div id="tag-input-container">
@@ -102,12 +105,14 @@ export default {
       },
       songs: [],
       songInput: null,
-      songInfo: {
-        songName: null,
-        songNumber: null,
-        artist: null,
-        duration: null,
-      },
+      songResults: [],
+      artistResults: [],
+      // songInfo: {
+      //   songName: null,
+      //   songNumber: null,
+      //   artist: null,
+      //   duration: null,
+      // },
       songAmount: 0,
       tags: [
         "Pop",
@@ -183,8 +188,13 @@ export default {
         );
         const result = await response.json();
         var logger = result.status;
-        logger.forEach((element) => console.log(element.name));
-        logger.forEach((element) => console.log(element.artists[0].name));
+        // logger.forEach((element) => console.log(element.artists[0].name));
+        logger.forEach((element) => this.songResults.push(element.name));
+        console.log(this.songResults);
+        logger.forEach((element) =>
+          this.artistResults.push(element.artists[0].name)
+        );
+        console.log(this.artistResults);
       } catch (error) {
         console.log(error);
       }
