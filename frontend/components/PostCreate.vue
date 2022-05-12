@@ -6,28 +6,42 @@
   >
     <div
       id="form"
-      class="flex flex-col w-[50vw] h-[50vh] bg-[#6957e7] flex items-center justify-center border-2 border-black rounded-[1.5rem]"
+      class="flex flex-col w-[65vw] h-[65vh] bg-[#dadada] flex items-center justify-center border-[3px] border-[#330066] rounded-[1.5rem]"
     >
-      <h1 class="underline mt-[7vh] font-semibold">Creating new post!</h1>
       <div id="input-container" class="flex flex-col w-[30vw] items-center">
-        <div class="">
-          <label for="postName">Post Name</label>
+        <div id="post-name" class="h-[5vh]">
+          <!-- <label for="postName">Post Name</label> -->
           <input
             v-model="postName"
             type="text"
-            class=""
-            placeholder="edit me"
+            class="w-[20vw] mx-[1vw] rounded-md p-[8px]"
+            placeholder="Title your Post..."
           />
         </div>
-        <div class="my-[5vh] h-[10vh] overflow-y-scroll w-[30vw]">
-          <div class="flex flex-row">
-            <input
-              type="text"
-              placeholder="Search by Song Name or Artist"
-              class="w-[25vw] mx-[1vw] rounded-md"
-              v-model="songInput"
-            />
-            <button class="mx-[1vw]" @click="search">Search</button>
+        <div class="my-[5vh] h-[30vh] w-[45vw]">
+          <div class="flex flex-row justify-center">
+            <div id="song-search">
+              <input
+                type="text"
+                placeholder="Search by Song Name or Artist"
+                class="w-[25vw] mx-[1vw] rounded-md p-[10px]"
+                v-model="songInput"
+              />
+              <button
+                class="mx-[1vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
+                @click="search"
+              >
+                Search
+              </button>
+            </div>
+            <div id="song-results" v-show="displayResults">
+              <!-- <ul>
+                <li v-for="logger in loggers" :key="logger">
+                  {{ logger.name }}
+                </li>
+              </ul> -->
+              {{ responseLog }}
+            </div>
           </div>
           <div id="song-list">
             <ul>
@@ -56,7 +70,7 @@
           </div>
         </div>
       </div>
-      <button @click="createPost" class="mt-[4vh] font-semibold">Post</button>
+      <!-- <button @click="createPost" class="mt-[4vh] font-semibold">Post</button> -->
       <button @click.prevent="close" class="mt-[2vh] font-semibold">
         Cancel
       </button>
@@ -133,7 +147,8 @@ export default {
       isActive: false,
       userPosting: "Bobby2000",
       postName: null,
-      // tagsLength: null,
+      responseLog: {},
+      displayResults: false,
     };
   },
   methods: {
@@ -164,9 +179,11 @@ export default {
           requestOptionsPatch
         );
         const result = await response.json();
-        var logger = result.status;
-        logger.forEach(element => console.log(element.name))
-        logger.forEach(element => console.log(element.artists[0].name))
+        this.responseLog = result.status;
+        // var logger = this.loggers;
+        // logger.forEach((element) => console.log(element.name));
+        // logger.forEach((element) => console.log(element.artists[0].name));
+        this.displayResults = true;
       } catch (error) {
         console.log(error);
       }
