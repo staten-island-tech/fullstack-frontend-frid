@@ -126,10 +126,10 @@
                   </p>
                 </div>
                 <div class="flex flex-row h-[5vh] ">
-                  <div class="w-[10%] pl-[1.5vw] ">
+                  <div class="w-[50%] pl-[1.5vw] ">
                     #{{ comment.commentNumber }}
                   </div>
-                  <div class="w-[30%] pl-[1.5vw] ">
+                  <!-- <div class="w-[30%] pl-[1.5vw] ">
                     <button
                       :disabled="disliked"
                       id="like-button"
@@ -171,8 +171,8 @@
                       />
                     </button>
                     {{ comment.commentDisLikes }}
-                  </div>
-                  <div class="flex justify-end w-[30%] pr-[1.5vw]">
+                  </div> -->
+                  <div class="flex justify-end w-[50%] pr-[1.5vw]">
                     {{ comment.commentUserName }}
                   </div>
                 </div>
@@ -184,6 +184,12 @@
             </li>
           </ul>
         </div>
+        <!-- <button
+          class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
+          @click="createCommentInLM"
+        >
+          &#43;
+        </button> -->
       </div>
 <!-- ------------------------------- -->
       <button @click="closeLM" class="mt-[2vh] font-semibold">Close</button>
@@ -195,11 +201,6 @@
 export default {
   name: "lmpost",
   props: ["modalLargePostOpenID"],
-  props: {
-    value: {
-      required: true,
-    },
-  },
   data() {
     return {
       localLikes: null,
@@ -228,7 +229,6 @@ export default {
       liked: false,
       disliked: false,
       commentsClicked: false,
-      modalLargePostOpenID: ["61f5d9d9000fb29e24d1bad9"]
     };
   },
   methods: {
