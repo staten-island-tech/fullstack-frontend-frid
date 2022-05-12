@@ -81,41 +81,7 @@ export default {
 </script>
 
 <style>
-.toggle-control {
-  display: block;
-  position: relative;
-  cursor: pointer;
-  font-size: 11px;
-}
-.toggle-control input {
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-.toggle-control input:checked ~ .control {
-  background-color: #d1d1d1;
-}
-.toggle-control input:checked ~ .control:after {
-  left: 27px;
-}
-.toggle-control .control {
-  position: relative;
-  height: 25px;
-  width: 50px;
-  border-radius: 12px;
-  background-color: #1e1e1e;
-  transition: background-color 0.15s ease-in;
-}
-.toggle-control .control:after {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-radius: 12px;
-  background: white;
-  transition: left 0.15s ease-in;
-}
+
 .dropdown {
   position: relative;
   display: inline-block;
