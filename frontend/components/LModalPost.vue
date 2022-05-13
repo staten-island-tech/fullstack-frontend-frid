@@ -8,7 +8,36 @@
       class="flex flex-col w-[75vw] h-[85%] bg-[#6957e7] flex items-center justify-center border-2 border-black rounded-[1.5rem]"
     >
 <!-- ------------------------------- -->
+      <div 
+        v-if="createCommentDisplay"
+        id="post-container"
+        class="h-[90%] w-[80%] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"      
+      >
+        <h1  class="mx-[1vw] justify-center content-center text-[1.25rem] font-lora">
+          Create a comment
+        </h1>
+        <div id="user-name-container" class="flex flex-row items-center">
+          <span
+            id="pfp"
+            class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
+          ></span>
+          <div id="username" class="text-[1rem] font-lora">
+            {{ userName }}
+          </div>
+        </div>
+        <div
+          id="divider"
+          class="flex h-[1px] w-full bg-[#000000] "
+        ></div>
+        <button
+          class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
+          @click="createCommentInLM"
+        >
+          Cancel
+        </button>
+      </div>
       <div
+        v-else
         id="post-container"
         class="h-[90%] w-[80%] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
       >
@@ -58,7 +87,7 @@
             </ul>
           </div>
           <div id="reactions" class="flex flex-row items-center min-w-15vh">
-            <button
+            <!-- <button
               :disabled="disliked"
               id="like-button"
               v-on:click="like"
@@ -99,7 +128,27 @@
               />
             </button>
             <span id="like-count" v-if="disliked"> {{ this.tempDislikes }} </span>
-            <span id="like-count" v-else> {{ this.localDislikes }} </span>
+            <span id="like-count" v-else> {{ this.localDislikes }} </span> -->
+            <div
+              class="mx-[0.6vw]"
+            >
+              <img
+                src="../assets/like.svg"
+                alt="Logo"
+                class="h-[3.5vh] mx-[0.5vw]"
+              />
+            </div>
+            <span id="like-count" > {{ this.localLikes }} </span>
+            <div
+              class="mx-[0.6vw]"
+            >
+              <img
+                src="../assets/dislike.svg"
+                alt="Logo"
+                class="h-[3.5vh] mx-[0.5vw]"
+              />
+            </div>
+            <span id="like-count" > {{ this.localDislikes }} </span>            
             <img
               src="../assets/comments.svg"
               alt="Logo"
@@ -191,9 +240,6 @@
           &#43;
         </button>
       </div>
-      <div>
-
-      </div>
 <!-- ------------------------------- -->
       <button @click="closeLM" class="mt-[2vh] font-semibold">Close</button>
     </div>
@@ -232,14 +278,15 @@ export default {
       liked: false,
       disliked: false,
       commentsClicked: false,
+      createCommentDisplay: false,
     };
   },
   methods: {
     closeLM() {
       this.$emit("closeLM");
     },
-    createCommentInLM() {
-
+    createCommentInLM: async function() {
+      this.createCommentDisplay = !this.createCommentDisplay
     },
     username: async function () {
       var requestOptionsGet = {
