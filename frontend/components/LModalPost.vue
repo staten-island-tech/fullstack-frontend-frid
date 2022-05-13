@@ -184,12 +184,15 @@
             </li>
           </ul>
         </div>
-        <!-- <button
+        <button
           class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
           @click="createCommentInLM"
         >
           &#43;
-        </button> -->
+        </button>
+      </div>
+      <div>
+
       </div>
 <!-- ------------------------------- -->
       <button @click="closeLM" class="mt-[2vh] font-semibold">Close</button>
@@ -234,6 +237,9 @@ export default {
   methods: {
     closeLM() {
       this.$emit("closeLM");
+    },
+    createCommentInLM() {
+
     },
     username: async function () {
       var requestOptionsGet = {
