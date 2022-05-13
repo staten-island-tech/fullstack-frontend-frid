@@ -38,14 +38,15 @@
           <div
             class="flex flex-row justify-center content-center h-[25vh] overflow-y-scroll mt-[2rem]"
           >
-            <div id="song-results" class="">
-              <ul>
+            <div id="song-results">
+              <ul class="">
                 <li v-for="songResult in songResults" :key="songResult">
+                  <button class="mr-[4vw]">ADD</button>
                   {{ songResult }}
                 </li>
               </ul>
             </div>
-            <div id="artist-results" class="">
+            <div id="artist-results" class="flex justify-center">
               <ul>
                 <li v-for="artistResult in artistResults" :key="artistResult">
                   {{ artistResult }}
