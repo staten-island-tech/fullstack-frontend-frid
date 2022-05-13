@@ -41,7 +41,7 @@
             <div id="song-results">
               <ul class="">
                 <li
-                  class="h-[5vh]"
+                  class="h-[5vh] text-ellipsis overflow-hidden ..."
                   v-for="songResult in songResults"
                   :key="songResult"
                 >
@@ -73,7 +73,12 @@
               Tags
               <div id="tag-list" class="dropdown-content">
                 <ul class="dropdown-content overflow-y-scroll h-[27vh]">
-                  <li v-for="tag in tags" :key="tag" class="hover:bg-slate-300">
+                  <li
+                    @click="addTag"
+                    v-for="tag in tags"
+                    :key="tag"
+                    class="hover:bg-slate-300"
+                  >
                     {{ tag }}
                   </li>
                 </ul>
@@ -87,6 +92,7 @@
             />
             <button :disabled="isActive" @click="addTag">Add</button> -->
           </div>
+          <div v-for="usedTag in usedTags" :key="usedTag">{{ usedTag }}</div>
         </div>
       </div>
       <!-- <button @click="createPost" class="mt-[4vh] font-semibold">Post</button> -->
@@ -161,6 +167,7 @@ export default {
         "Disco",
         "Foreign",
       ],
+      usedTags: [],
       tagInput: null,
       totalTags: 0,
       isActive: false,
@@ -213,18 +220,19 @@ export default {
         console.log(error);
       }
     },
+
+    addTag() {
+      this.usedTags.push(this.tag);
+      console.log(this.usedTags);
+      this.totalTags = this.totalTags + 1;
+      console.log(this.totalTags);
+
+      if (this.usedTags.length > 3) {
+        this.isActive = true;
+      }
+    },
   },
 
-  addTag() {
-    this.tags.push(this.tagInput);
-    console.log(this.tags);
-    this.totalTags = this.totalTags + 1;
-    console.log(this.totalTags);
-
-    if (this.tags.length > 3) {
-      this.isActive = true;
-    }
-  },
   close() {
     this.$emit("input", !this.value);
   },
