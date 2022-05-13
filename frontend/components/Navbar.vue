@@ -1,41 +1,20 @@
 <template>
   <div
-    class="
-      h-[8vh]
-      w-[100%]
-      bg-gradient-to-b
-      from-[#dddddd]
-      to-[#eeeeee]
-      flex
-      items-center
-      brightness-[97%]
-      z-[2]
-    "
+    class="h-[8vh] w-[100%] bg-gradient-to-b from-[#dddddd] to-[#eeeeee] flex items-center brightness-[97%] z-[2]"
   >
     <NuxtLink to="/" class="w-[20rem] ml-[4rem] my-[2rem]"
-      ><img src="../assets/Logo2.png" alt="Logo" class="h-[7.5vh]" 
+      ><img src="../assets/Logo2.png" alt="Logo" class="h-[7.5vh]"
     /></NuxtLink>
     <div class="h-[8vh] w-[100%] mr-[5vw] flex items-center justify-end">
       <button
-        class="
-          mx-[1.5rem]
-          text-[1.25rem]
-          p-[0.75rem]
-          text-[#3a2d80]
-          font-semibold font-lora
-        "
+        class="mx-[1.5rem] text-[1.25rem] p-[0.75rem] text-[#3a2d80] font-semibold font-lora"
         id="hover-underline-animation"
       >
-        <NuxtLink to="/Login">Login</NuxtLink>
+        <!-- <NuxtLink to="/Login">Login</NuxtLink> -->
+        <a href="https://localhost:3000/login">Login</a>
       </button>
       <button
-        class="
-          mx-[1.5rem]
-          text-[1.25rem]
-          p-[0.75rem]
-          text-[#3a2d80]
-          font-semibold font-lora
-        "
+        class="mx-[1.5rem] text-[1.25rem] p-[0.75rem] text-[#3a2d80] font-semibold font-lora"
         id="hover-underline-animation"
       >
         <NuxtLink to="/SignUp">Sign Up</NuxtLink>
@@ -72,5 +51,4 @@ export default {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-
 </style>
