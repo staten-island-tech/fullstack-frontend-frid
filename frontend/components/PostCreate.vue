@@ -90,9 +90,7 @@
         </div>
       </div>
       <!-- <button @click="createPost" class="mt-[4vh] font-semibold">Post</button> -->
-      <button @click.prevent="close" class="mt-[2vh] font-semibold">
-        Cancel
-      </button>
+      <button @click="closeCP" class="mt-[2vh] font-semibold">Close</button>
     </div>
   </div>
 </template>
@@ -179,6 +177,9 @@ export default {
     //   this.songAmount = this.songAmount + 1;
     //   console.log(this.songAmount)
     // },
+    closeCP() {
+      this.$emit("closeCP");
+    },
     search: async function () {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
