@@ -40,15 +40,27 @@
           >
             <div id="song-results">
               <ul class="">
-                <li v-for="songResult in songResults" :key="songResult">
-                  <button class="mr-[4vw]">ADD</button>
+                <li
+                  class="h-[5vh]"
+                  v-for="songResult in songResults"
+                  :key="songResult"
+                >
+                  <button
+                    class="mr-[4vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[5px] rounded-md transform active:translate-y-px"
+                  >
+                    ADD
+                  </button>
                   {{ songResult }}
                 </li>
               </ul>
             </div>
             <div id="artist-results" class="flex justify-center">
               <ul>
-                <li v-for="artistResult in artistResults" :key="artistResult">
+                <li
+                  class="h-[5vh] px-[5px]"
+                  v-for="artistResult in artistResults"
+                  :key="artistResult"
+                >
                   {{ artistResult }}
                 </li>
               </ul>
