@@ -67,11 +67,11 @@
               </ul> -->
 
               <SongData
-                v-for="(songResults, index) in songResults"
+                v-for="(searchResults, index) in searchResults"
                 :key="index"
-                :Songname="songResults.songName"
-                :Songartist="songResults.artist"
-              ></SongData>
+                :Songname="searchResults.name"
+                :Songartist="searchResults.artist"
+              />
             </div>
           </div>
         </div>
@@ -105,9 +105,7 @@
       </div>
       <!-- <button @click="createPost" class="mt-[4vh] font-semibold">Post</button> -->
       <button @click="closeCP" class="mt-[2vh] font-semibold">Close</button>
-      <div>
-        {{ this.songResults }}
-      </div>
+      <div>{{ searchResults }}</div>
     </div>
   </div>
 </template>
@@ -233,7 +231,7 @@ export default {
           // console.log(p.name);
           // console.log(p.artists[0].name);
           this.searchResult = {
-            songName: p.name,
+            name: p.name,
             artist: p.artists[0].name,
           };
           this.searchResults.push(this.searchResult);

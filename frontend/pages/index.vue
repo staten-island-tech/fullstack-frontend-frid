@@ -1,13 +1,13 @@
 <template>
   <div>
     <Navbar class="sticky top-0" />
-    <NuxtLink to="/ProfilePage3"> Profile </NuxtLink>
+
     <div
       id="main-container"
       class="w-[80vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
     >
       <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
-          <app-posts v-bind:fetchedPostID=allPostsID></app-posts>        
+        <app-posts v-bind:fetchedPostID="allPostsID"></app-posts>
       </li>
     </div>
     <button
@@ -16,7 +16,10 @@
     >
       &#43;
     </button>
-    <PostCreate v-model="createPostModalDisplay"  @closeCP ="closeCreatePostModal"></PostCreate>
+    <PostCreate
+      v-model="createPostModalDisplay"
+      @closeCP="closeCreatePostModal"
+    ></PostCreate>
     <!-- <LModalPost v-show="modalLargePostOpen" @closeLM ="closeModalLargePost"></LModalPost> -->
   </div>
 </template>
@@ -26,9 +29,8 @@ import Posts from "../components/Posts.vue";
 // import LModalPost from "../components/LModalPost.vue";
 export default {
   components: {
-    'app-posts': Posts,
+    "app-posts": Posts,
     // 'LModalPost': LModalPost,
-
   },
   data() {
     return {
@@ -44,7 +46,7 @@ export default {
     closeCreatePostModal() {
       this.createPostModalDisplay = false;
     },
-    openCreatePostModal: async function() {
+    openCreatePostModal: async function () {
       this.createPostModalDisplay = true;
 
       var myHeaders = new Headers();

@@ -6,6 +6,14 @@
       ><img src="../assets/Logo2.png" alt="Logo" class="h-[7.5vh]"
     /></NuxtLink>
     <div class="h-[8vh] w-[100%] mr-[5vw] flex items-center justify-end">
+      <NuxtLink
+        class="mx-[1.5rem] text-[1.25rem] p-[0.75rem] text-[#3a2d80] font-semibold font-lora"
+        id="hover-underline-animation"
+        v-if="this.$auth.loggedIn"
+        to="/ProfilePage3"
+      >
+        Profile
+      </NuxtLink>
       <button
         class="mx-[1.5rem] text-[1.25rem] p-[0.75rem] text-[#3a2d80] font-semibold font-lora"
         id="hover-underline-animation"
@@ -50,7 +58,7 @@ export default {
 #hover-underline-animation:after {
   content: "";
   position: absolute;
-  width: 100%;
+  /* width: 100%; */
   transform: scaleX(0);
   height: 2px;
   bottom: 0;
