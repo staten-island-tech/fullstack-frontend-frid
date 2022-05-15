@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-row justify-center">
-    <PostCreate />
+  <div>
+    <button @click="login">login</button>
   </div>
 </template>
 
@@ -10,6 +10,10 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    async login() {
+      await this.$auth.loginWith("auth0");
+    },
+  },
 };
 </script>

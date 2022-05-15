@@ -1,168 +1,88 @@
- <template>
+<template>
   <div class="bg-[#eeeeee]">
     <Navbar />
     <div class="flex flex-row">
       <div id="sidecar" class="flex flex-col align-center w-[12vw] h-[92vh]">
         <span
-          class="
-            w-[12.5vh]
-            h-[12.5vh]
-            bg-[#6957e7]
-            rounded-[100%]
-            mx-[2.5vw]
-            mt-[5vh]
-            mb-[2.5vh]
-          "
+          class="w-[12.5vh] h-[12.5vh] bg-[#6957e7] rounded-[100%] mx-[2.5vw] mt-[5vh] mb-[2.5vh]"
         ></span>
         <div>
           <p
             id="username"
-            class="
-              mx-[1rem]
-              text-[.95rem] text-[#3a2d80]
-              font-semibold
-              w-[7.5vw]
-              flex
-              relative
-              left-[1.5vw]
-              font-lora
-              brightness-50
-            "
+            class="mx-[1rem] text-[.95rem] text-[#3a2d80] font-semibold w-[7.5vw] flex relative left-[1.5vw] font-lora brightness-50"
           >
-            Bobby2000
+            {{ username }}
           </p>
           <p
             id="bio"
-            class="
-              mx-[1rem]
-              text-[.75rem] text-[#3a2d80]
-              font-normal
-              w-[7.5vw]
-              flex
-              relative
-              left-[1.5vw]
-              font-lora
-              brightness-50
-            "
+            class="mx-[1rem] text-[.75rem] text-[#3a2d80] font-normal w-[7.5vw] flex relative left-[1.5vw] font-lora brightness-50"
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit tiel
           </p>
         </div>
         <button
-          class="
-            mx-[1rem]
-            my-[2rem]
-            text-[1.25rem] text-[#3a2d80]
-            font-medium
-            w-[10vw]
-            inline-block
-            relative
-            font-lora
-          "
+          class="mx-[1rem] my-[2rem] text-[1.25rem] text-[#3a2d80] font-medium w-[10vw] inline-block relative font-lora"
           id="hover-underline-animation"
         >
           Followers
         </button>
         <button
-          class="
-            mx-[1rem]
-            my-[2rem]
-            text-[1.25rem] text-[#3a2d80]
-            font-medium
-            w-[10vw]
-            inline-block
-            relative
-            font-lora
-          "
+          class="mx-[1rem] my-[2rem] text-[1.25rem] text-[#3a2d80] font-medium w-[10vw] inline-block relative font-lora"
           id="hover-underline-animation"
         >
           Following
         </button>
         <button
-          class="
-            mx-[1rem]
-            my-[2rem]
-            text-[1.25rem] text-[#3a2d80]
-            font-medium
-            w-[10vw]
-            inline-block
-            relative
-            font-lora
-          "
+          class="mx-[1rem] my-[2rem] text-[1.25rem] text-[#3a2d80] font-medium w-[10vw] inline-block relative font-lora"
           @click="openModal"
           id="hover-underline-animation"
-        >User Settings
-          
-        </button> 
+        >
+          User Settings
+        </button>
         <UserSettings class="z-50" v-model="modalOpen"></UserSettings>
       </div>
 
       <!-- <Modal v-show="modalOpen"/> -->
       <!-- @click="openModal" -->
 
-      <div id="main-content" class="px-[5vw] bg-gradient-to-r from-violet-500 to-fuchsia-500">
+      <div
+        id="main-content"
+        class="px-[5vw] bg-gradient-to-r from-violet-500 to-fuchsia-500"
+      >
         <div
           id="main-menu-container"
           class="flex flex-row justify-center w-[80vw] h-[8.25vh] mt-[7.5vh]"
         >
           <div
             id="all-posts"
-            class="
-              h-[8.25vh]
-              w-[8.25vw]
-              hover:border-b-2
-              border-[#3a2d80]
-              flex
-              justify-center
-              items-center
-            "
+            class="h-[8.25vh] w-[8.25vw] hover:border-b-2 border-[#3a2d80] flex justify-center items-center"
           >
             <img src="../assets/all-posts.svg" alt="Logo" class="h-[5vh]" />
           </div>
           <div
             id="liked-posts"
-            class="
-              h-[8.25vh]
-              w-[8.25vw]
-              hover:border-b-2
-              border-[#3a2d80]
-              flex
-              justify-center
-              items-center
-            "
+            class="h-[8.25vh] w-[8.25vw] hover:border-b-2 border-[#3a2d80] flex justify-center items-center"
           >
             <img src="../assets/liked.svg" alt="Logo" class="h-[5vh]" />
           </div>
           <div
             id="tagged-posts"
-            class="
-              h-[8.25vh]
-              w-[8.25vw]
-              hover:border-b-2
-              border-[#3a2d80]
-              flex
-              justify-center
-              items-center
-            "
+            class="h-[8.25vh] w-[8.25vw] hover:border-b-2 border-[#3a2d80] flex justify-center items-center"
           >
             <img src="../assets/tagged-posts.svg" alt="Logo" class="h-[5vh]" />
           </div>
         </div>
         <div
           id="main-container"
-          class="
-            w-[80vw]
-            h-[75vh]
-            bg-gradient-to-r from-violet-500 to-fuchsia-500
-            flex flex-row
-            justify-evenly
-            flex-wrap
-            overflow-y-scroll
-          "
+          class="w-[80vw] h-[75vh] bg-gradient-to-r from-violet-500 to-fuchsia-500 flex flex-row justify-evenly flex-wrap overflow-y-scroll"
         >
           <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
-          <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
-            <app-posts v-bind:fetchedPostID=allPostsID></app-posts>
+          <li
+            v-for="allPostsID in allPostsIDs"
+            :key="allPostsID"
+            class="list-none"
+          >
+            <app-posts v-bind:fetchedPostID="allPostsID"></app-posts>
           </li>
         </div>
       </div>
@@ -174,7 +94,7 @@
 import Posts from "../components/Posts.vue";
 export default {
   components: {
-    'app-posts': Posts,
+    "app-posts": Posts,
   },
   name: "Profile_Page3",
   data() {
@@ -182,14 +102,15 @@ export default {
       // modalOpen: false,
       modalOpen: false,
       allPostsIDs: [],
-      postAPI:[],
+      postAPI: [],
+      username: this.$auth.user.name,
     };
   },
   methods: {
     openModal() {
       this.modalOpen = !this.modalOpen;
     },
-    getPosts: async function() {
+    getPosts: async function () {
       var requestOptionsGet = {
         method: "GET",
         redirect: "follow",
@@ -198,21 +119,21 @@ export default {
         const response = await fetch(
           "http://localhost:3000/api/v1/posts/",
           requestOptionsGet
-        )
+        );
         const result = await response.json();
         this.postAPI = result.data.posts;
         this.postAPI.forEach((element) => {
           this.allPostsIDs.push(element._id);
         });
-        console.log(this.allPostsIDs)
+        console.log(this.allPostsIDs);
       } catch (error) {
         console.log(error);
       }
     },
   },
   created() {
-    this.getPosts()
-  }
+    this.getPosts();
+  },
 };
 </script>
 

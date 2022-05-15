@@ -9,15 +9,19 @@
       <button
         class="mx-[1.5rem] text-[1.25rem] p-[0.75rem] text-[#3a2d80] font-semibold font-lora"
         id="hover-underline-animation"
+        @click="logout"
+        v-if="this.$auth.loggedIn"
       >
         <!-- <NuxtLink to="/Login">Login</NuxtLink> -->
-        <a href="https://localhost:3000/login">Login</a>
+        Log Out
       </button>
       <button
         class="mx-[1.5rem] text-[1.25rem] p-[0.75rem] text-[#3a2d80] font-semibold font-lora"
         id="hover-underline-animation"
+        @click="login"
+        v-else
       >
-        <NuxtLink to="/SignUp">Sign Up</NuxtLink>
+        Log In / Sign Up
       </button>
     </div>
   </div>
@@ -27,9 +31,18 @@
 export default {
   name: "Navbar",
   data() {
-    return {};
+    return {
+      user: this.$auth.user,
+    };
   },
-  methods: {},
+  methods: {
+    async login() {
+      await this.$auth.loginWith("auth0");
+    },
+    async logout() {
+      await this.$auth.logout();
+    },
+  },
 };
 </script>
 
