@@ -2,10 +2,10 @@
 
   <div>
     <div>
-      <button @click="openModalLargePost" v-bind:modalLargePostOpenID=allPostsID>
+      <button @click="openModalLargePost" v-bind:modalLargePostOpenID=fetchedPostID>
         <div
         id="post-container"
-        class="h-[40vh] w-[32vw] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
+        class="h-[47vh] w-[32vw] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
       >
         <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
           {{ postName }}
@@ -114,7 +114,7 @@
             <span id="like-count" v-else> {{ this.localDislikes }} </span>
           </div>
           <div>
-            <button v-on:click="commentsClickedF"
+            <button 
               id="comments-button"
               class="mx-[0.6vw]"
             >
@@ -130,7 +130,7 @@
         </div>
       </button>
     </div>
-    <LModalPost v-show="modalLargePostOpen" @closeLM ="closeModalLargePost"></LModalPost>
+    <LModalPost v-show="modalLargePostOpen" @closeLM ="closeModalLargePost" v-bind:modalLargePostOpenID=fetchedPostID></LModalPost>
   </div>
 </template>
 
@@ -173,7 +173,7 @@ export default {
       disliked: false,
       commentsClicked: false,
       modalLargePostOpen: false,
-      modalLargePostOpenID: [],
+      modalLargePostOpenID: "",
     };
   },
 

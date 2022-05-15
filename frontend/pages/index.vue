@@ -12,27 +12,27 @@
     </div>
     <button
       class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
-      @click="openModal"
+      @click="openCreatePostModal"
     >
       &#43;
     </button>
-    <PostCreate v-model="modalOpen"></PostCreate>
+    <PostCreate v-model="createPostModalDisplay"  @closeCP ="closeCreatePostModal"></PostCreate>
     <!-- <LModalPost v-show="modalLargePostOpen" @closeLM ="closeModalLargePost"></LModalPost> -->
   </div>
 </template>
 
 <script>
 import Posts from "../components/Posts.vue";
-import LModalPost from "../components/LModalPost.vue";
+// import LModalPost from "../components/LModalPost.vue";
 export default {
   components: {
     'app-posts': Posts,
-    'LModalPost': LModalPost,
+    // 'LModalPost': LModalPost,
 
   },
   data() {
     return {
-      modalOpen: false,
+      createPostModalDisplay: false,
       // modalLargePostOpen: false,
       // modalLargePostOpenID: "",
       allPostsIDs: [],
@@ -41,8 +41,11 @@ export default {
     };
   },
   methods: {
-    openModal: async function() {
-      this.modalOpen = !this.modalOpen;
+    closeCreatePostModal() {
+      this.createPostModalDisplay = false;
+    },
+    openCreatePostModal: async function() {
+      this.createPostModalDisplay = true;
 
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
