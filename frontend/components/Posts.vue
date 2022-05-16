@@ -81,6 +81,7 @@
           >
             <div id="reactions" class="flex flex-row items-center">
               <button
+                v-if="this.$auth.loggedIn"
                 :disabled="disliked"
                 id="like-button"
                 v-on:click="like"
@@ -99,9 +100,17 @@
                   v-else
                 />
               </button>
+              <button v-else id="like-button" @click="login" class="mx-[0.6vw]">
+                <img
+                  src="../assets/like.svg"
+                  alt="Logo"
+                  class="h-[3.5vh] mx-[0.5vw]"
+                />
+              </button>
               <span id="like-count" v-if="liked"> {{ this.tempLikes }} </span>
               <span id="like-count" v-else> {{ this.localLikes }} </span>
               <button
+                v-if="this.$auth.loggedIn"
                 :disabled="liked"
                 id="dislike-button"
                 v-on:click="dislike"
@@ -118,6 +127,18 @@
                   alt="Logo"
                   class="h-[3.5vh] mx-[0.5vw]"
                   v-else
+                />
+              </button>
+              <button
+                v-else
+                id="dislike-button"
+                @click="login"
+                class="mx-[0.6vw]"
+              >
+                <img
+                  src="../assets/dislike.svg"
+                  alt="Logo"
+                  class="h-[3.5vh] mx-[0.5vw]"
                 />
               </button>
               <span id="like-count" v-if="disliked">
@@ -185,10 +206,14 @@ export default {
       commentsClicked: false,
       modalLargePostOpen: false,
       modalLargePostOpenID: "",
+      user: this.$auth.user,
     };
   },
 
   methods: {
+    async login() {
+      await this.$auth.loginWith("auth0");
+    },
     username: async function () {
       var requestOptionsGet = {
         method: "GET",
@@ -280,11 +305,9 @@ export default {
     },
 
     like: async function () {
-      if (this.$auth.loggedIn) {
-        this.liked = !this.liked;
-      }
+      this.liked = !this.liked;
 
-      if (this.liked == true && this.$auth.loggedIn) {
+      if (this.liked == true) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
