@@ -31,10 +31,25 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    "@nuxtjs/axios",
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth-next"],
+  auth: {
+    redirect: {
+      login: "/", // redirect user when not connected
+      callback: "/auth/logged-in",
+    },
+    strategies: {
+      auth0: {
+        domain: "dev-7g4awxij.us.auth0.com",
+        clientId: "d41Q0WOQujXeyYA8MckBQp984IoPhiAC",
+        logoutRedirectUri: "http://localhost:8000",
+        // audience: "https:dev-7g4awxij.us.auth0.com/",
+      },
+    },
+  },
+
+  // router: {
+  //   middleware: ["auth"],
+  // },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

@@ -39,19 +39,39 @@
             class="flex flex-row justify-center content-center h-[25vh] overflow-y-scroll mt-[2rem]"
           >
             <div id="song-results">
-              <ul class="">
-                <li v-for="songResult in songResults" :key="songResult">
-                  <button class="mr-[4vw]">ADD</button>
+              <!-- <ul class="">
+                <li
+                  class="h-[5vh] text-ellipsis overflow-hidden ..."
+                  v-for="songResult in songResults"
+                  :key="songResult"
+                >
+                  <button
+                    class="mr-[4vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[5px] rounded-md transform active:translate-y-px"
+                    @click="addSong"
+                  >
+                    ADD
+                  </button>
                   {{ songResult }}
                 </li>
               </ul>
             </div>
             <div id="artist-results" class="flex justify-center">
               <ul>
-                <li v-for="artistResult in artistResults" :key="artistResult">
+                <li
+                  class="h-[5vh] px-[5px]"
+                  v-for="artistResult in artistResults"
+                  :key="artistResult"
+                >
                   {{ artistResult }}
                 </li>
-              </ul>
+              </ul> -->
+
+              <SongData
+                v-for="(searchResults, index) in searchResults"
+                :key="index"
+                :Songname="searchResults.name"
+                :Songartist="searchResults.artist"
+              />
             </div>
           </div>
         </div>
@@ -61,7 +81,12 @@
               Tags
               <div id="tag-list" class="dropdown-content">
                 <ul class="dropdown-content overflow-y-scroll h-[27vh]">
-                  <li v-for="tag in tags" :key="tag" class="hover:bg-slate-300">
+                  <li
+                    @click="addTag"
+                    v-for="tag in tags"
+                    :key="tag"
+                    class="hover:bg-slate-300"
+                  >
                     {{ tag }}
                   </li>
                 </ul>
@@ -75,17 +100,24 @@
             />
             <button :disabled="isActive" @click="addTag">Add</button> -->
           </div>
+          <div v-for="usedTag in usedTags" :key="usedTag">{{ usedTag }}</div>
         </div>
       </div>
       <!-- <button @click="createPost" class="mt-[4vh] font-semibold">Post</button> -->
       <button @click="closeCP" class="mt-[2vh] font-semibold">Close</button>
+      <div>{{ searchResults }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import songData from "./SongData.vue";
+
 export default {
   name: "PostCreate",
+  components: {
+    songData,
+  },
   props: {
     value: {
       required: true,
@@ -106,12 +138,9 @@ export default {
       songInput: null,
       songResults: [],
       artistResults: [],
-      // songInfo: {
-      //   songName: null,
-      //   songNumber: null,
-      //   artist: null,
-      //   duration: null,
-      // },
+      searchResult: {},
+      searchResults: [],
+      songDataKeys: ["songName", "artist"],
       songAmount: 0,
       tags: [
         "Pop",
@@ -149,6 +178,7 @@ export default {
         "Disco",
         "Foreign",
       ],
+      usedTags: [],
       tagInput: null,
       totalTags: 0,
       isActive: false,
@@ -190,29 +220,40 @@ export default {
         );
         const result = await response.json();
         var logger = result.status;
-        // logger.forEach((element) => console.log(element.artists[0].name));
-        logger.forEach((element) => this.songResults.push(element.name));
-        console.log(this.songResults);
-        logger.forEach((element) =>
-          this.artistResults.push(element.artists[0].name)
-        );
-        console.log(this.artistResults);
+        // logger.forEach((element) => this.songResults.push(element.name));
+        // console.log(this.songResults);
+        // logger.forEach((element) =>
+        //   this.artistResults.push(element.artists[0].name)
+        // );
+        // console.log(this.artistResults);
+        for (let i = 0; i < 20; i++) {
+          let p = logger[i];
+          // console.log(p.name);
+          // console.log(p.artists[0].name);
+          this.searchResult = {
+            name: p.name,
+            artist: p.artists[0].name,
+          };
+          this.searchResults.push(this.searchResult);
+        }
+        console.log(this.searchResults);
       } catch (error) {
         console.log(error);
       }
     },
+    addSong() {},
+    addTag() {
+      this.usedTags.push(this.tag);
+      console.log(this.usedTags);
+      this.totalTags = this.totalTags + 1;
+      console.log(this.totalTags);
+
+      if (this.usedTags.length > 3) {
+        this.isActive = true;
+      }
+    },
   },
 
-  addTag() {
-    this.tags.push(this.tagInput);
-    console.log(this.tags);
-    this.totalTags = this.totalTags + 1;
-    console.log(this.totalTags);
-
-    if (this.tags.length > 3) {
-      this.isActive = true;
-    }
-  },
   close() {
     this.$emit("input", !this.value);
   },
