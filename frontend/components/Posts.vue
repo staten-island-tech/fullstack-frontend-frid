@@ -1,10 +1,6 @@
 <template>
   <div>
     <div>
-      <button
-        @click="openModalLargePost"
-        v-bind:modalLargePostOpenID="fetchedPostID"
-      >
         <div
           id="post-container"
           class="h-[47vh] w-[32vw] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
@@ -25,40 +21,45 @@
             id="divider"
             class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
           ></div>
-          <div id="post-content" class="h-[27.5vh] overflow-y-scroll">
-            <ul v-if="commentsClicked">
-              <li
-                v-for="comment in comments"
-                :key="comment"
-                class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
-              >
-                <div class="w-[13.5vw] pl-[1.5vw]">
-                  {{ comment.commentContent }}
-                </div>
-                <!-- <div class="flex justify-center w-[4vw]">{{ comment.commentNumber }}</div> -->
-                <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
-                  {{ comment.commentUserName }}
-                </div>
-              </li>
-            </ul>
-            <ul v-else>
-              <li
-                v-for="song in songs"
-                :key="song"
-                class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
-              >
-                <div class="w-[13.5vw] pl-[1.5vw] truncate">
-                  {{ song.songName }}
-                </div>
-                <div class="flex justify-center w-[4vw]">
-                  {{ song.duration }}
-                </div>
-                <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
-                  {{ song.artist }}
-                </div>
-              </li>
-            </ul>
-          </div>
+          <button
+            @click="openModalLargePost"
+            v-bind:modalLargePostOpenID="fetchedPostID"
+          >
+            <div id="post-content" class="h-[27.5vh] overflow-y-scroll">
+              <ul v-if="commentsClicked">
+                <li
+                  v-for="comment in comments"
+                  :key="comment"
+                  class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
+                >
+                  <div class="w-[13.5vw] pl-[1.5vw]">
+                    {{ comment.commentContent }}
+                  </div>
+                  <!-- <div class="flex justify-center w-[4vw]">{{ comment.commentNumber }}</div> -->
+                  <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
+                    {{ comment.commentUserName }}
+                  </div>
+                </li>
+              </ul>
+              <ul v-else>
+                <li
+                  v-for="song in songs"
+                  :key="song"
+                  class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
+                >
+                  <div class="w-[13.5vw] pl-[1.5vw] truncate">
+                    {{ song.songName }}
+                  </div>
+                  <div class="flex justify-center w-[4vw]">
+                    {{ song.duration }}
+                  </div>
+                  <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
+                    {{ song.artist }}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </button>
           <div
             id="divider"
             class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
@@ -147,7 +148,9 @@
               <span id="like-count" v-else> {{ this.localDislikes }} </span>
             </div>
             <div>
-              <button id="comments-button" class="mx-[0.6vw]">
+              <button id="comments-button" class="mx-[0.6vw]" 
+              @click="openModalLargePost"
+              v-bind:modalLargePostOpenID="fetchedPostID">
                 <img
                   src="../assets/comments.svg"
                   alt="Logo"
@@ -158,7 +161,6 @@
             </div>
           </div>
         </div>
-      </button>
     </div>
     <LModalPost
       v-show="modalLargePostOpen"

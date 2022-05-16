@@ -233,15 +233,20 @@
             </li>
           </ul>
         </div>
+      <div class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]">
+        <!-- <p>Create Comment</p> -->
         <button
-          class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
+          class=""
           @click="createCommentInLM"
         >
           &#43;
         </button>
       </div>
+      </div>
 <!-- ------------------------------- -->
-      <button @click="closeLM" class="mt-[2vh] font-semibold">Close</button>
+      <button @click="closeLM" class="mt-[.5vh] p-[1vh] rounded-[25%] bg-fuchsia-600 font-semibold">
+        <p>Close</p>
+      </button>
     </div>
   </div>
 </template>
