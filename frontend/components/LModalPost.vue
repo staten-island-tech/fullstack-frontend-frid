@@ -13,24 +13,79 @@
         id="post-container"
         class="h-[90%] w-[80%] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"      
       >
-        <h1  class="mx-[1vw] justify-center content-center text-[1.25rem] font-lora">
-          Create a comment
-        </h1>
+        <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
+          Create a Comment
+        </div>
         <div id="user-name-container" class="flex flex-row items-center">
           <span
             id="pfp"
             class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
           ></span>
           <div id="username" class="text-[1rem] font-lora">
-            {{ userName }}
+            {{ userName}}
           </div>
         </div>
         <div
           id="divider"
           class="flex h-[1px] w-full bg-[#000000] "
         ></div>
+        <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
+
+          <textarea
+            type="text"
+            placeholder="Type comment here"
+            class="h-[90%] w-[90%] rounded-md p-[10px]"
+            v-model="commentInput"
+            rows = "5" cols = "60"
+          />
+        </div>
+        <div
+          id="divider"
+          class="flex h-[1px] w-full bg-[#000000] "
+        ></div>
+        <div id="reactions-and-tags" class="flex flex-wrap items-center mt-[1vh]">
+          <button
+            class="mx-[1vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
+            @click="postComment"
+          >
+            Post Comment
+          </button>
+        </div>
+        <div
+          id="divider"
+          class="flex h-[1px] w-full bg-[#000000] "
+        ></div>
+        <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
+          <!-- <ul>
+            <li
+              v-for="comment in comments"
+              :key="comment"
+              class=" text-[2.5vh] hover:bg-[#dddddd] font-lora"
+            >
+              <div class="flex flex-col h-[flex flex-col h-[5vh]vh]">
+                <div class="">
+                  <p class="w-full pl-[1.5vw]">
+                    {{ comment.commentContent }}
+                  </p>
+                </div>
+                <div class="flex flex-row h-[5vh] ">
+                  <div class="w-[50%] pl-[1.5vw] ">
+                    #{{ comment.commentNumber }}
+                  </div>
+                  <div class="flex justify-end w-[50%] pr-[1.5vw]">
+                    {{ comment.commentUserName }}
+                  </div>
+                </div>
+              </div>
+              <div
+                id="divider"
+                class="flex justify-center h-[1px] w-[80%] bg-[#000000] "
+              ></div>
+            </li>
+          </ul> -->
+        </div>
         <button
-          class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
+          class="text-[4rem] text-[#330066] place-content-center text-[2vh] float-right mr-[1vw]"
           @click="createCommentInLM"
         >
           Cancel
@@ -261,6 +316,7 @@ export default {
       localDislikes: null,
       tempLikes: null,
       tempDislikes: null,
+      commentInput: [],
       userName: null,
       postName: null,
       songs: null,
@@ -287,6 +343,9 @@ export default {
     };
   },
   methods: {
+    postComment: async function () {
+
+    },
     closeLM() {
       this.$emit("closeLM");
     },
