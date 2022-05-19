@@ -69,8 +69,8 @@
               <SongData
                 v-for="(searchResults, index) in searchResults"
                 :key="index"
-                :Songname="searchResults.name"
-                :Songartist="searchResults.artist"
+                :songName="searchResults.name"
+                :songArtist="searchResults.artist"
               />
             </div>
           </div>
@@ -105,7 +105,6 @@
       </div>
       <!-- <button @click="createPost" class="mt-[4vh] font-semibold">Post</button> -->
       <button @click="closeCP" class="mt-[2vh] font-semibold">Close</button>
-      <div>{{ searchResults }}</div>
     </div>
   </div>
 </template>

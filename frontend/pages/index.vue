@@ -4,7 +4,7 @@
 
     <div
       id="main-container"
-      class="w-[80vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
+      class="w-[100vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
     >
       <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
         <app-posts v-bind:fetchedPostID="allPostsID"></app-posts>
@@ -13,6 +13,8 @@
     <button
       class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
       @click="openCreatePostModal"
+      v-if="this.$auth.loggedIn"
+      title="Add Post"
     >
       &#43;
     </button>
