@@ -110,7 +110,7 @@
         <div id="reactions-and-tags" class="flex flex-wrap items-center mt-[1vh]">
           <div id="tags" class="flex flex-row items-center ml-[2vw] min-w-15vh">
             <ul class="columns-4">
-              <li v-for="tag in tags" :key="tag" class="text-[2vh]">
+              <li v-for="tag in tags" :key="tag" class="text-[2vh] font-medium">
                 #{{ tag.tagName }}
               </li>
             </ul>
@@ -159,31 +159,20 @@
             <span id="like-count" v-if="disliked"> {{ this.tempDislikes }} </span>
             <span id="like-count" v-else> {{ this.localDislikes }} </span> -->
             <div
-              class="mx-[0.6vw]"
+              class="mx-[0.6vw] flex flex-row underline font-medium"
             >
-              <img
-                src="../assets/like.svg"
-                alt="Logo"
-                class="h-[3.5vh] mx-[0.5vw]"
-              />
+              <p> Likes: {{this.localLikes}}</p>
             </div>
-            <span id="like-count" > {{ this.localLikes }} </span>
             <div
-              class="mx-[0.6vw]"
+              class="mx-[0.6vw] flex flex-row underline font-medium"
             >
-              <img
-                src="../assets/dislike.svg"
-                alt="Logo"
-                class="h-[3.5vh] mx-[0.5vw]"
-              />
+              <p> Dislikes: {{this.localDislikes}}</p>
+            </div>           
+            <div
+              class="mx-[0.6vw] flex flex-row underline font-medium"
+            >
+              <p> Comments: {{this.localTotalComments}}</p>
             </div>
-            <span id="like-count" > {{ this.localDislikes }} </span>            
-            <img
-              src="../assets/comments.svg"
-              alt="Logo"
-              class="h-[3.5vh] mx-[0.5vw]"
-            />
-            <span id="comment-count"> {{ this.localTotalComments }} </span>
           </div>
         </div>
         <div
@@ -303,13 +292,13 @@ export default {
       postName: null,
       songs: null,
       tags: null,
-      // localTotalComments: null,
-      // localcomment: {
-      //   localcommentNumber: 4,
-      //   localcommentContent: null,
-      //   localcommentUserName: "True_Busty_Bird_Fan",
-      //   localuserID: "riuengiu4jt89fu5jyt895jhtrkv",
-      // },
+      localTotalComments: null,
+      localcomment: {
+        localcommentNumber: null,
+        localcommentContent: null,
+        localcommentUserName: null,
+        localuserID: null,
+      },
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -331,33 +320,34 @@ export default {
   },
   methods: {
     postComment: async function () {
-      // var myHeaders = new Headers();
-      // myHeaders.append("Content-Type", "application/json");
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-      // this.localTotalComments = this.localTotalComments + 1;
+      this.localTotalComments = this.localTotalComments + 1;
+      this.localcommentNumber = this.localTotalComments;
 
-      // var raw = JSON.stringify({
-      //   totalcomments: this.localTotalComments,
-      //   comments: this.localComment
-      // });
+      var raw = JSON.stringify({
+        totalcomments: this.localTotalComments,
+        comments: this.localComment
+      });
 
-      // var requestOptionsPatch = {
-      //   method: "PATCH",
-      //   headers: myHeaders,
-      //   body: raw,
-      //   redirect: "follow",
-      // };
+      var requestOptionsPatch = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
 
-      // try {
-      //   const response = await fetch(
-      //     "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-      //     requestOptionsPatch
-      //   );
-      //   const result = await response.json();
-      //   console.log("There are " + result.data.post.totalLikes + " likes");
-      // } catch (error) {
-      //   console.log(error);
-      // }
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
+          requestOptionsPatch
+        );
+        const result = await response.json();
+        console.log("There are " + result.data.post.totalLikes + " likes");
+      } catch (error) {
+        console.log(error);
+      }
     },
     closeLM() {
       this.$emit("closeLM");
