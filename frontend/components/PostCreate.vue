@@ -10,7 +10,6 @@
     >
       <div id="input-container" class="flex flex-col w-[30vw] items-center">
         <div id="post-name" class="h-[5vh]">
-          <!-- <label for="postName">Post Name</label> -->
           <input
             v-model="postName"
             type="text"
@@ -67,6 +66,7 @@
               </ul> -->
 
               <SongData
+                @add="addSong(index)"
                 v-for="(searchResults, index) in searchResults"
                 :key="index"
                 :songName="searchResults.name"
@@ -134,6 +134,7 @@ export default {
         display: "none",
       },
       songs: [],
+      songsAdded: [],
       songInput: null,
       songResults: [],
       artistResults: [],
@@ -181,19 +182,41 @@ export default {
       tagInput: null,
       totalTags: 0,
       isActive: false,
-      userPosting: "Bobby2000",
+      userPosting: this.$auth.user.name,
       postName: null,
       responseLog: {},
       displayResults: false,
     };
   },
   methods: {
-    // addSong() {
-    //   this.songs.push(this.songInfo);
-    //   console.log(this.songs);
-    //   this.songAmount = this.songAmount + 1;
-    //   console.log(this.songAmount)
-    // },
+    createPost: async function () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        postName: this.postName,
+        songAmount: this.songsAdded.length,
+        userName: this.userPosting,
+        songs: this.songsAdded,
+      });
+
+      var requestOptionsPost = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/searchTracks",
+          requestOptionsPost
+        );
+        const result = await response.json();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     closeCP() {
       this.$emit("closeCP");
     },
@@ -240,7 +263,10 @@ export default {
         console.log(error);
       }
     },
-    addSong() {},
+    addSong(index) {
+      this.songsAdded.push(this.searchResults[index]);
+      console.log(this.songsAdded);
+    },
     addTag() {
       this.usedTags.push(this.tag);
       console.log(this.usedTags);
@@ -256,28 +282,28 @@ export default {
   close() {
     this.$emit("input", !this.value);
   },
-  createPost: async function () {
-    console.log("createPost function ran");
+  // createPost: async function () {
+  //   console.log("createPost function ran");
 
-    try {
-      const response = await post("http://localhost:3000/api/v1/posts/create", {
-        postName: this.postName,
-        userName: this.userPosting,
-        tags: this.tags,
-        songs: this.songs,
-        totalLikes: 0,
-        totalDislikes: 0,
-        totalComments: 0,
-        totalTags: this.totalTags,
-        songAmount: this.songAmount,
-      });
-      const result = await response.json();
-      console.log("Created post with this id: " + result._id);
-    } catch (error) {
-      console.log(error);
-      alert("Did you fill in all the proper information?");
-    }
-  },
+  //   try {
+  //     const response = await post("http://localhost:3000/api/v1/posts/create", {
+  //       postName: this.postName,
+  //       userName: this.userPosting,
+  //       tags: this.tags,
+  //       songs: this.songs,
+  //       totalLikes: 0,
+  //       totalDislikes: 0,
+  //       totalComments: 0,
+  //       totalTags: this.totalTags,
+  //       songAmount: this.songAmount,
+  //     });
+  //     const result = await response.json();
+  //     console.log("Created post with this id: " + result._id);
+  //   } catch (error) {
+  //     console.log(error);
+  //     alert("Did you fill in all the proper information?");
+  //   }
+  // },
 
   //  tagsLength() {
   //    this.tagsLength = this.tags.length

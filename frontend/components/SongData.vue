@@ -4,6 +4,7 @@
     <p class="">{{ songArtist }}</p>
     <button
       class="mx-[1vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px w-[5vw]"
+      @click="$emit('add')"
     >
       Add
     </button>
@@ -15,9 +16,6 @@ export default {
   props: {
     songName: String,
     songArtist: String,
-  },
-  methods: {
-    add: {},
   },
 };
 </script>
