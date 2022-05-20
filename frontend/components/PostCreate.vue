@@ -78,9 +78,9 @@
         <div id="tag-input-container">
           <div class="flex flex-row">
             <button class="dropdown">
-              Tags
+              <div class="text-[2rem]">Tags</div>
               <div id="tag-list" class="dropdown-content">
-                <ul class="dropdown-content overflow-y-scroll h-[27vh]">
+                <ul class="dropdown-content overflow-y-scroll h-[20vh]">
                   <li
                     @click="addTag"
                     v-for="tag in tags"
