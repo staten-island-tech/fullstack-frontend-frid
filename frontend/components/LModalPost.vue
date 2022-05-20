@@ -55,9 +55,9 @@
           id="divider"
           class="flex h-[1px] w-full bg-[#000000] "
         ></div>
-        <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
+        <!-- <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
           {{ commentInput}}
-        </div>
+        </div> -->
         <button
           class="text-[4rem] text-[#330066] place-content-center text-[2vh] float-right mr-[1vw]"
           @click="createCommentInLM"
@@ -262,20 +262,28 @@
             </li>
           </ul>
         </div>
-      <div class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]">
-        <!-- <p>Create Comment</p> -->
-        <button
-          class=""
-          @click="createCommentInLM"
-        >
-          &#43;
-        </button>
-      </div>
+        <div class=" text-[#330066]  mr-[1vw] h-[5vh] flex flex-row w-[full]">
+          <div class="float-left  flex flex-row w-[50%]">
+            <button
+              class="flex text-[2vh]"
+              @click="createCommentInLM"
+            >
+              <img
+                src="../assets/add-comment.svg"
+                alt="Logo"
+                class="h-[3.5vh] mx-[0.5vw]"
+              />
+              <p class="flex underline">Create new Comment</p>
+            </button>            
+          </div>          
+          <div class="w-[50%] justify-end pl-[1vh]">
+            <button @click="closeLM" class="mt-[.5vh]   p-[.5vh] float-right rounded-[25%] bg-fuchsia-500 font-semibold">
+              <p>Close</p>
+            </button>            
+          </div>
+        </div>
       </div>
 <!-- ------------------------------- -->
-      <button @click="closeLM" class="mt-[.5vh] p-[1vh] rounded-[25%] bg-fuchsia-600 font-semibold">
-        <p>Close</p>
-      </button>
     </div>
   </div>
 </template>
@@ -295,13 +303,13 @@ export default {
       postName: null,
       songs: null,
       tags: null,
-      localTotalComments: null,
-      localcomment: {
-        commentNumber: 4,
-        commentContent: null,
-        commentUserName: "True_Busty_Bird_Fan",
-        userID: "riuengiu4jt89fu5jyt895jhtrkv",
-      },
+      // localTotalComments: null,
+      // localcomment: {
+      //   localcommentNumber: 4,
+      //   localcommentContent: null,
+      //   localcommentUserName: "True_Busty_Bird_Fan",
+      //   localuserID: "riuengiu4jt89fu5jyt895jhtrkv",
+      // },
       // songList: null,
       // comments: [],
       // commentInput: null,
@@ -323,33 +331,33 @@ export default {
   },
   methods: {
     postComment: async function () {
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+      // var myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "application/json");
 
-      this.localTotalComments = this.localTotalComments + 1;
+      // this.localTotalComments = this.localTotalComments + 1;
 
-      var raw = JSON.stringify({
-        totalcomments: this.localTotalComments,
-        comments: this.localComment
-      });
+      // var raw = JSON.stringify({
+      //   totalcomments: this.localTotalComments,
+      //   comments: this.localComment
+      // });
 
-      var requestOptionsPatch = {
-        method: "PATCH",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-      };
+      // var requestOptionsPatch = {
+      //   method: "PATCH",
+      //   headers: myHeaders,
+      //   body: raw,
+      //   redirect: "follow",
+      // };
 
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-          requestOptionsPatch
-        );
-        const result = await response.json();
-        console.log("There are " + result.data.post.totalLikes + " likes");
-      } catch (error) {
-        console.log(error);
-      }
+      // try {
+      //   const response = await fetch(
+      //     "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
+      //     requestOptionsPatch
+      //   );
+      //   const result = await response.json();
+      //   console.log("There are " + result.data.post.totalLikes + " likes");
+      // } catch (error) {
+      //   console.log(error);
+      // }
     },
     closeLM() {
       this.$emit("closeLM");
