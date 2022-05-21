@@ -36,43 +36,38 @@
           </div>
           <div
             class="flex flex-row justify-center content-center h-[25vh] overflow-y-scroll mt-[2rem]"
+            v-if="activeSearch"
           >
             <div id="song-results">
-              <!-- <ul class="">
-                <li
-                  class="h-[5vh] text-ellipsis overflow-hidden ..."
-                  v-for="songResult in songResults"
-                  :key="songResult"
-                >
-                  <button
-                    class="mr-[4vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[5px] rounded-md transform active:translate-y-px"
-                    @click="addSong"
-                  >
-                    ADD
-                  </button>
-                  {{ songResult }}
-                </li>
-              </ul>
-            </div>
-            <div id="artist-results" class="flex justify-center">
-              <ul>
-                <li
-                  class="h-[5vh] px-[5px]"
-                  v-for="artistResult in artistResults"
-                  :key="artistResult"
-                >
-                  {{ artistResult }}
-                </li>
-              </ul> -->
-
-              <SongData
+              <SongResult
                 @add="addSong(index)"
                 v-for="(searchResults, index) in searchResults"
                 :key="index"
                 :songName="searchResults.name"
                 :songArtist="searchResults.artist"
+                :songDuration="searchResults.duration"
               />
             </div>
+          </div>
+          <div
+            class="flex flex-row justify-center content-center h-[25vh] overflow-y-scroll mt-[2rem]"
+            v-else-if="songsExist"
+          >
+            <div id="current-post">
+              <SongItem
+                v-for="(songsAdded, index) in songsAdded"
+                :key="index"
+                :songName="songsAdded.name"
+                :songArtist="songsAdded.artist"
+                :songDuration="songsAdded.duration"
+              />
+            </div>
+          </div>
+          <div
+            class="flex flex-row justify-center content-center h-[25vh] mt-[2rem]"
+            v-else
+          >
+            <div>No Songs Yet, Add Songs to see them here...</div>
           </div>
         </div>
         <div id="tag-input-container">
@@ -110,12 +105,14 @@
 </template>
 
 <script>
-import songData from "./SongData.vue";
+import songResult from "./SongResult.vue";
+import songItem from "./SongItem.vue";
 
 export default {
   name: "PostCreate",
   components: {
-    songData,
+    songResult,
+    songItem,
   },
   props: {
     value: {
@@ -136,11 +133,8 @@ export default {
       songs: [],
       songsAdded: [],
       songInput: null,
-      songResults: [],
-      artistResults: [],
       searchResult: {},
       searchResults: [],
-      songDataKeys: ["songName", "artist"],
       songAmount: 0,
       tags: [
         "Pop",
@@ -182,10 +176,12 @@ export default {
       tagInput: null,
       totalTags: 0,
       isActive: false,
-      userPosting: this.$auth.user.name,
+      // userPosting: this.$auth.user.name,
       postName: null,
       responseLog: {},
       displayResults: false,
+      activeSearch: false,
+      songsExist: false,
     };
   },
   methods: {
@@ -221,6 +217,8 @@ export default {
       this.$emit("closeCP");
     },
     search: async function () {
+      this.activeSearch = true;
+
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -242,19 +240,13 @@ export default {
         );
         const result = await response.json();
         var logger = result.status;
-        // logger.forEach((element) => this.songResults.push(element.name));
-        // console.log(this.songResults);
-        // logger.forEach((element) =>
-        //   this.artistResults.push(element.artists[0].name)
-        // );
-        // console.log(this.artistResults);
+        console.log(logger);
         for (let i = 0; i < 20; i++) {
           let p = logger[i];
-          // console.log(p.name);
-          // console.log(p.artists[0].name);
           this.searchResult = {
             name: p.name,
             artist: p.artists[0].name,
+            duration: p.duration_ms,
           };
           this.searchResults.push(this.searchResult);
         }
@@ -266,6 +258,10 @@ export default {
     addSong(index) {
       this.songsAdded.push(this.searchResults[index]);
       console.log(this.songsAdded);
+      this.searchResults = [];
+      this.songInput = null;
+      this.songsExist = true;
+      this.activeSearch = false;
     },
     addTag() {
       this.usedTags.push(this.tag);
@@ -338,10 +334,3 @@ export default {
   background-color: #f1f1f1;
 }
 </style>
-
-v-bind:style="formStyle"
-<button v-on:click="formStylesOpen">Open</button>
-<button v-on:click="formStylesClosed">Closed</button>
-<div id="button"></div>
-
-<button class="mx-[1vw]" @click="addSong">Add</button>
