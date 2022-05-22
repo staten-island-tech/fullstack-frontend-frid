@@ -264,46 +264,55 @@ export default {
       this.activeSearch = false;
     },
     addTag() {
-      this.usedTags.push(this.tag);
-      console.log(this.usedTags);
-      this.totalTags = this.totalTags + 1;
-      console.log(this.totalTags);
+      var logger = this.tags;
+      for (let i = 0; i < 4; i++) {
+        let p = logger[i];
+        this.tag = {
+          tag: p,
+        };
+        this.usedTags.push(this.tag);
+        console.log(this.usedTags);
+        // this.usedTags.push(this.tag);
+        // console.log(this.usedTags);
+        // this.totalTags = this.totalTags + 1;
+        // console.log(this.totalTags);
 
-      if (this.usedTags.length > 3) {
-        this.isActive = true;
+        // if (this.usedTags.length > 3) {
+        //   this.isActive = true;
+        // }
       }
     },
+
+    close() {
+      this.$emit("input", !this.value);
+    },
+    // createPost: async function () {
+    //   console.log("createPost function ran");
+
+    //   try {
+    //     const response = await post("http://localhost:3000/api/v1/posts/create", {
+    //       postName: this.postName,
+    //       userName: this.userPosting,
+    //       tags: this.tags,
+    //       songs: this.songs,
+    //       totalLikes: 0,
+    //       totalDislikes: 0,
+    //       totalComments: 0,
+    //       totalTags: this.totalTags,
+    //       songAmount: this.songAmount,
+    //     });
+    //     const result = await response.json();
+    //     console.log("Created post with this id: " + result._id);
+    //   } catch (error) {
+    //     console.log(error);
+    //     alert("Did you fill in all the proper information?");
+    //   }
+    // },
+
+    //  tagsLength() {
+    //    this.tagsLength = this.tags.length
+    //    },
   },
-
-  close() {
-    this.$emit("input", !this.value);
-  },
-  // createPost: async function () {
-  //   console.log("createPost function ran");
-
-  //   try {
-  //     const response = await post("http://localhost:3000/api/v1/posts/create", {
-  //       postName: this.postName,
-  //       userName: this.userPosting,
-  //       tags: this.tags,
-  //       songs: this.songs,
-  //       totalLikes: 0,
-  //       totalDislikes: 0,
-  //       totalComments: 0,
-  //       totalTags: this.totalTags,
-  //       songAmount: this.songAmount,
-  //     });
-  //     const result = await response.json();
-  //     console.log("Created post with this id: " + result._id);
-  //   } catch (error) {
-  //     console.log(error);
-  //     alert("Did you fill in all the proper information?");
-  //   }
-  // },
-
-  //  tagsLength() {
-  //    this.tagsLength = this.tags.length
-  //    },
 };
 </script>
 
@@ -311,14 +320,14 @@ export default {
 .dropdown {
   position: relative;
   display: inline-block;
-  font-size: 5rem;
+  font-size: 9rem;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 10vw;
+  min-width: 20vw;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
