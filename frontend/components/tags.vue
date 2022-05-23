@@ -1,47 +1,16 @@
-<template></template>
+<template>
+  <div>
+    {{ tags }}
+  </div>
+</template>
 
 <script>
 export default {
-  props: {},
+  props: {
+    tags: String,
+  },
   data() {
-    return {
-      tags: [
-        "Accapella",
-        "Alternative Rock",
-        "Blues",
-        "Classical",
-        "Classic Rock",
-        "Country",
-        "Desi",
-        "Disco",
-        "Drill",
-        "Electronic",
-        "Folk",
-        "Foreign",
-        "Grime",
-        "Grunge",
-        "Hard Rock",
-        "Hip-hop",
-        "Indie",
-        "Instrumental",
-        "Jazz",
-        "Metal",
-        "Melodic Rap",
-        "Mumble Rap",
-        "Musical Theatre",
-        "Nightcore",
-        "Opera",
-        "Pop",
-        "Psychadelic Rock",
-        "Punk Rock",
-        "R&B",
-        "Rap",
-        "Reggae",
-        "Rock",
-        "Soul",
-        "Techno",
-      ],
-    };
+    return {};
   },
 };
 </script>
