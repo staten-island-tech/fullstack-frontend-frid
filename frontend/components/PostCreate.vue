@@ -8,7 +8,10 @@
       id="form"
       class="flex flex-col w-[65vw] h-[65vh] bg-[#dadada] flex items-center justify-center border-[3px] border-[#330066] rounded-[1.5rem]"
     >
-      <div id="input-container" class="flex flex-col w-[30vw] items-center">
+      <div
+        id="input-container"
+        class="flex flex-col w-[30vw] items-center mt-[3vh]"
+      >
         <div id="post-name" class="h-[5vh]">
           <input
             v-model="postName"
@@ -31,6 +34,25 @@
                 @click="search"
               >
                 Search
+              </button>
+              <button class="dropdown">
+                <div
+                  class="text-[1rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
+                >
+                  Add Tags
+                </div>
+                <div id="tag-list" class="dropdown-content">
+                  <ul class="dropdown-content overflow-y-scroll h-[30vh]">
+                    <li
+                      @click="addTag"
+                      v-for="tag in tags"
+                      :key="tag"
+                      class="hover:bg-slate-300"
+                    >
+                      {{ tag }}
+                    </li>
+                  </ul>
+                </div>
               </button>
             </div>
           </div>
@@ -70,23 +92,8 @@
             <div>No Songs Yet, Add Songs to see them here...</div>
           </div>
         </div>
-        <div id="tag-input-container">
+        <div id="tag-input-container" class="mb-[5vh]">
           <div class="flex flex-row">
-            <button class="dropdown">
-              <div class="text-[2rem]">Tags</div>
-              <div id="tag-list" class="dropdown-content">
-                <ul class="dropdown-content overflow-y-scroll h-[20vh]">
-                  <li
-                    @click="addTag"
-                    v-for="tag in tags"
-                    :key="tag"
-                    class="hover:bg-slate-300"
-                  >
-                    {{ tag }}
-                  </li>
-                </ul>
-              </div>
-            </button>
             <!-- <input
               type="text"
               placeholder="Tags"
