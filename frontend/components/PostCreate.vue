@@ -19,13 +19,16 @@
         </div>
         <div class="my-[5vh] h-[30vh] w-[45vw]">
           <div class="flex flex-row justify-center">
-            <div id="song-search">
-              <input
-                type="text"
-                placeholder="Search by Song Name or Artist"
-                class="w-[25vw] mx-[1vw] rounded-md p-[10px]"
-                v-model="songInput"
-              />
+            <div id="song-search" class="flex direction-row">
+              <div class="w-[20vw] bg-white rounded-xl">
+                <input
+                  type="text"
+                  placeholder="Search by Song Name or Artist"
+                  class="w-[18vw] p-[10px] rounded-xl"
+                  v-model="songInput"
+                />
+                <button class="w-[1vw] m-[5px]">&#x2715;</button>
+              </div>
               <button
                 class="mx-[1vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
                 @click="search"
