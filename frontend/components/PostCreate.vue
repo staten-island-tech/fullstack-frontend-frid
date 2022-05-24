@@ -82,6 +82,7 @@
           >
             <div id="current-post">
               <SongItem
+                @remove="removeSong(index)"
                 v-for="(songsAdded, index) in songsAdded"
                 :key="index"
                 :songName="songsAdded.name"
@@ -289,6 +290,10 @@ export default {
       this.songInput = null;
       this.songsExist = true;
       this.activeSearch = false;
+    },
+    removeSong(index) {
+      this.songsAdded.splice(this.songsAdded[index]);
+      console.log(this.songsAdded);
     },
     addTag(index) {
       if (this.totalTags >= 4) {
