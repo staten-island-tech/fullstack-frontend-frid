@@ -1,7 +1,9 @@
 <template>
-  <div class="flex flex-row my-[2vh] grid grid-cols-3">
-    <h4 class="mr-[1vw]">{{ songName }}</h4>
-    <p class="">{{ songArtist }}</p>
+  <div class="flex flex-row my-[2vh]">
+    <section id="song-name" class="mr-[1vw]">
+      {{ songName }}
+    </section>
+    <section class="">{{ songArtist }}</section>
     <button
       class="mx-[1vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px w-[5vw]"
       @click="$emit('add')"
@@ -20,3 +22,47 @@ export default {
   },
 };
 </script>
+
+<style>
+#song-name {
+  width: 100%;
+  display: inline-block; /* important */
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* when not hovering show ellipsis */
+#song-name:not(:hover) {
+  text-overflow: ellipsis;
+}
+
+/* animate on either hover or focus */
+#song-name:hover,
+#song-name:focus {
+  display: inline-block;
+  animation-name: scroll-text;
+  animation-duration: 7s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  /* FYI this would be the shorthand:
+        animation: scroll-text 5s ease 0s 2 normal;
+      */
+}
+
+/* define the animation */
+@keyframes scroll-text {
+  0% {
+    transform: translateX(0%);
+  }
+  90% {
+    transform: translateX(-100%);
+  }
+  95% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+</style>

@@ -40,7 +40,7 @@
               >
                 Search
               </button>
-              <button class="dropdown">
+              <!-- <button class="dropdown">
                 <div
                   class="text-[1rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
                 >
@@ -58,7 +58,7 @@
                     </li>
                   </ul>
                 </div>
-              </button>
+              </button> -->
             </div>
           </div>
           <div
@@ -98,30 +98,27 @@
           </div>
         </div>
         <div id="tag-input-container" class="mb-[5vh]">
-          <div class="flex flex-row">
+          <div class="flex flex-row justify-end w-[50vw]">
             <button class="dropdown">
-              <div class="text-[2rem]">Tags</div>
+              <div
+                class="text-[1rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
+              >
+                Add Tags
+              </div>
               <div id="tag-list" class="dropdown-content">
-                <ul class="dropdown-content overflow-y-scroll h-[20vh]">
-                  <tags
-                    @click="addTag"
-                    v-for="tag in tags"
-                    :key="tag"
+                <ul class="dropdown-content overflow-y-scroll h-[30vh]">
+                  <Tags
+                    @add="addTag(index)"
+                    v-for="(tag, index) in tags"
+                    :key="index"
                     :tags="tag"
                     class="hover:bg-slate-300"
                   >
                     {{ tag }}
-                  </tags>
+                  </Tags>
                 </ul>
               </div>
             </button>
-            <!-- <input
-              type="text"
-              placeholder="Tags"
-              v-model="tagInput"
-              class="mx-[1vw] rounded-md"
-            />
-            <button :disabled="isActive" @click="addTag">Add</button> -->
           </div>
           <div v-for="usedTag in usedTags" :key="usedTag">{{ usedTag }}</div>
         </div>
@@ -202,7 +199,7 @@ export default {
         "Disco",
         "Foreign",
       ],
-      usedTags: [],
+      selectedTags: [],
       tagInput: null,
       totalTags: 0,
       isActive: false,
@@ -293,16 +290,15 @@ export default {
       this.songsExist = true;
       this.activeSearch = false;
     },
-    addTag() {
-      // var logger = this.tags;
-      // for (let i = 0; i < 4; i++) {
-      //   let p = logger[i];
-      //   this.tag = {
-      //     tag: p,
-      //   };
-      //   this.usedTags.push(this.tag);
-      //   console.log(this.usedTags);
-      // }
+    addTag(index) {
+      if (this.totalTags >= 4) {
+        alert("Maximum nubmer of tags has been reached.");
+      } else {
+        this.selectedTags.push(this.tags[index]);
+        console.log(this.selectedTags);
+        this.totalTags = this.totalTags + 1;
+        console.log(this.totalTags);
+      }
     },
 
     close() {
