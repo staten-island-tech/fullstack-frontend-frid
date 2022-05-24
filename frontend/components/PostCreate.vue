@@ -40,25 +40,6 @@
               >
                 Search
               </button>
-              <!-- <button class="dropdown">
-                <div
-                  class="text-[1rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
-                >
-                  Add Tags
-                </div>
-                <div id="tag-list" class="dropdown-content">
-                  <ul class="dropdown-content overflow-y-scroll h-[30vh]">
-                    <li
-                      @click="addTag"
-                      v-for="tag in tags"
-                      :key="tag"
-                      class="hover:bg-slate-300"
-                    >
-                      {{ tag }}
-                    </li>
-                  </ul>
-                </div>
-              </button> -->
             </div>
           </div>
           <div
@@ -120,7 +101,9 @@
               </div>
             </button>
           </div>
-          <div v-for="usedTag in usedTags" :key="usedTag">{{ usedTag }}</div>
+          <div v-for="selectedTag in selectedTags" :key="selectedTag">
+            {{ selectedTag }}
+          </div>
         </div>
       </div>
       <!-- <button @click="createPost" class="mt-[4vh] font-semibold">Post</button> -->
@@ -164,40 +147,40 @@ export default {
       searchResults: [],
       songAmount: 0,
       tags: [
-        "Pop",
-        "Rock",
-        "Classic Rock",
-        "Punk Rock",
-        "Hard Rock",
-        "Metal",
-        "Grunge",
-        "Grime",
-        "Alternative Rock",
-        "Psychadelic Rock",
-        "Hip-hop",
-        "Rap",
-        "Drill",
-        "Mumble Rap",
-        "Melodic Rap",
-        "Classical",
-        "Instrumental",
         "Accapella",
-        "Musical Theatre",
-        "Electronic",
-        "Techno",
-        "Nightcore",
-        "Jazz",
-        "Country",
-        "Reggae",
-        "R&B",
-        "Indie",
-        "Opera",
-        "Folk",
-        "Soul",
-        "Desi",
+        "Alternative Rock",
         "Blues",
+        "Classical",
+        "Classic Rock",
+        "Country",
+        "Desi",
         "Disco",
+        "Drill",
+        "Electronic",
+        "Folk",
         "Foreign",
+        "Grime",
+        "Grunge",
+        "Hard Rock",
+        "Hip-hop",
+        "Indie",
+        "Instrumental",
+        "Jazz",
+        "Metal",
+        "Melodic Rap",
+        "Mumble Rap",
+        "Musical Theatre",
+        "Nightcore",
+        "Opera",
+        "Pop",
+        "Psychadelic Rock",
+        "Punk Rock",
+        "R&B",
+        "Rap",
+        "Reggae",
+        "Rock",
+        "Soul",
+        "Techno",
       ],
       selectedTags: [],
       tagInput: null,
