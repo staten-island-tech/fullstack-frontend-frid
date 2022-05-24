@@ -55,9 +55,6 @@
           id="divider"
           class="flex h-[1px] w-full bg-[#000000] "
         ></div>
-        <!-- <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
-          {{ commentInput}}
-        </div> -->
         <button
           class="text-[4rem] text-[#330066] place-content-center text-[2vh] float-right mr-[1vw]"
           @click="createCommentInLM"
@@ -116,48 +113,6 @@
             </ul>
           </div>
           <div id="reactions" class="flex flex-row items-center min-w-15vh">
-            <!-- <button
-              :disabled="disliked"
-              id="like-button"
-              v-on:click="like"
-              class="mx-[0.6vw]"
-            >
-              <img
-                src="../assets/like1.svg"
-                alt="Logo"
-                class="h-[3.5vh] mx-[0.5vw]"
-                v-if="liked"
-              />
-              <img
-                src="../assets/like.svg"
-                alt="Logo"
-                class="h-[3.5vh] mx-[0.5vw]"
-                v-else
-              />
-            </button>
-            <span id="like-count" v-if="liked"> {{ this.tempLikes }} </span>
-            <span id="like-count" v-else> {{ this.localLikes }} </span>
-            <button
-              :disabled="liked"
-              id="dislike-button"
-              v-on:click="dislike"
-              class="mx-[0.6vw]"
-            >
-              <img
-                src="../assets/dislike1.svg"
-                alt="Logo"
-                class="h-[3.5vh] mx-[0.5vw]"
-                v-if="disliked"
-              />
-              <img
-                src="../assets/dislike.svg"
-                alt="Logo"
-                class="h-[3.5vh] mx-[0.5vw]"
-                v-else
-              />
-            </button>
-            <span id="like-count" v-if="disliked"> {{ this.tempDislikes }} </span>
-            <span id="like-count" v-else> {{ this.localDislikes }} </span> -->
             <div
               class="mx-[0.6vw] flex flex-row underline font-medium"
             >
@@ -344,7 +299,7 @@ export default {
           requestOptionsPatch
         );
         const result = await response.json();
-        console.log("There are " + result.data.post.totalLikes + " likes");
+        console.log("You posted " + result);
       } catch (error) {
         console.log(error);
       }
@@ -565,6 +520,7 @@ export default {
     },
   },
   created() {
+    this.commentRetriever();
     this.username();
     this.postname();
     this.songRetriever();
@@ -572,7 +528,6 @@ export default {
     this.displayLikes();
     this.displayDislikes();
     this.displayTotalComments();
-    this.commentRetriever();
   },
 };
 </script>
