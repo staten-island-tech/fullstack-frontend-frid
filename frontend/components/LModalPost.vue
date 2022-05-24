@@ -248,11 +248,11 @@ export default {
       songs: null,
       tags: null,
       localTotalComments: null,
-      localcomment: {
-        localcommentNumber: null,
-        localcommentContent: null,
-        localcommentUserName: null,
-        localuserID: null,
+      localComment: {
+        commentNumber: null,
+        commentContent: null,
+        commentUserName: "Bobby",
+        userID: "8927589r4w5r4893",
       },
       // songList: null,
       // comments: [],
@@ -279,11 +279,16 @@ export default {
       myHeaders.append("Content-Type", "application/json");
 
       this.localTotalComments = this.localTotalComments + 1;
-      this.localcommentNumber = this.localTotalComments;
+      this.localComment.localcommentNumber = this.localTotalComments;
 
       var raw = JSON.stringify({
-        totalcomments: this.localTotalComments,
-        comments: this.localComment
+        totalComments: this.localTotalComments,
+        comments: {
+          commentNumber: this.commentNumber,
+          commentContent: this.commentContent,
+          commentUserName: this.commentUserName,
+          userID: this.userID,
+        },
       });
 
       var requestOptionsPatch = {
