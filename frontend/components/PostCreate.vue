@@ -22,20 +22,25 @@
         </div>
         <div class="my-[5vh] h-[30vh] w-[45vw]">
           <div class="flex flex-row justify-center">
-            <div id="song-search">
-              <input
-                type="text"
-                placeholder="Search by Song Name or Artist"
-                class="w-[25vw] mx-[1vw] rounded-md p-[10px]"
-                v-model="songInput"
-              />
+            <div id="song-search" class="flex direction-row">
+              <div class="w-[20vw] bg-white rounded-xl">
+                <input
+                  type="text"
+                  placeholder="Search by Song Name or Artist"
+                  class="w-[17.5vw] p-[10px] rounded-xl"
+                  v-model="songInput"
+                />
+                <button class="w-[1vw] m-[5px]" @click="clearSearch">
+                  &#x2715;
+                </button>
+              </div>
               <button
                 class="mx-[1vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
                 @click="search"
               >
                 Search
               </button>
-              <button class="dropdown">
+              <!-- <button class="dropdown">
                 <div
                   class="text-[1rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
                 >
@@ -53,7 +58,7 @@
                     </li>
                   </ul>
                 </div>
-              </button>
+              </button> -->
             </div>
           </div>
           <div
@@ -93,14 +98,27 @@
           </div>
         </div>
         <div id="tag-input-container" class="mb-[5vh]">
-          <div class="flex flex-row">
-            <!-- <input
-              type="text"
-              placeholder="Tags"
-              v-model="tagInput"
-              class="mx-[1vw] rounded-md"
-            />
-            <button :disabled="isActive" @click="addTag">Add</button> -->
+          <div class="flex flex-row justify-end w-[50vw]">
+            <button class="dropdown">
+              <div
+                class="text-[1rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
+              >
+                Add Tags
+              </div>
+              <div id="tag-list" class="dropdown-content">
+                <ul class="dropdown-content overflow-y-scroll h-[30vh]">
+                  <Tags
+                    @add="addTag(index)"
+                    v-for="(tag, index) in tags"
+                    :key="index"
+                    :tags="tag"
+                    class="hover:bg-slate-300"
+                  >
+                    {{ tag }}
+                  </Tags>
+                </ul>
+              </div>
+            </button>
           </div>
           <div v-for="usedTag in usedTags" :key="usedTag">{{ usedTag }}</div>
         </div>
@@ -114,12 +132,14 @@
 <script>
 import songResult from "./SongResult.vue";
 import songItem from "./SongItem.vue";
+import Tags from "./tags.vue";
 
 export default {
   name: "PostCreate",
   components: {
     songResult,
     songItem,
+    Tags,
   },
   props: {
     value: {
@@ -143,43 +163,43 @@ export default {
       searchResult: {},
       searchResults: [],
       songAmount: 0,
-      // tags: [
-      //   "Pop",
-      //   "Rock",
-      //   "Classic Rock",
-      //   "Punk Rock",
-      //   "Hard Rock",
-      //   "Metal",
-      //   "Grunge",
-      //   "Grime",
-      //   "Alternative Rock",
-      //   "Psychadelic Rock",
-      //   "Hip-hop",
-      //   "Rap",
-      //   "Drill",
-      //   "Mumble Rap",
-      //   "Melodic Rap",
-      //   "Classical",
-      //   "Instrumental",
-      //   "Accapella",
-      //   "Musical Theatre",
-      //   "Electronic",
-      //   "Techno",
-      //   "Nightcore",
-      //   "Jazz",
-      //   "Country",
-      //   "Reggae",
-      //   "R&B",
-      //   "Indie",
-      //   "Opera",
-      //   "Folk",
-      //   "Soul",
-      //   "Desi",
-      //   "Blues",
-      //   "Disco",
-      //   "Foreign",
-      // ],
-      usedTags: [],
+      tags: [
+        "Pop",
+        "Rock",
+        "Classic Rock",
+        "Punk Rock",
+        "Hard Rock",
+        "Metal",
+        "Grunge",
+        "Grime",
+        "Alternative Rock",
+        "Psychadelic Rock",
+        "Hip-hop",
+        "Rap",
+        "Drill",
+        "Mumble Rap",
+        "Melodic Rap",
+        "Classical",
+        "Instrumental",
+        "Accapella",
+        "Musical Theatre",
+        "Electronic",
+        "Techno",
+        "Nightcore",
+        "Jazz",
+        "Country",
+        "Reggae",
+        "R&B",
+        "Indie",
+        "Opera",
+        "Folk",
+        "Soul",
+        "Desi",
+        "Blues",
+        "Disco",
+        "Foreign",
+      ],
+      selectedTags: [],
       tagInput: null,
       totalTags: 0,
       isActive: false,
@@ -270,28 +290,24 @@ export default {
       this.songsExist = true;
       this.activeSearch = false;
     },
-    addTag() {
-      var logger = this.tags;
-      for (let i = 0; i < 4; i++) {
-        let p = logger[i];
-        this.tag = {
-          tag: p,
-        };
-        this.usedTags.push(this.tag);
-        console.log(this.usedTags);
-        // this.usedTags.push(this.tag);
-        // console.log(this.usedTags);
-        // this.totalTags = this.totalTags + 1;
-        // console.log(this.totalTags);
-
-        // if (this.usedTags.length > 3) {
-        //   this.isActive = true;
-        // }
+    addTag(index) {
+      if (this.totalTags >= 4) {
+        alert("Maximum nubmer of tags has been reached.");
+      } else {
+        this.selectedTags.push(this.tags[index]);
+        console.log(this.selectedTags);
+        this.totalTags = this.totalTags + 1;
+        console.log(this.totalTags);
       }
     },
 
     close() {
       this.$emit("input", !this.value);
+    },
+    clearSearch() {
+      this.songInput = null;
+      this.searchResults = [];
+      this.activeSearch = false;
     },
     // createPost: async function () {
     //   console.log("createPost function ran");
