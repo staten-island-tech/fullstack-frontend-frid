@@ -81,6 +81,17 @@
         </div>
         <div id="tag-input-container" class="mb-[5vh]">
           <div class="flex flex-row justify-end w-[50vw]">
+            <div class="">
+              <ul class="flex flex-row">
+                <li
+                  v-for="selectedTag in selectedTags"
+                  :key="selectedTag"
+                  class="flex mx-[0.4vw] justify-center hover:line-through hover:text-[#6e5ba7]"
+                >
+                  #{{ selectedTag }}
+                </li>
+              </ul>
+            </div>
             <button class="dropdown">
               <div
                 class="text-[1rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
@@ -88,7 +99,7 @@
                 Add Tags
               </div>
               <div id="tag-list" class="dropdown-content">
-                <ul class="dropdown-content overflow-y-scroll h-[30vh]">
+                <ul class="dropdown-content overflow-y-scroll h-[24vh]">
                   <Tags
                     @add="addTag(index)"
                     v-for="(tag, index) in tags"
@@ -101,9 +112,6 @@
                 </ul>
               </div>
             </button>
-          </div>
-          <div v-for="selectedTag in selectedTags" :key="selectedTag">
-            {{ selectedTag }}
           </div>
         </div>
       </div>
