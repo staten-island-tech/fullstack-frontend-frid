@@ -55,6 +55,9 @@
           id="divider"
           class="flex h-[1px] w-full bg-[#000000] "
         ></div>
+        <p> {{localComment.commentUserName}}</p>
+        <p> {{localComment.commentContent}}</p>
+        <p> {{localComment.commentNumber}}</p>
         <button
           class="text-[4rem] text-[#330066] place-content-center text-[2vh] float-right mr-[1vw]"
           @click="createCommentInLM"
@@ -251,8 +254,7 @@ export default {
       localComment: {
         commentNumber: null,
         commentContent: null,
-        commentUserName: "Bobby",
-        userID: "8927589r4w5r4893",
+        commentUserName: "Bobby5356738",
       },
       // songList: null,
       // comments: [],
@@ -279,15 +281,15 @@ export default {
       myHeaders.append("Content-Type", "application/json");
 
       this.localTotalComments = this.localTotalComments + 1;
-      this.localComment.localcommentNumber = this.localTotalComments;
+      this.localComment.commentNumber = this.localTotalComments;
+      this.localComment.commentContent = this.commentInput;
 
       var raw = JSON.stringify({
         totalComments: this.localTotalComments,
         comments: {
-          commentNumber: this.commentNumber,
-          commentContent: this.commentContent,
-          commentUserName: this.commentUserName,
-          userID: this.userID,
+          commentNumber: this.localComment.commentNumber,
+          commentContent: this.localComment.commentContent,
+          commentUserName: this.localComment.commentUserName,
         },
       });
 
