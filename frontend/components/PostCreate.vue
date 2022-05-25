@@ -23,7 +23,10 @@
         <div class="my-[5vh] h-[30vh] w-[45vw]">
           <div class="flex flex-row justify-center">
             <div id="song-search" class="flex direction-row">
-              <div class="w-[20vw] bg-white rounded-xl">
+              <div
+                class="w-[20vw] bg-white rounded-xl"
+                v-on:keyup.enter="search"
+              >
                 <input
                   type="text"
                   placeholder="Search by Song Name or Artist"
@@ -275,7 +278,7 @@ export default {
       this.activeSearch = false;
     },
     removeSong(index) {
-      this.songsAdded.splice(this.songsAdded[index]);
+      this.songsAdded.splice(index, 1);
       console.log(this.songsAdded);
     },
     addTag(index) {
