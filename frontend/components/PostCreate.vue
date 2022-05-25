@@ -89,7 +89,7 @@
                 <li
                   v-for="selectedTag in selectedTags"
                   :key="selectedTag"
-                  class="flex mx-[0.4vw] justify-center hover:line-through hover:text-[#6e5ba7]"
+                  class="flex mx-[0.4vw] justify-center hover:line-through hover:text-[#6e5ba7] font-bold"
                 >
                   #{{ selectedTag }}
                 </li>
