@@ -86,13 +86,15 @@
           <div class="flex flex-row justify-end w-[50vw]">
             <div class="">
               <ul class="flex flex-row">
-                <li
-                  v-for="selectedTag in selectedTags"
-                  :key="selectedTag"
+                <SelectedTags
+                  @remove="removeTag(index)"
+                  v-for="(selectedTag, index) in selectedTags"
+                  :key="index"
+                  :selectedTags="selectedTag"
                   class="flex mx-[0.4vw] justify-center hover:line-through hover:text-[#6e5ba7] font-bold"
                 >
-                  #{{ selectedTag }}
-                </li>
+                  {{ selectedTag }}
+                </SelectedTags>
               </ul>
             </div>
             <button class="dropdown">
@@ -118,7 +120,7 @@
           </div>
         </div>
       </div>
-      <!-- <button @click="createPost" class="mt-[4vh] font-semibold">Post</button> -->
+      <button @click="createPost" class="mt-[4vh] font-semibold">Post</button>
       <button @click="closeCP" class="mt-[2vh] font-semibold">Close</button>
     </div>
   </div>
@@ -128,6 +130,7 @@
 import songResult from "./SongResult.vue";
 import songItem from "./SongItem.vue";
 import Tags from "./tags.vue";
+import SelectedTags from "./selectedTags.vue";
 
 export default {
   name: "PostCreate",
@@ -135,6 +138,7 @@ export default {
     songResult,
     songItem,
     Tags,
+    SelectedTags,
   },
   props: {
     value: {
@@ -204,35 +208,40 @@ export default {
       displayResults: false,
       activeSearch: false,
       songsExist: false,
+      songsPosted: [],
     };
   },
   methods: {
     createPost: async function () {
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+      console.log(this.songsAdded);
+      for (let i = 0; i < this.songsAdded.length; i++) {}
 
-      var raw = JSON.stringify({
-        postName: this.postName,
-        songAmount: this.songsAdded.length,
-        userName: this.userPosting,
-        songs: this.songsAdded,
-      });
+      //   var myHeaders = new Headers();
+      //   myHeaders.append("Content-Type", "application/json");
 
-      var requestOptionsPost = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-      };
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/users/searchTracks",
-          requestOptionsPost
-        );
-        const result = await response.json();
-      } catch (error) {
-        console.log(error);
-      }
+      //   var raw = JSON.stringify({
+      //     postName: this.postName,
+      //     songAmount: this.songsAdded.length,
+      //     userName: this.userPosting,
+      //     songs: this.songsAdded,
+      //     tags: this.selectedTags,
+      //   });
+
+      //   var requestOptionsPost = {
+      //     method: "POST",
+      //     headers: myHeaders,
+      //     body: raw,
+      //     redirect: "follow",
+      //   };
+      //   try {
+      //     const response = await fetch(
+      //       "http://localhost:3000/api/v1/users/searchTracks",
+      //       requestOptionsPost
+      //     );
+      //     const result = await response.json();
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
     },
 
     closeCP() {
@@ -298,6 +307,10 @@ export default {
         this.totalTags = this.totalTags + 1;
         console.log(this.totalTags);
       }
+    },
+    removeTag(index) {
+      this.selectedTags.splice(index, 1);
+      this.totalTags = this.totalTags - 1;
     },
 
     close() {
