@@ -294,7 +294,7 @@ export default {
       });
 
       var requestOptionsPatch = {
-        method: "PATCH",
+        method: "POST",
         headers: myHeaders,
         body: raw,
         redirect: "follow",
