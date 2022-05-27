@@ -1,166 +1,169 @@
 <template>
   <div>
     <div>
-        <div
-          id="post-container"
-          class="h-[47vh] w-[32vw] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
-        >
-          <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
-            {{ postName }}
-          </div>
-          <div id="user-name-container" class="flex flex-row items-center">
-            <span
-              id="pfp"
-              class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
-            ></span>
-            <div id="username" class="text-[1rem] font-lora">
-              {{ userName }}
-            </div>
-          </div>
-          <div
-            id="divider"
-            class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
-          ></div>
-          <button
-            @click="openModalLargePost"
-            v-bind:modalLargePostOpenID="fetchedPostID"
-          >
-            <div id="post-content" class="h-[27.5vh] overflow-y-scroll">
-              <ul v-if="commentsClicked">
-                <li
-                  v-for="comment in comments"
-                  :key="comment"
-                  class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
-                >
-                  <div class="w-[13.5vw] pl-[1.5vw]">
-                    {{ comment.commentContent }}
-                  </div>
-                  <!-- <div class="flex justify-center w-[4vw]">{{ comment.commentNumber }}</div> -->
-                  <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
-                    {{ comment.commentUserName }}
-                  </div>
-                </li>
-              </ul>
-              <ul v-else>
-                <li
-                  v-for="song in songs"
-                  :key="song"
-                  class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
-                >
-                  <div class="w-[13.5vw] pl-[1.5vw] truncate">
-                    {{ song.songName }}
-                  </div>
-                  <div class="flex justify-center w-[4vw]">
-                    {{ song.duration }}
-                  </div>
-                  <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
-                    {{ song.artist }}
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </button>
-          <div
-            id="divider"
-            class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
-          ></div>
-          <div
-            id="reactions-and-tags"
-            class="flex flex-row items-center mt-[1vh]"
-          >
-            <div id="tags" class="flex flex-row items-center ml-[2vw]">
-              <ul class="columns-4">
-                <li v-for="tag in tags" :key="tag" class="text-[2vh]">
-                  #{{ tag.tagName }}
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div
-            id="reactions-and-tags"
-            class="flex flex-row items-center mt-[1vh]"
-          >
-            <div id="reactions" class="flex flex-row items-center">
-              <button
-                v-if="this.$auth.loggedIn"
-                :disabled="disliked"
-                id="like-button"
-                v-on:click="like"
-                class="mx-[0.6vw]"
-              >
-                <img
-                  src="../assets/like1.svg"
-                  alt="Logo"
-                  class="h-[3.5vh] mx-[0.5vw]"
-                  v-if="liked"
-                />
-                <img
-                  src="../assets/like.svg"
-                  alt="Logo"
-                  class="h-[3.5vh] mx-[0.5vw]"
-                  v-else
-                />
-              </button>
-              <button v-else id="like-button" @click="login" class="mx-[0.6vw]">
-                <img
-                  src="../assets/like.svg"
-                  alt="Logo"
-                  class="h-[3.5vh] mx-[0.5vw]"
-                />
-              </button>
-              <span id="like-count" v-if="liked"> {{ this.tempLikes }} </span>
-              <span id="like-count" v-else> {{ this.localLikes }} </span>
-              <button
-                v-if="this.$auth.loggedIn"
-                :disabled="liked"
-                id="dislike-button"
-                v-on:click="dislike"
-                class="mx-[0.6vw]"
-              >
-                <img
-                  src="../assets/dislike1.svg"
-                  alt="Logo"
-                  class="h-[3.5vh] mx-[0.5vw]"
-                  v-if="disliked"
-                />
-                <img
-                  src="../assets/dislike.svg"
-                  alt="Logo"
-                  class="h-[3.5vh] mx-[0.5vw]"
-                  v-else
-                />
-              </button>
-              <button
-                v-else
-                id="dislike-button"
-                @click="login"
-                class="mx-[0.6vw]"
-              >
-                <img
-                  src="../assets/dislike.svg"
-                  alt="Logo"
-                  class="h-[3.5vh] mx-[0.5vw]"
-                />
-              </button>
-              <span id="like-count" v-if="disliked">
-                {{ this.tempDislikes }}
-              </span>
-              <span id="like-count" v-else> {{ this.localDislikes }} </span>
-            </div>
-            <div>
-              <button id="comments-button" class="mx-[0.6vw]" 
-              @click="openModalLargePost"
-              v-bind:modalLargePostOpenID="fetchedPostID">
-                <img
-                  src="../assets/comments.svg"
-                  alt="Logo"
-                  class="h-[3.5vh] mx-[0.5vw]"
-                />
-              </button>
-              <span id="comment-count"> {{ this.localTotalComments }} </span>
-            </div>
+      <div
+        id="post-container"
+        class="h-[47vh] w-[32vw] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
+      >
+        <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
+          {{ postName }}
+        </div>
+        <div id="user-name-container" class="flex flex-row items-center">
+          <span
+            id="pfp"
+            class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
+          ></span>
+          <div id="username" class="text-[1rem] font-lora">
+            {{ userName }}
           </div>
         </div>
+        <div
+          id="divider"
+          class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
+        ></div>
+        <button
+          @click="openModalLargePost"
+          v-bind:modalLargePostOpenID="fetchedPostID"
+        >
+          <div id="post-content" class="h-[27.5vh] overflow-y-scroll">
+            <ul v-if="commentsClicked">
+              <li
+                v-for="comment in comments"
+                :key="comment"
+                class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
+              >
+                <div class="w-[13.5vw] pl-[1.5vw]">
+                  {{ comment.commentContent }}
+                </div>
+                <!-- <div class="flex justify-center w-[4vw]">{{ comment.commentNumber }}</div> -->
+                <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
+                  {{ comment.commentUserName }}
+                </div>
+              </li>
+            </ul>
+            <ul v-else>
+              <li
+                v-for="song in songs"
+                :key="song"
+                class="flex flex-row h-[5vh] text-[2.5vh] hover:bg-[#dddddd] font-lora"
+              >
+                <div class="w-[13.5vw] pl-[1.5vw] truncate">
+                  {{ song.songName }}
+                </div>
+                <div class="flex justify-center w-[4vw]">
+                  {{ song.duration }}
+                </div>
+                <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
+                  {{ song.artist }}
+                </div>
+              </li>
+            </ul>
+          </div>
+        </button>
+        <div
+          id="divider"
+          class="flex h-[1px] w-[31vw] bg-[#000000] mx-[.5vw]"
+        ></div>
+        <div
+          id="reactions-and-tags"
+          class="flex flex-row items-center mt-[1vh]"
+        >
+          <div id="tags" class="flex flex-row items-center ml-[2vw]">
+            <ul class="columns-4">
+              <li v-for="tag in tags" :key="tag" class="text-[2vh]">
+                #{{ tag.tagName }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          id="reactions-and-tags"
+          class="flex flex-row items-center mt-[1vh]"
+        >
+          <div id="reactions" class="flex flex-row items-center">
+            <button
+              v-if="this.$auth.loggedIn"
+              :disabled="disliked"
+              id="like-button"
+              v-on:click="like"
+              class="mx-[0.6vw]"
+            >
+              <img
+                src="../assets/like1.svg"
+                alt="like-button"
+                class="h-[3.5vh] mx-[0.5vw]"
+                v-if="liked"
+              />
+              <img
+                src="../assets/like.svg"
+                alt="like-button"
+                class="h-[3.5vh] mx-[0.5vw]"
+                v-else
+              />
+            </button>
+            <button v-else id="like-button" @click="login" class="mx-[0.6vw]">
+              <img
+                src="../assets/like.svg"
+                alt="Logo"
+                class="h-[3.5vh] mx-[0.5vw]"
+              />
+            </button>
+            <span id="like-count" v-if="liked"> {{ this.tempLikes }} </span>
+            <span id="like-count" v-else> {{ this.localLikes }} </span>
+            <button
+              v-if="this.$auth.loggedIn"
+              :disabled="liked"
+              id="dislike-button"
+              v-on:click="dislike"
+              class="mx-[0.6vw]"
+            >
+              <img
+                src="../assets/dislike1.svg"
+                alt="Logo"
+                class="h-[3.5vh] mx-[0.5vw]"
+                v-if="disliked"
+              />
+              <img
+                src="../assets/dislike.svg"
+                alt="Logo"
+                class="h-[3.5vh] mx-[0.5vw]"
+                v-else
+              />
+            </button>
+            <button
+              v-else
+              id="dislike-button"
+              @click="login"
+              class="mx-[0.6vw]"
+            >
+              <img
+                src="../assets/dislike.svg"
+                alt="Logo"
+                class="h-[3.5vh] mx-[0.5vw]"
+              />
+            </button>
+            <span id="like-count" v-if="disliked">
+              {{ this.tempDislikes }}
+            </span>
+            <span id="like-count" v-else> {{ this.localDislikes }} </span>
+          </div>
+          <div>
+            <button
+              id="comments-button"
+              class="mx-[0.6vw]"
+              @click="openModalLargePost"
+              v-bind:modalLargePostOpenID="fetchedPostID"
+            >
+              <img
+                src="../assets/comments.svg"
+                alt="Logo"
+                class="h-[3.5vh] mx-[0.5vw]"
+              />
+            </button>
+            <span id="comment-count"> {{ this.localTotalComments }} </span>
+          </div>
+        </div>
+      </div>
     </div>
     <LModalPost
       v-show="modalLargePostOpen"
