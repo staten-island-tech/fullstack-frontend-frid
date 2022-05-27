@@ -210,6 +210,8 @@ export default {
       songsExist: false,
       songsPosted: [],
       songPosted: {},
+      tagsAdded: [],
+      tagPosted: {},
     };
   },
   methods: {
@@ -225,33 +227,48 @@ export default {
         this.songsPosted.push(this.songPosted);
       }
       console.log(this.songsPosted);
+      console.log(this.postName);
+      console.log(this.songsAdded.length);
+      console.log(this.selectedTags);
+      for (let i = 0; i < this.selectedTags.length; i++) {
+        this.tagAdded = {
+          tagName: this.selectedTags[i],
+          tagNumber: i + 1,
+        };
+        this.tagsAdded.push(this.tagAdded);
+      }
+      console.log(this.tagsAdded);
 
-      //   var myHeaders = new Headers();
-      //   myHeaders.append("Content-Type", "application/json");
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-      //   var raw = JSON.stringify({
-      //     postName: this.postName,
-      //     songAmount: this.songsAdded.length,
-      //     userName: this.userPosting,
-      //     songs: this.songsAdded,
-      //     tags: this.selectedTags,
-      //   });
+      var raw = JSON.stringify({
+        postName: this.postName,
+        songAmount: this.songsAdded.length,
+        userName: "Michael Frid",
+        songs: this.songsPosted,
+        tags: this.tagsAdded,
+        totalTags: this.tagsAdded.length,
+        totalLikes: 0,
+        totalDislikes: 0,
+      });
 
-      //   var requestOptionsPost = {
-      //     method: "POST",
-      //     headers: myHeaders,
-      //     body: raw,
-      //     redirect: "follow",
-      //   };
-      //   try {
-      //     const response = await fetch(
-      //       "http://localhost:3000/api/v1/users/searchTracks",
-      //       requestOptionsPost
-      //     );
-      //     const result = await response.json();
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
+      var requestOptionsPost = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/searchTracks",
+          requestOptionsPost
+        );
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     closeCP() {
