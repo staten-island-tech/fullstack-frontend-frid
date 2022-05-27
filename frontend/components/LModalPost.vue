@@ -58,6 +58,7 @@
         <p> {{localComment.commentUserName}}</p>
         <p> {{localComment.commentContent}}</p>
         <p> {{localComment.commentNumber}}</p>
+        <p>{{this.comments}}</p>
         <button
           class="text-[4rem] text-[#330066] place-content-center text-[2vh] float-right mr-[1vw]"
           @click="createCommentInLM"
@@ -214,6 +215,7 @@
             <button
               class="flex text-[2vh]"
               @click="createCommentInLM"
+              v-if="this.$auth.loggedIn"
             >
               <img
                 src="../assets/add-comment.svg"
@@ -254,7 +256,7 @@ export default {
       localComment: {
         commentNumber: null,
         commentContent: null,
-        commentUserName: "Bobby5356738",
+        commentUserName: this.$auth.user.name,
       },
       // songList: null,
       // comments: [],
@@ -273,6 +275,7 @@ export default {
       disliked: false,
       commentsClicked: false,
       createCommentDisplay: false,
+      comments:[],
     };
   },
   methods: {
@@ -283,18 +286,19 @@ export default {
       this.localTotalComments = this.localTotalComments + 1;
       this.localComment.commentNumber = this.localTotalComments;
       this.localComment.commentContent = this.commentInput;
+      this.comments.push({
+        commentNumber: this.localComment.commentNumber,
+        commentContent: this.localComment.commentContent,
+        commentUserName: this.localComment.commentUserName,
+      })
 
       var raw = JSON.stringify({
         totalComments: this.localTotalComments,
-        comments: {
-          commentNumber: this.localComment.commentNumber,
-          commentContent: this.localComment.commentContent,
-          commentUserName: this.localComment.commentUserName,
-        },
+        comments: this.comments,
       });
 
       var requestOptionsPatch = {
-        method: "POST",
+        method: "PATCH",
         headers: myHeaders,
         body: raw,
         redirect: "follow",
