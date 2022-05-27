@@ -209,12 +209,22 @@ export default {
       activeSearch: false,
       songsExist: false,
       songsPosted: [],
+      songPosted: {},
     };
   },
   methods: {
     createPost: async function () {
       console.log(this.songsAdded);
-      for (let i = 0; i < this.songsAdded.length; i++) {}
+      for (let i = 0; i < this.songsAdded.length; i++) {
+        this.songPosted = {
+          songName: this.songsAdded[i].name,
+          songNumber: i + 1,
+          artist: this.songsAdded[i].artist,
+          duration: this.songsAdded[i].duration,
+        };
+        this.songsPosted.push(this.songPosted);
+      }
+      console.log(this.songsPosted);
 
       //   var myHeaders = new Headers();
       //   myHeaders.append("Content-Type", "application/json");
