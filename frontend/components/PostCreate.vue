@@ -261,12 +261,18 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/users/searchTracks",
+          "http://localhost:3000/api/v1/posts/create",
           requestOptionsPost
         );
         const result = await response.json();
         console.log(result);
+        this.$emit("closeCP");
       } catch (error) {
+        alert(
+          "We're sorry, but something went wrong, please make sure that all required fields are completed and try again"
+        );
+        this.tagsAdded = [];
+        this.songsAdded = [];
         console.log(error);
       }
     },

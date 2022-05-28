@@ -52,6 +52,7 @@
                 </div>
                 <div class="flex justify-center w-[4vw]">
                   {{ song.duration }}
+                  <!-- {{ (song.duration / 60000).toFixed(2) }} -->
                 </div>
                 <div class="flex justify-end w-[11.5vw] pr-[1.5vw]">
                   {{ song.artist }}
@@ -266,6 +267,15 @@ export default {
         );
         const result = await response.json();
         this.songs = result.data.post.songs;
+        for (let i = 0; i < this.songs.length; i++) {
+          let ms = this.songs[i].duration;
+          var minutes = Math.floor(ms / 60000);
+          var seconds = ((ms % 60000) / 1000).toFixed(0);
+          this.songs[i].duration =
+            seconds == 60
+              ? minutes + 1 + ":00"
+              : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        }
       } catch (error) {
         console.log(error);
       }
