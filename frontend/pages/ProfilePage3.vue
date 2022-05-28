@@ -11,7 +11,7 @@
             id="username"
             class="mx-[1rem] text-[.95rem] text-[#3a2d80] font-semibold w-[7.5vw] flex relative left-[1.5vw] font-lora brightness-50"
           >
-            {{ username }}
+            <button @click="getUserInfo">username</button>
           </p>
           <p
             id="bio"
@@ -103,7 +103,7 @@ export default {
       modalOpen: false,
       allPostsIDs: [],
       postAPI: [],
-      username: this.$auth.user.name,
+      username: null,
     };
   },
   methods: {
@@ -121,17 +121,46 @@ export default {
           requestOptionsGet
         );
         const result = await response.json();
-        this.postAPI = result.data.posts;
-        this.postAPI.forEach((element) => {
-          this.allPostsIDs.push(element._id);
-        });
-        console.log(this.allPostsIDs);
+        for (let i = 0; i < result.data.posts.length; i++) {
+          if (this.username == result.data.posts[i].userID) {
+            this.allPostsIDs.push(result.data.posts[i]._id);
+          } else {
+          }
+        }
+        console.log(this.postAPI);
+        // this.postAPI = result.data.posts;
+        // this.postAPI.forEach((element) => {
+        //   this.allPostsIDs.push(element._id);
+        // });
+        // console.log(this.allPostsIDs);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    getUserInfo: async function () {
+      let userid = this.$auth.user.sub;
+      let n = 6;
+      this.username = userid.substring(n);
+      console.log(this.username);
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/" + this.username,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
       } catch (error) {
         console.log(error);
       }
     },
   },
   created() {
+    this.getUserInfo();
     this.getPosts();
   },
 };

@@ -212,6 +212,8 @@ export default {
       songPosted: {},
       tagsAdded: [],
       tagPosted: {},
+      userName: null,
+      userID: null,
     };
   },
   methods: {
@@ -245,7 +247,8 @@ export default {
       var raw = JSON.stringify({
         postName: this.postName,
         songAmount: this.songsAdded.length,
-        userName: "Michael Frid",
+        userName: this.userName,
+        userID: this.userID,
         songs: this.songsPosted,
         tags: this.tagsAdded,
         totalTags: this.tagsAdded.length,
@@ -276,7 +279,29 @@ export default {
         console.log(error);
       }
     },
+    getUserInfo: async function () {
+      let userid = this.$auth.user.sub;
+      let n = 6;
+      this.userID = userid.substring(n);
+      console.log(this.userID);
 
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/" + this.userID,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        this.userName = result.data.user.username;
+        console.log(this.userName);
+        console.log(this.userID);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     closeCP() {
       this.$emit("closeCP");
     },
@@ -354,32 +379,9 @@ export default {
       this.searchResults = [];
       this.activeSearch = false;
     },
-    // createPost: async function () {
-    //   console.log("createPost function ran");
-
-    //   try {
-    //     const response = await post("http://localhost:3000/api/v1/posts/create", {
-    //       postName: this.postName,
-    //       userName: this.userPosting,
-    //       tags: this.tags,
-    //       songs: this.songs,
-    //       totalLikes: 0,
-    //       totalDislikes: 0,
-    //       totalComments: 0,
-    //       totalTags: this.totalTags,
-    //       songAmount: this.songAmount,
-    //     });
-    //     const result = await response.json();
-    //     console.log("Created post with this id: " + result._id);
-    //   } catch (error) {
-    //     console.log(error);
-    //     alert("Did you fill in all the proper information?");
-    //   }
-    // },
-
-    //  tagsLength() {
-    //    this.tagsLength = this.tags.length
-    //    },
+  },
+  created() {
+    this.getUserInfo();
   },
 };
 </script>
