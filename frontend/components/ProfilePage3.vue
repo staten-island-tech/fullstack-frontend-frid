@@ -1,6 +1,8 @@
 <template>
-  <div class="bg-[#eeeeee]">
-    <Navbar />
+  <div
+    class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]"
+    v-show="value"
+  >
     <div class="flex flex-row">
       <div id="sidecar" class="flex flex-col align-center w-[12vw] h-[92vh]">
         <span
@@ -45,10 +47,7 @@
       <!-- <Modal v-show="modalOpen"/> -->
       <!-- @click="openModal" -->
 
-      <div
-        id="main-content"
-        class="px-[5vw] bg-gradient-to-r from-violet-500 to-fuchsia-500"
-      >
+      <div id="main-content" class="px-[5vw]">
         <div
           id="main-menu-container"
           class="flex flex-row justify-center w-[80vw] h-[8.25vh] mt-[7.5vh]"
@@ -74,7 +73,7 @@
         </div>
         <div
           id="main-container"
-          class="w-[80vw] h-[75vh] bg-gradient-to-r from-violet-500 to-fuchsia-500 flex flex-row justify-evenly flex-wrap overflow-y-scroll"
+          class="w-[80vw] h-[75vh] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
         >
           <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
           <li
@@ -86,17 +85,23 @@
           </li>
         </div>
       </div>
+      <button @click="closePM" class="mt-[2vh] font-semibold">Close</button>
     </div>
   </div>
 </template>
 
 <script>
-import Posts from "../components/Posts.vue";
+import Posts from "./Posts.vue";
 export default {
   components: {
     "app-posts": Posts,
   },
   name: "Profile_Page3",
+  props: {
+    value: {
+      required: true,
+    },
+  },
   data() {
     return {
       // modalOpen: false,
@@ -157,6 +162,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    closePM() {
+      this.$emit("closePM");
     },
   },
   created() {
