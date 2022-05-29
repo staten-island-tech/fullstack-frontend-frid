@@ -6,6 +6,20 @@
       ><img src="../assets/Logo2.png" alt="Logo" class="h-[7.5vh]"
     /></NuxtLink>
     <div class="h-[8vh] w-[100%] mr-[5vw] flex items-center justify-end">
+      <div id="search-bar" v-if="this.$auth.loggedIn">
+        <input
+          type="text"
+          placeholder="Search for posts by Genre, Post Name, or Username"
+          class="h-[4vh] w-[35vw] p-[1rem] rounded-lg"
+          v-model="query"
+        />
+        <button
+          class="mx-[1vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
+          @click="querySort"
+        >
+          Search
+        </button>
+      </div>
       <NuxtLink
         class="mx-[1.5rem] text-[1.25rem] p-[0.75rem] text-[#3a2d80] font-semibold font-lora"
         id="hover-underline-animation"
@@ -41,6 +55,43 @@ export default {
   data() {
     return {
       user: this.$auth.user,
+      query: null,
+      tags: [
+        "Accapella",
+        "Alternative Rock",
+        "Blues",
+        "Classical",
+        "Classic Rock",
+        "Country",
+        "Desi",
+        "Disco",
+        "Drill",
+        "Electronic",
+        "Folk",
+        "Foreign",
+        "Grime",
+        "Grunge",
+        "Hard Rock",
+        "Hip-hop",
+        "Indie",
+        "Instrumental",
+        "Jazz",
+        "Metal",
+        "Melodic Rap",
+        "Mumble Rap",
+        "Musical Theatre",
+        "Nightcore",
+        "Opera",
+        "Pop",
+        "Psychadelic Rock",
+        "Punk Rock",
+        "R&B",
+        "Rap",
+        "Reggae",
+        "Rock",
+        "Soul",
+        "Techno",
+      ],
     };
   },
   methods: {
@@ -49,6 +100,53 @@ export default {
     },
     async logout() {
       await this.$auth.logout();
+    },
+    querySort: async function () {
+      const queryCaps =
+        this.query.charAt(0).toUpperCase() + this.query.slice(1);
+
+      //any posts with query as a tag
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts?tags.tagName=" + queryCaps,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+
+      //any posts with query as a post name
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts?postName=" + queryCaps,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+
+      //any posts with query as a user name
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts?userName=" + queryCaps,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
