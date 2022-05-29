@@ -1,6 +1,8 @@
 <template>
-  <div class="bg-[#eeeeee]">
-    <Navbar />
+  <div
+    class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]"
+    v-show="value"
+  >
     <div class="flex flex-row">
       <div id="sidecar" class="flex flex-col align-center w-[12vw] h-[92vh]">
         <span
@@ -11,7 +13,7 @@
             id="username"
             class="mx-[1rem] text-[.95rem] text-[#3a2d80] font-semibold w-[7.5vw] flex relative left-[1.5vw] font-lora brightness-50"
           >
-            {{ username }}
+            <button @click="getUserInfo">username</button>
           </p>
           <p
             id="bio"
@@ -45,10 +47,7 @@
       <!-- <Modal v-show="modalOpen"/> -->
       <!-- @click="openModal" -->
 
-      <div
-        id="main-content"
-        class="px-[5vw] bg-gradient-to-r from-violet-500 to-fuchsia-500"
-      >
+      <div id="main-content" class="px-[5vw]">
         <div
           id="main-menu-container"
           class="flex flex-row justify-center w-[80vw] h-[8.25vh] mt-[7.5vh]"
@@ -74,7 +73,7 @@
         </div>
         <div
           id="main-container"
-          class="w-[80vw] h-[75vh] bg-gradient-to-r from-violet-500 to-fuchsia-500 flex flex-row justify-evenly flex-wrap overflow-y-scroll"
+          class="w-[80vw] h-[75vh] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
         >
           <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
           <li
@@ -86,24 +85,30 @@
           </li>
         </div>
       </div>
+      <button @click="closePM" class="mt-[2vh] font-semibold">Close</button>
     </div>
   </div>
 </template>
 
 <script>
-import Posts from "../components/Posts.vue";
+import Posts from "./Posts.vue";
 export default {
   components: {
     "app-posts": Posts,
   },
   name: "Profile_Page3",
+  props: {
+    value: {
+      required: true,
+    },
+  },
   data() {
     return {
       // modalOpen: false,
       modalOpen: false,
       allPostsIDs: [],
       postAPI: [],
-      username: this.$auth.user.name,
+      username: null,
     };
   },
   methods: {
@@ -121,17 +126,49 @@ export default {
           requestOptionsGet
         );
         const result = await response.json();
-        this.postAPI = result.data.posts;
-        this.postAPI.forEach((element) => {
-          this.allPostsIDs.push(element._id);
-        });
-        console.log(this.allPostsIDs);
+        for (let i = 0; i < result.data.posts.length; i++) {
+          if (this.username == result.data.posts[i].userID) {
+            this.allPostsIDs.push(result.data.posts[i]._id);
+          } else {
+          }
+        }
+        console.log(this.postAPI);
+        // this.postAPI = result.data.posts;
+        // this.postAPI.forEach((element) => {
+        //   this.allPostsIDs.push(element._id);
+        // });
+        // console.log(this.allPostsIDs);
       } catch (error) {
         console.log(error);
       }
     },
+    getUserInfo: async function () {
+      let userid = this.$auth.user.sub;
+      let n = 6;
+      this.username = userid.substring(n);
+      console.log(this.username);
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/" + this.username,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    closePM() {
+      this.$emit("closePM");
+    },
   },
   created() {
+    this.getUserInfo();
     this.getPosts();
   },
 };

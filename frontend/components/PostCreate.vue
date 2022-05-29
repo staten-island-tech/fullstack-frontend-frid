@@ -210,6 +210,10 @@ export default {
       songsExist: false,
       songsPosted: [],
       songPosted: {},
+      tagsAdded: [],
+      tagPosted: {},
+      userName: null,
+      userID: null,
     };
   },
   methods: {
@@ -225,35 +229,79 @@ export default {
         this.songsPosted.push(this.songPosted);
       }
       console.log(this.songsPosted);
+      console.log(this.postName);
+      console.log(this.songsAdded.length);
+      console.log(this.selectedTags);
+      for (let i = 0; i < this.selectedTags.length; i++) {
+        this.tagAdded = {
+          tagName: this.selectedTags[i],
+          tagNumber: i + 1,
+        };
+        this.tagsAdded.push(this.tagAdded);
+      }
+      console.log(this.tagsAdded);
 
-      //   var myHeaders = new Headers();
-      //   myHeaders.append("Content-Type", "application/json");
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-      //   var raw = JSON.stringify({
-      //     postName: this.postName,
-      //     songAmount: this.songsAdded.length,
-      //     userName: this.userPosting,
-      //     songs: this.songsAdded,
-      //     tags: this.selectedTags,
-      //   });
+      var raw = JSON.stringify({
+        postName: this.postName,
+        songAmount: this.songsAdded.length,
+        userName: this.userName,
+        userID: this.userID,
+        songs: this.songsPosted,
+        tags: this.tagsAdded,
+        totalTags: this.tagsAdded.length,
+        totalLikes: 0,
+        totalDislikes: 0,
+      });
 
-      //   var requestOptionsPost = {
-      //     method: "POST",
-      //     headers: myHeaders,
-      //     body: raw,
-      //     redirect: "follow",
-      //   };
-      //   try {
-      //     const response = await fetch(
-      //       "http://localhost:3000/api/v1/users/searchTracks",
-      //       requestOptionsPost
-      //     );
-      //     const result = await response.json();
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
+      var requestOptionsPost = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/create",
+          requestOptionsPost
+        );
+        const result = await response.json();
+        console.log(result);
+        this.$emit("closeCP");
+      } catch (error) {
+        alert(
+          "We're sorry, but something went wrong, please make sure that all required fields are completed and try again"
+        );
+        this.tagsAdded = [];
+        this.songsAdded = [];
+        console.log(error);
+      }
     },
+    getUserInfo: async function () {
+      let userid = this.$auth.user.sub;
+      let n = 6;
+      this.userID = userid.substring(n);
+      console.log(this.userID);
 
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/" + this.userID,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        this.userName = result.data.user.username;
+        console.log(this.userName);
+        console.log(this.userID);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     closeCP() {
       this.$emit("closeCP");
     },
@@ -331,32 +379,9 @@ export default {
       this.searchResults = [];
       this.activeSearch = false;
     },
-    // createPost: async function () {
-    //   console.log("createPost function ran");
-
-    //   try {
-    //     const response = await post("http://localhost:3000/api/v1/posts/create", {
-    //       postName: this.postName,
-    //       userName: this.userPosting,
-    //       tags: this.tags,
-    //       songs: this.songs,
-    //       totalLikes: 0,
-    //       totalDislikes: 0,
-    //       totalComments: 0,
-    //       totalTags: this.totalTags,
-    //       songAmount: this.songAmount,
-    //     });
-    //     const result = await response.json();
-    //     console.log("Created post with this id: " + result._id);
-    //   } catch (error) {
-    //     console.log(error);
-    //     alert("Did you fill in all the proper information?");
-    //   }
-    // },
-
-    //  tagsLength() {
-    //    this.tagsLength = this.tags.length
-    //    },
+  },
+  created() {
+    this.getUserInfo();
   },
 };
 </script>

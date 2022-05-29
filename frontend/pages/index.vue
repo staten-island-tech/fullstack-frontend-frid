@@ -1,6 +1,17 @@
 <template>
   <div>
     <Navbar class="sticky top-0" />
+    <button
+      class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
+      @click="openProfileModal"
+      v-if="this.$auth.loggedIn"
+    >
+      &#43;
+    </button>
+    <ProfilePage3
+      v-model="profileModalDisplay"
+      @closePM="closeProfileModal"
+    ></ProfilePage3>
 
     <div
       id="main-container"
@@ -37,6 +48,7 @@ export default {
   data() {
     return {
       createPostModalDisplay: false,
+      profileModalDisplay: false,
       // modalLargePostOpen: false,
       // modalLargePostOpenID: "",
       allPostsIDs: [],
@@ -79,6 +91,12 @@ export default {
     //   // console.log("attempting to close Modal for Large Post")
     //   this.modalLargePostOpen = false;
     // },
+    closeProfileModal() {
+      this.profileModalDisplay = false;
+    },
+    openProfileModal() {
+      this.profileModalDisplay = true;
+    },
     getPosts: async function () {
       var requestOptionsGet = {
         method: "GET",
