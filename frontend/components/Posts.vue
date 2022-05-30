@@ -14,7 +14,14 @@
             class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
           ></span>
           <div id="username" class="text-[1rem] font-lora">
-            {{ userName }}
+            <button @click="openProfileModalPoster">
+              {{ userName }}
+            </button>
+            <ProfilePagePoster
+              v-model="profileModalPosterDisplay"
+              @closePMP="closeProfileModalPoster"
+              class="z-50"
+            ></ProfilePagePoster>
           </div>
         </div>
         <div
@@ -212,6 +219,7 @@ export default {
       commentsClicked: false,
       modalLargePostOpen: false,
       modalLargePostOpenID: "",
+      profileModalPosterDisplay: false,
       user: this.$auth.user,
     };
   },
@@ -252,6 +260,12 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    openProfileModalPoster() {
+      this.profileModalPosterDisplay = true;
+    },
+    closeProfileModalPoster() {
+      this.profileModalDisplay = false;
     },
     like: async function () {
       this.liked = !this.liked;

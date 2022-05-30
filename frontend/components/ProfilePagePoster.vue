@@ -35,13 +35,11 @@
           Following
         </button>
         <button
-          class="mx-[1rem] my-[2rem] text-[1.25rem] text-[#3a2d80] font-medium w-[10vw] inline-block relative font-lora"
-          @click="openModal"
-          id="hover-underline-animation"
+          class="mx-[1rem] my-[2rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
+          @click="closePMP"
         >
-          User Settings
+          Back
         </button>
-        <UserSettings class="z-50" v-model="modalOpen"></UserSettings>
       </div>
 
       <!-- <Modal v-show="modalOpen"/> -->
@@ -85,7 +83,7 @@
           </li>
         </div>
       </div>
-      <button @click="closePM" class="mt-[2vh] font-semibold">Close</button>
+      <button @click="closePMP" class="mt-[2vh] font-semibold">Close</button>
     </div>
   </div>
 </template>
@@ -166,8 +164,8 @@ export default {
         console.log(error);
       }
     },
-    closePM() {
-      this.$emit("closePM");
+    closePMP() {
+      this.$emit("closePMP");
     },
   },
   created() {
