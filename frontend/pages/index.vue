@@ -2,18 +2,12 @@
   <div>
     <Navbar class="sticky top-0" />
     <!-- {{ postIDs }} -->
-    <button
-      class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
-      @click="openProfileModal"
-      v-if="this.$auth.loggedIn"
-    >
-      &#43;
-    </button>
+
     <ProfilePage3
       v-model="profileModalDisplay"
       @closePM="closeProfileModal"
+      class="z-50"
     ></ProfilePage3>
-
     <div
       id="main-container"
       class="w-[100vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
@@ -22,14 +16,28 @@
         <app-posts v-bind:fetchedPostID="allPostsID"></app-posts>
       </li>
     </div>
-    <button
-      class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
-      @click="openCreatePostModal"
-      v-if="this.$auth.loggedIn"
-      title="Add Post"
-    >
-      &#43;
-    </button>
+    <div class="flex flex-row place-content-end items-center mr-[4vw]">
+      <button
+        class="text-[4rem] items-center"
+        @click="openProfileModal"
+        v-if="this.$auth.loggedIn"
+      >
+        <img
+          src="../assets/profile-circled.svg"
+          alt="Profile"
+          class="h-[5vh] mt-[1rem] mr-[0.5vw]"
+          title="Profile"
+        />
+      </button>
+      <button
+        class="text-[4rem] text-[#330066] items-center"
+        @click="openCreatePostModal"
+        v-if="this.$auth.loggedIn"
+        title="Add Post"
+      >
+        &#43;
+      </button>
+    </div>
     <PostCreate
       v-model="createPostModalDisplay"
       @closeCP="closeCreatePostModal"
@@ -93,11 +101,11 @@ export default {
     //   // console.log("attempting to close Modal for Large Post")
     //   this.modalLargePostOpen = false;
     // },
-    closeProfileModal() {
-      this.profileModalDisplay = false;
-    },
+    // closeProfileModal() {
+    //   this.profileModalDisplay = false;
+    // },
     openProfileModal() {
-      this.profileModalDisplay = true;
+      this.profileModalDisplay = !this.profileModalDisplay;
     },
     getPosts: async function () {
       var requestOptionsGet = {

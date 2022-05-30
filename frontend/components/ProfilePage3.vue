@@ -1,10 +1,10 @@
 <template>
   <div
-    class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]"
+    class="fixed flex items-center justify-center bg-slate-500 h-[75vh]"
     v-show="value"
   >
     <div class="flex flex-row">
-      <div id="sidecar" class="flex flex-col align-center w-[12vw] h-[92vh]">
+      <div id="sidecar" class="flex flex-col align-center w-[12vw] h-[75vh]">
         <span
           class="w-[12.5vh] h-[12.5vh] bg-[#6957e7] rounded-[100%] mx-[2.5vw] mt-[5vh] mb-[2.5vh]"
         ></span>
@@ -73,7 +73,7 @@
         </div>
         <div
           id="main-container"
-          class="w-[80vw] h-[75vh] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
+          class="w-[80vw] h-[55vh] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
         >
           <!-- <button v-on:click="getPosts">testclcikmagik?</button> -->
           <li

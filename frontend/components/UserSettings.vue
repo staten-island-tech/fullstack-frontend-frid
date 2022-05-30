@@ -1,7 +1,9 @@
 <template>
-  <div id="main-container"
+  <div
+    id="main-container"
     class="fixed flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-[rgba(0, 0, 0, 0.3)]"
-    v-show="value">
+    v-show="value"
+  >
     <div
       class="flex items-center justify-center h-[70vh] w-[70vw] text-center flex"
     >
@@ -11,7 +13,9 @@
         <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
           <button class="dropdown">
             <!-- <span>Mouse over me</span> -->
-            <p class="text-[15px] relative font-bold hover:scale-105">Color Theme</p>
+            <p class="text-[15px] relative font-bold hover:scale-105">
+              Color Theme
+            </p>
             <div class="dropdown-content">
               <p class="dropdown-item">Default</p>
               <p class="dropdown-item">Custom</p>
@@ -37,7 +41,9 @@
         <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
           <button class="dropdown">
             <!-- <span>Mouse over me</span> -->
-            <p class="text-[15px] relative top-[5px] font-bold hover:scale-105">About</p>
+            <p class="text-[15px] relative top-[5px] font-bold hover:scale-105">
+              About
+            </p>
             <div class="dropdown-content">
               <p class="dropdown-item">Privacy Policy</p>
               <p class="dropdown-item">Terms of Use</p>
@@ -47,7 +53,9 @@
         <div class="flex flex-row justify-between h-[5vh] my-[1vw]">
           <button class="dropdown">
             <!-- <span>Mouse over me</span> -->
-            <p class="text-[15px] relative top-[5px] font-bold hover:scale-105">Help</p>
+            <p class="text-[15px] relative top-[5px] font-bold hover:scale-105">
+              Help
+            </p>
             <div class="dropdown-content">
               <p class="dropdown-item">Contact Support</p>
               <p class="dropdown-item">Navigation Help</p>
@@ -81,7 +89,6 @@ export default {
 </script>
 
 <style>
-
 .dropdown {
   position: relative;
   display: inline-block;

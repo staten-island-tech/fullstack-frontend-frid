@@ -20,14 +20,15 @@
           Search
         </button>
       </div>
-      <NuxtLink
+      <!-- <button
         class="mx-[1.5rem] text-[1.25rem] p-[0.75rem] text-[#3a2d80] font-semibold font-lora"
         id="hover-underline-animation"
         v-if="this.$auth.loggedIn"
-        to="/ProfilePage3"
+        @click="openProfileModal"
       >
         Profile
-      </NuxtLink>
+      </button> -->
+
       <button
         class="mx-[1.5rem] text-[1.25rem] p-[0.75rem] text-[#3a2d80] font-semibold font-lora"
         id="hover-underline-animation"
@@ -52,6 +53,7 @@
 <script>
 export default {
   name: "Navbar",
+
   data() {
     return {
       user: this.$auth.user,
@@ -95,6 +97,12 @@ export default {
     };
   },
   methods: {
+    // closeProfileModal() {
+    //   this.profileModalDisplay = false;
+    // },
+    // openProfileModal() {
+    //   this.profileModalDisplay = true;
+    // },
     async login() {
       await this.$auth.loginWith("auth0");
     },
