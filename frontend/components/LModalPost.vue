@@ -55,9 +55,35 @@
           id="divider"
           class="flex h-[1px] w-full bg-[#000000] "
         ></div>
-        <p> {{localComment.commentUserName}}</p>
-        <p> {{localComment.commentContent}}</p>
-        <p> {{localComment.commentNumber}}</p>
+        <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
+          <ul>
+            <li
+              v-for="comment in comments"
+              :key="comment"
+              class=" text-[2.5vh] hover:bg-[#dddddd] font-lora"
+            >
+              <div class="flex flex-col h-[flex flex-col h-[5vh]vh]">
+                <div class="">
+                  <p class="w-full pl-[1.5vw]">
+                    {{ comment.commentContent }}
+                  </p>
+                </div>
+                <div class="flex flex-row h-[5vh] ">
+                  <div class="w-[50%] pl-[1.5vw] ">
+                    #{{ comment.commentNumber }}
+                  </div>
+                  <div class="flex justify-end w-[50%] pr-[1.5vw]">
+                    {{ comment.commentUserName }}
+                  </div>
+                </div>
+              </div>
+              <div
+                id="divider"
+                class="flex justify-center h-[1px] w-[80%] bg-[#000000] "
+              ></div>
+            </li>
+          </ul>
+        </div>
         <button
           class="text-[4rem] text-[#330066] place-content-center text-[2vh] float-right mr-[1vw]"
           @click="createCommentInLM"
@@ -214,6 +240,7 @@
             <button
               class="flex text-[2vh]"
               @click="createCommentInLM"
+              v-if="this.$auth.loggedIn"
             >
               <img
                 src="../assets/add-comment.svg"
@@ -254,7 +281,7 @@ export default {
       localComment: {
         commentNumber: null,
         commentContent: null,
-        commentUserName: "Bobby5356738",
+        localCommentUserName: [],
       },
       // songList: null,
       // comments: [],
@@ -273,24 +300,32 @@ export default {
       disliked: false,
       commentsClicked: false,
       createCommentDisplay: false,
+      comments:[],
     };
   },
   methods: {
     postComment: async function () {
       var myHeaders = new Headers();
+      // if (this.$auth.loggedIn = true) {
+      //   this.localCommentUserName  = this.$auth.user.name;
+      // } else {
+      //   this.localCommentUserName = "Bert";
+      // }
+      this.localCommentUserName = "bort"
       myHeaders.append("Content-Type", "application/json");
 
       this.localTotalComments = this.localTotalComments + 1;
       this.localComment.commentNumber = this.localTotalComments;
       this.localComment.commentContent = this.commentInput;
+      this.comments.push({
+        commentNumber: this.localComment.commentNumber,
+        commentContent: this.localComment.commentContent,
+        commentUserName: this.localComment.localCommentUserName,
+      })
 
       var raw = JSON.stringify({
         totalComments: this.localTotalComments,
-        comments: {
-          commentNumber: this.localComment.commentNumber,
-          commentContent: this.localComment.commentContent,
-          commentUserName: this.localComment.commentUserName,
-        },
+        comments: this.comments,
       });
 
       var requestOptionsPatch = {
@@ -317,7 +352,7 @@ export default {
     createCommentInLM: async function() {
       this.createCommentDisplay = !this.createCommentDisplay
     },
-    username: async function () {
+    postRetriever: async function () {
       var requestOptionsGet = {
         method: "GET",
         redirect: "follow",
@@ -330,211 +365,20 @@ export default {
         );
         const result = await response.json();
         this.userName = result.data.post.userName;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    postname: async function () {
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-          requestOptionsGet
-        );
-        const result = await response.json();
         this.postName = result.data.post.postName;
-        console.log(this.postName);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    songRetriever: async function () {
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-          requestOptionsGet
-        );
-        const result = await response.json();
         this.songs = result.data.post.songs;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    displayLikes: async function () {
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-          requestOptionsGet
-        );
-        const result = await response.json();
         this.localLikes = result.data.post.totalLikes;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    like: async function () {
-      this.liked = !this.liked;
-
-      if (this.liked == true) {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        this.tempLikes = this.localLikes + 1;
-
-        var raw = JSON.stringify({
-          totalLikes: this.tempLikes,
-        });
-
-        var requestOptionsPatch = {
-          method: "PATCH",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
-
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-            requestOptionsPatch
-          );
-          const result = await response.json();
-          console.log("There are " + result.data.post.totalLikes + " likes");
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    },
-    displayDislikes: async function () {
-      var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var requestOptionsGet = {
-          method: "GET",
-          redirect: "follow",
-        };
-
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-            requestOptionsGet
-          );
-          const result = await response.json();
-          this.localDislikes = result.data.post.totalDislikes;
-        } catch (error) {
-          console.log(error);
-        }
-    },
-    dislike: async function () {
-      this.disliked = !this.disliked;
-
-      if (this.disliked == true) {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        this.tempDislikes = this.localDislikes + 1;
-
-        var raw = JSON.stringify({
-          totalDislikes: this.tempDislikes,
-        });
-
-        var requestOptionsPatch = {
-          method: "PATCH",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
-
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-            requestOptionsPatch
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    },
-    tagRetriever: async function () {
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-          requestOptionsGet
-        );
-        const result = await response.json();
+        this.localDislikes = result.data.post.totalDislikes;
         this.tags = result.data.post.tags;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    displayTotalComments: async function () {
-      var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var requestOptionsGet = {
-          method: "GET",
-          redirect: "follow",
-        };
-
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-            requestOptionsGet
-          );
-          const result = await response.json();
-          this.localTotalComments = result.data.post.totalComments;
-        } catch (error) {
-          console.log(error);
-        }
-    },
-    commentRetriever: async function () {
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
-      };
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
-          requestOptionsGet
-        );
-        const result = await response.json();
+        this.localTotalComments = result.data.post.totalComments;
         this.comments = result.data.post.comments;
       } catch (error) {
         console.log(error);
       }
-    },
+    }
   },
   created() {
-    this.commentRetriever();
-    this.username();
-    this.postname();
-    this.songRetriever();
-    this.tagRetriever();
-    this.displayLikes();
-    this.displayDislikes();
-    this.displayTotalComments();
+    this.postRetriever();
   },
 };
 </script>
