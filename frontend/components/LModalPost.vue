@@ -7,11 +7,11 @@
       id="form"
       class="flex flex-col w-[75vw] h-[85%] bg-[#6957e7] flex items-center justify-center border-2 border-black rounded-[1.5rem]"
     >
-<!-- ------------------------------- -->
-      <div 
+      <!-- ------------------------------- -->
+      <div
         v-if="createCommentDisplay"
         id="post-container"
-        class="h-[90%] w-[80%] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"      
+        class="h-[90%] w-[80%] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
       >
         <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
           Create a Comment
@@ -22,27 +22,21 @@
             class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
           ></span>
           <div id="username" class="text-[1rem] font-lora">
-            {{ userName}}
+            {{ userName }}
           </div>
         </div>
-        <div
-          id="divider"
-          class="flex h-[1px] w-full bg-[#000000] "
-        ></div>
+        <div id="divider" class="flex h-[1px] w-full bg-[#000000]"></div>
         <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
-
           <textarea
             type="text"
             placeholder="Type comment here"
             class="h-[90%] w-[90%] rounded-md p-[10px]"
             v-model="commentInput"
-            rows = "5" cols = "60"
+            rows="5"
+            cols="60"
           />
         </div>
-        <div
-          id="divider"
-          class="flex h-[1px] w-full bg-[#000000] "
-        ></div>
+        <div id="divider" class="flex h-[1px] w-full bg-[#000000]"></div>
         <div class="flex flex-wrap items-center mt-[1vh]">
           <button
             class="mx-[1vw] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
@@ -51,16 +45,13 @@
             Post Comment
           </button>
         </div>
-        <div
-          id="divider"
-          class="flex h-[1px] w-full bg-[#000000] "
-        ></div>
+        <div id="divider" class="flex h-[1px] w-full bg-[#000000]"></div>
         <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
           <ul>
             <li
               v-for="comment in comments"
               :key="comment"
-              class=" text-[2.5vh] hover:bg-[#dddddd] font-lora"
+              class="text-[2.5vh] hover:bg-[#dddddd] font-lora"
             >
               <div class="flex flex-col h-[flex flex-col h-[5vh]vh]">
                 <div class="">
@@ -68,8 +59,8 @@
                     {{ comment.commentContent }}
                   </p>
                 </div>
-                <div class="flex flex-row h-[5vh] ">
-                  <div class="w-[50%] pl-[1.5vw] ">
+                <div class="flex flex-row h-[5vh]">
+                  <div class="w-[50%] pl-[1.5vw]">
                     #{{ comment.commentNumber }}
                   </div>
                   <div class="flex justify-end w-[50%] pr-[1.5vw]">
@@ -79,7 +70,7 @@
               </div>
               <div
                 id="divider"
-                class="flex justify-center h-[1px] w-[80%] bg-[#000000] "
+                class="flex justify-center h-[1px] w-[80%] bg-[#000000]"
               ></div>
             </li>
           </ul>
@@ -108,10 +99,7 @@
             {{ userName }}
           </div>
         </div>
-        <div
-          id="divider"
-          class="flex h-[1px] w-full bg-[#000000] "
-        ></div>
+        <div id="divider" class="flex h-[1px] w-full bg-[#000000]"></div>
         <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
           <ul>
             <li
@@ -129,11 +117,11 @@
             </li>
           </ul>
         </div>
+        <div id="divider" class="flex h-[1px] w-full bg-[#000000]"></div>
         <div
-          id="divider"
-          class="flex h-[1px] w-full bg-[#000000] "
-        ></div>
-        <div id="reactions-and-tags" class="flex flex-wrap items-center mt-[1vh]">
+          id="reactions-and-tags"
+          class="flex flex-wrap items-center mt-[1vh]"
+        >
           <div id="tags" class="flex flex-row items-center ml-[2vw] min-w-15vh">
             <ul class="columns-4">
               <li v-for="tag in tags" :key="tag" class="text-[2vh] font-medium">
@@ -142,33 +130,24 @@
             </ul>
           </div>
           <div id="reactions" class="flex flex-row items-center min-w-15vh">
-            <div
-              class="mx-[0.6vw] flex flex-row underline font-medium"
-            >
-              <p> Likes: {{this.localLikes}}</p>
+            <div class="mx-[0.6vw] flex flex-row underline font-medium">
+              <p>Likes: {{ this.localLikes }}</p>
             </div>
-            <div
-              class="mx-[0.6vw] flex flex-row underline font-medium"
-            >
-              <p> Dislikes: {{this.localDislikes}}</p>
-            </div>           
-            <div
-              class="mx-[0.6vw] flex flex-row underline font-medium"
-            >
-              <p> Comments: {{this.localTotalComments}}</p>
+            <div class="mx-[0.6vw] flex flex-row underline font-medium">
+              <p>Dislikes: {{ this.localDislikes }}</p>
+            </div>
+            <div class="mx-[0.6vw] flex flex-row underline font-medium">
+              <p>Comments: {{ this.localTotalComments }}</p>
             </div>
           </div>
         </div>
-        <div
-          id="divider"
-          class="flex h-[1px] w-full bg-[#000000] "
-        ></div>
+        <div id="divider" class="flex h-[1px] w-full bg-[#000000]"></div>
         <div id="post-content" class="h-[27.5vh] w-full overflow-y-scroll">
           <ul>
             <li
               v-for="comment in comments"
               :key="comment"
-              class=" text-[2.5vh] hover:bg-[#dddddd] font-lora"
+              class="text-[2.5vh] hover:bg-[#dddddd] font-lora"
             >
               <div class="flex flex-col h-[flex flex-col h-[5vh]vh]">
                 <div class="">
@@ -176,8 +155,8 @@
                     {{ comment.commentContent }}
                   </p>
                 </div>
-                <div class="flex flex-row h-[5vh] ">
-                  <div class="w-[50%] pl-[1.5vw] ">
+                <div class="flex flex-row h-[5vh]">
+                  <div class="w-[50%] pl-[1.5vw]">
                     #{{ comment.commentNumber }}
                   </div>
                   <!-- <div class="w-[30%] pl-[1.5vw] ">
@@ -230,13 +209,13 @@
               </div>
               <div
                 id="divider"
-                class="flex justify-center h-[1px] w-[80%] bg-[#000000] "
+                class="flex justify-center h-[1px] w-[80%] bg-[#000000]"
               ></div>
             </li>
           </ul>
         </div>
-        <div class=" text-[#330066]  mr-[1vw] h-[5vh] flex flex-row w-[full]">
-          <div class="float-left  flex flex-row w-[50%]">
+        <div class="text-[#330066] mr-[1vw] h-[5vh] flex flex-row w-[full]">
+          <div class="float-left flex flex-row w-[50%]">
             <button
               class="flex text-[2vh]"
               @click="createCommentInLM"
@@ -248,16 +227,19 @@
                 class="h-[3.5vh] mx-[0.5vw]"
               />
               <p class="flex underline">Create new Comment</p>
-            </button>            
-          </div>          
+            </button>
+          </div>
           <div class="w-[50%] justify-end pl-[1vh]">
-            <button @click="closeLM" class="mt-[.5vh]   p-[.5vh] float-right rounded-[25%] bg-fuchsia-500 font-semibold">
+            <button
+              @click="closeLM"
+              class="mt-[.5vh] p-[.5vh] float-right rounded-[25%] bg-fuchsia-500 font-semibold"
+            >
               <p>Close</p>
-            </button>            
+            </button>
           </div>
         </div>
       </div>
-<!-- ------------------------------- -->
+      <!-- ------------------------------- -->
     </div>
   </div>
 </template>
@@ -281,7 +263,7 @@ export default {
       localComment: {
         commentNumber: null,
         commentContent: null,
-        localCommentUserName: [],
+        localCommentUserName: null,
       },
       // songList: null,
       // comments: [],
@@ -300,7 +282,7 @@ export default {
       disliked: false,
       commentsClicked: false,
       createCommentDisplay: false,
-      comments:[],
+      comments: [],
     };
   },
   methods: {
@@ -311,7 +293,6 @@ export default {
       // } else {
       //   this.localCommentUserName = "Bert";
       // }
-      this.localCommentUserName = "bort"
       myHeaders.append("Content-Type", "application/json");
 
       this.localTotalComments = this.localTotalComments + 1;
@@ -320,8 +301,8 @@ export default {
       this.comments.push({
         commentNumber: this.localComment.commentNumber,
         commentContent: this.localComment.commentContent,
-        commentUserName: this.localComment.localCommentUserName,
-      })
+        commentUserName: this.localCommentUserName,
+      });
 
       var raw = JSON.stringify({
         totalComments: this.localTotalComments,
@@ -329,7 +310,7 @@ export default {
       });
 
       var requestOptionsPatch = {
-        method: "POST",
+        method: "PATCH",
         headers: myHeaders,
         body: raw,
         redirect: "follow",
@@ -349,8 +330,8 @@ export default {
     closeLM() {
       this.$emit("closeLM");
     },
-    createCommentInLM: async function() {
-      this.createCommentDisplay = !this.createCommentDisplay
+    createCommentInLM: async function () {
+      this.createCommentDisplay = !this.createCommentDisplay;
     },
     postRetriever: async function () {
       var requestOptionsGet = {
@@ -375,10 +356,34 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
+    getUserName: async function () {
+      let userid = this.$auth.user.sub;
+      let n = 6;
+      this.localCommentUserName = userid.substring(n);
+      console.log(this.localCommentUserName);
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/" + this.localCommentUserName,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
+        this.localCommentUserName = result.data.user.username;
+        console.log(this.localCommentUserName);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   created() {
     this.postRetriever();
+    this.getUserName();
   },
 };
 </script>

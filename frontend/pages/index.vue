@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar class="sticky top-0" />
-    {{ postIDs }}
+    <!-- {{ postIDs }} -->
     <button
       class="text-[4rem] text-[#330066] place-content-center float-right mr-[1vw]"
       @click="openProfileModal"
@@ -40,7 +40,7 @@
 
 <script>
 import Posts from "../components/Posts.vue";
-import { mapState } from "vuex";
+// import { mapState } from "frontend/store/vuexTest.js";
 // import LModalPost from "../components/LModalPost.vue";
 export default {
   components: {
