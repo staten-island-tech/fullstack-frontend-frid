@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed flex items-center justify-center bg-slate-500 h-[75vh]"
+    class="fixed flex items-center justify-center bg-slate-300 h-[75vh]"
     v-show="value"
   >
     <div class="flex flex-row">
