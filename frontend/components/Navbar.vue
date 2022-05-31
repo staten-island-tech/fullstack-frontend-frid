@@ -168,6 +168,7 @@ export default {
           this.searchedPostsIDs.push(element._id);
         });
         console.log(this.searchedPostsIDs)
+        this.emit(this.searchedPostsIDs)
       } catch (error) {
         console.log(error);
       }

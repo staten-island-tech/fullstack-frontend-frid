@@ -1,9 +1,6 @@
 <template>
   <div>
-    <Navbar class="sticky top-0" >
-      
-      <P>efnckjeashnfvjck</P>
-    </Navbar>
+    <Navbar class="sticky top-0" ></Navbar>
     <!-- {{ postIDs }} -->
 
     <ProfilePage3
