@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed flex items-center justify-center bg-slate-300 h-[75vh]"
+    class="absolute flex items-center justify-center bg-slate-300 h-[75vh]"
     v-show="value"
   >
     <div class="flex flex-row">
@@ -13,7 +13,7 @@
             id="username"
             class="mx-[1rem] text-[.95rem] text-[#3a2d80] font-semibold w-[7.5vw] flex relative left-[1.5vw] font-lora brightness-50"
           >
-            {{ this.displayedUsername }}
+            {{ this.username }}
           </p>
           <p
             id="bio"
@@ -99,6 +99,7 @@ export default {
     value: {
       required: true,
     },
+    username: String,
   },
   data() {
     return {
@@ -169,9 +170,9 @@ export default {
     },
   },
   created() {
-    this.getUserInfo();
-    this.getPosts();
-    this.getUserInfo();
+    // this.getUserInfo();
+    // this.getPosts();
+    // this.getUserInfo();
   },
 };
 </script>

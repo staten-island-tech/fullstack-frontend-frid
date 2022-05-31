@@ -20,6 +20,7 @@
             <ProfilePagePoster
               v-model="profileModalPosterDisplay"
               @closePMP="closeProfileModalPoster"
+              :username="this.userName"
               class="z-50"
             ></ProfilePagePoster>
           </div>
