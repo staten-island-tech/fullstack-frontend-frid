@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Navbar class="sticky top-0" />
+    <Navbar class="sticky top-0" >
+      
+      <P>efnckjeashnfvjck</P>
+    </Navbar>
     <!-- {{ postIDs }} -->
 
     <ProfilePage3
@@ -48,6 +51,7 @@
 
 <script>
 import Posts from "../components/Posts.vue";
+import Navbar from "../components/Navbar.vue";
 // import { mapState } from "frontend/store/vuexTest.js";
 // import LModalPost from "../components/LModalPost.vue";
 export default {
@@ -55,6 +59,7 @@ export default {
     "app-posts": Posts,
     // 'LModalPost': LModalPost,
   },
+  props: ["searchedPostsIDs"],
   data() {
     return {
       createPostModalDisplay: false,
@@ -64,6 +69,7 @@ export default {
       allPostsIDs: [],
       postAPI: [],
       fetchedPostID: "",
+      // searchedPostsIDs: ["rap"],
     };
   },
   methods: {

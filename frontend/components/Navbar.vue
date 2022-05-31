@@ -94,6 +94,8 @@ export default {
         "Soul",
         "Techno",
       ],
+      searchPostAPI: [],
+      searchedPostsIDs: ["testing"],
     };
   },
   methods: {
@@ -126,6 +128,11 @@ export default {
         );
         const result = await response.json();
         console.log(result);
+        this.searchPostAPI = result.data.posts;
+        this.searchPostAPI.forEach((element) => {
+          this.searchedPostsIDs.push(element._id);
+        });
+        console.log(this.searchedPostsIDs)
       } catch (error) {
         console.log(error);
       }
@@ -139,6 +146,10 @@ export default {
         );
         const result = await response.json();
         console.log(result);
+        this.searchPostAPI = result.data.posts;
+        this.searchPostAPI.forEach((element) => {
+          this.searchedPostsIDs.push(element._id);
+        });
       } catch (error) {
         console.log(error);
       }
@@ -152,6 +163,11 @@ export default {
         );
         const result = await response.json();
         console.log(result);
+        this.searchPostAPI = result.data.posts;
+        this.searchPostAPI.forEach((element) => {
+          this.searchedPostsIDs.push(element._id);
+        });
+        console.log(this.searchedPostsIDs)
       } catch (error) {
         console.log(error);
       }
