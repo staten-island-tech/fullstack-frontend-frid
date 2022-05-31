@@ -36,7 +36,7 @@
         </button>
         <button
           class="mx-[1rem] my-[2rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[10px] py-[5px] rounded-md transform active:translate-y-px"
-          @click="closePMP"
+          @click.prevent="closePMP"
         >
           Back
         </button>
@@ -83,7 +83,6 @@
           </li>
         </div>
       </div>
-      <button @click="closePMP" class="mt-[2vh] font-semibold">Close</button>
     </div>
   </div>
 </template>
@@ -166,7 +165,7 @@ export default {
       }
     },
     closePMP() {
-      this.$emit("closePMP");
+      this.$emit("input", !this.value);
     },
   },
   created() {

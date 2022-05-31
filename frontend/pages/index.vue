@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Navbar class="sticky top-0" >
-      
+    <Navbar class="sticky top-0">
       <P>efnckjeashnfvjck</P>
     </Navbar>
     <!-- {{ postIDs }} -->
@@ -64,6 +63,7 @@ export default {
     return {
       createPostModalDisplay: false,
       profileModalDisplay: false,
+
       // modalLargePostOpen: false,
       // modalLargePostOpenID: "",
       allPostsIDs: [],
@@ -113,6 +113,7 @@ export default {
     openProfileModal() {
       this.profileModalDisplay = !this.profileModalDisplay;
     },
+
     getPosts: async function () {
       var requestOptionsGet = {
         method: "GET",

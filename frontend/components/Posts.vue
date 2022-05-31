@@ -1,5 +1,11 @@
 <template>
   <div>
+    <ProfilePagePoster
+      v-model="profileModalPosterDisplay"
+      @closePMP="closeProfileModalPoster"
+      :username="this.userName"
+      class="z-50"
+    ></ProfilePagePoster>
     <div>
       <div
         id="post-container"
@@ -17,12 +23,6 @@
             <button @click="openProfileModalPoster">
               {{ userName }}
             </button>
-            <ProfilePagePoster
-              v-model="profileModalPosterDisplay"
-              @closePMP="closeProfileModalPoster"
-              :username="this.userName"
-              class="z-50"
-            ></ProfilePagePoster>
           </div>
         </div>
         <div
@@ -262,12 +262,7 @@ export default {
         console.log(error);
       }
     },
-    openProfileModalPoster() {
-      this.profileModalPosterDisplay = true;
-    },
-    closeProfileModalPoster() {
-      this.profileModalDisplay = false;
-    },
+
     like: async function () {
       this.liked = !this.liked;
 
@@ -469,6 +464,12 @@ export default {
     },
     closeModalLargePost() {
       this.modalLargePostOpen = false;
+    },
+    openProfileModalPoster() {
+      this.profileModalPosterDisplay = !this.profileModalPosterDisplay;
+    },
+    closeProfileModalPoster() {
+      this.profileModalDisplay = false;
     },
   },
   created() {
