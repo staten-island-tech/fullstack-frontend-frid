@@ -21,6 +21,7 @@
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit tiel
           </p>
+          <button @click="followUser">Follow</button>
         </div>
         <button
           class="mx-[1rem] my-[2rem] text-[1.25rem] text-[#3a2d80] font-medium w-[10vw] inline-block relative font-lora"
@@ -112,6 +113,35 @@ export default {
     };
   },
   methods: {
+    followUser: async function () {
+      console.log(this.username);
+      console.log(this.displayedUsername);
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        followers,
+      });
+
+      var requestOptionsPatch = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+          requestOptionsPatch
+        );
+        const result = await response.json();
+        console.log("There are " + result.data.post.totalLikes + " likes");
+      } catch (error) {
+        console.log(error);
+      }
+    },
     openModal() {
       this.modalOpen = !this.modalOpen;
     },
@@ -170,9 +200,9 @@ export default {
     },
   },
   created() {
-    // this.getUserInfo();
-    // this.getPosts();
-    // this.getUserInfo();
+    this.getUserInfo();
+    this.getPosts();
+    this.getUserInfo();
   },
 };
 </script>
