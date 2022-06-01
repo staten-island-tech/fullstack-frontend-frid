@@ -107,6 +107,7 @@ export default {
       modalOpen: false,
       allPostsIDs: [],
       postAPI: [],
+      activeUsername: null,
       username: null,
       displayedUsername: null,
     };
@@ -116,30 +117,47 @@ export default {
       console.log(this.username);
       console.log(this.displayedUsername);
 
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+      //first we run a get request query, finding and savign the id of the user whom active user is trying to follow
 
-      var raw = JSON.stringify({
-        followers,
-      });
-
-      var requestOptionsPatch = {
-        method: "PATCH",
-        headers: myHeaders,
-        body: raw,
+      var requestOptionsGet = {
+        method: "GET",
         redirect: "follow",
       };
-
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
-          requestOptionsPatch
+          "http://localhost:3000/api/v1/users?userName=" + this.username,
+          requestOptionsGet
         );
         const result = await response.json();
-        console.log("There are " + result.data.post.totalLikes + " likes");
+        console.log(result);
       } catch (error) {
         console.log(error);
       }
+
+      // var myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "application/json");
+
+      // var raw = JSON.stringify({
+      //   followers:,
+      // });
+
+      // var requestOptionsPatch = {
+      //   method: "PATCH",
+      //   headers: myHeaders,
+      //   body: raw,
+      //   redirect: "follow",
+      // };
+
+      // try {
+      //   const response = await fetch(
+      //     "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+      //     requestOptionsPatch
+      //   );
+      //   const result = await response.json();
+      //   console.log("There are " + result.data.post.totalLikes + " likes");
+      // } catch (error) {
+      //   console.log(error);
+      // }
     },
     openModal() {
       this.modalOpen = !this.modalOpen;
@@ -174,7 +192,7 @@ export default {
     getUserInfo: async function () {
       let userid = this.$auth.user.sub;
       let n = 6;
-      this.username = userid.substring(n);
+      this.activeUsername = userid.substring(n);
       // console.log(this.username);
 
       var requestOptionsGet = {
@@ -183,7 +201,7 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/users/" + this.username,
+          "http://localhost:3000/api/v1/users/" + this.activeUsername,
           requestOptionsGet
         );
         const result = await response.json();
