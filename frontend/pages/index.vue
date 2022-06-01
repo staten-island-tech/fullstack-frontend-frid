@@ -10,6 +10,12 @@
       @closePM="closeProfileModal"
       class="z-50"
     ></ProfilePage3>
+    <ProfilePagePoster
+      v-model="profileModalPosterDisplay"
+      @closePMP="closeProfileModalPoster"
+      :username="this.userName"
+      class="z-50"
+    ></ProfilePagePoster>
     <div
       id="main-container"
       class="w-[100vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
@@ -69,10 +75,18 @@ export default {
       allPostsIDs: [],
       postAPI: [],
       fetchedPostID: "",
+      userName: null,
+      profileModalPosterDisplay: false,
       // searchedPostsIDs: ["rap"],
     };
   },
   methods: {
+    openProfileModalPoster() {
+      this.profileModalPosterDisplay = true;
+    },
+    closeProfileModalPoster() {
+      this.profileModalDisplay = false;
+    },
     closeCreatePostModal() {
       this.createPostModalDisplay = false;
     },

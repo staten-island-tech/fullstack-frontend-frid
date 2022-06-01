@@ -1,11 +1,11 @@
 <template>
   <div>
-    <ProfilePagePoster
+    <!-- <ProfilePagePoster
       v-model="profileModalPosterDisplay"
       @closePMP="closeProfileModalPoster"
       :username="this.userName"
       class="z-50"
-    ></ProfilePagePoster>
+    ></ProfilePagePoster> -->
     <div>
       <div
         id="post-container"
@@ -20,7 +20,7 @@
             class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
           ></span>
           <div id="username" class="text-[1rem] font-lora">
-            <button @click="openProfileModalPoster">
+            <button @click="$emit('openPMP')">
               {{ userName }}
             </button>
           </div>
@@ -220,7 +220,7 @@ export default {
       commentsClicked: false,
       modalLargePostOpen: false,
       modalLargePostOpenID: "",
-      profileModalPosterDisplay: false,
+      // profileModalPosterDisplay: false,
       user: this.$auth.user,
     };
   },
@@ -465,12 +465,12 @@ export default {
     closeModalLargePost() {
       this.modalLargePostOpen = false;
     },
-    openProfileModalPoster() {
-      this.profileModalPosterDisplay = !this.profileModalPosterDisplay;
-    },
-    closeProfileModalPoster() {
-      this.profileModalDisplay = false;
-    },
+    // openProfileModalPoster() {
+    //   this.profileModalPosterDisplay = true;
+    // },
+    // closeProfileModalPoster() {
+    //   this.profileModalDisplay = false;
+    // },
   },
   created() {
     this.postRetriever();
