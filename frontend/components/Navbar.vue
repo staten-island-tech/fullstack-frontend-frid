@@ -95,7 +95,7 @@ export default {
         "Techno",
       ],
       searchPostAPI: [],
-      searchedPostsIDs: ["testing"],
+      searchedPostsIDs: [],
     };
   },
   methods: {
@@ -132,7 +132,6 @@ export default {
         this.searchPostAPI.forEach((element) => {
           this.searchedPostsIDs.push(element._id);
         });
-        console.log(this.searchedPostsIDs)
       } catch (error) {
         console.log(error);
       }
@@ -168,10 +167,15 @@ export default {
           this.searchedPostsIDs.push(element._id);
         });
         console.log(this.searchedPostsIDs)
+        this.$emit('searchedThroughPosts', 'searchedPostsIDs');
       } catch (error) {
         console.log(error);
       }
     },
+    searchedThroughPosts (){
+      alert("g7fncjkewbhfdnc")
+      console.log("buefwndifvnudi")
+    }
   },
 };
 </script>

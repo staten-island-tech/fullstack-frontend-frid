@@ -1,9 +1,11 @@
 <template>
   <div>
-    <Navbar class="sticky top-0">
-      <P>efnckjeashnfvjck</P>
-    </Navbar>
-    <!-- {{ postIDs }} -->
+    <app-Navbar class="sticky top-0">
+      v-bind:searchedPostsIDs="searchedPostsIDs"
+      v-on:searchedThroughPosts="searchedThroughPosts($event)"
+    </app-Navbar>
+    <!-- <button @click="searchedPostsIDs">ifncnscnk</button>
+    {{ postIDs }} -->
 
     <ProfilePage3
       v-model="profileModalDisplay"
@@ -63,6 +65,7 @@ export default {
   components: {
     "app-posts": Posts,
     // 'LModalPost': LModalPost,
+    "app-Navbar": Navbar,
   },
   props: ["searchedPostsIDs"],
   data() {
@@ -78,6 +81,7 @@ export default {
       userName: null,
       profileModalPosterDisplay: false,
       // searchedPostsIDs: ["rap"],
+      searchedPostsIDs: []
     };
   },
   methods: {
@@ -147,6 +151,11 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    searchedThroughPosts: function(searchedThroughPosts) {
+      this.searchedPostsIDs = searchedThroughPosts;
+      console.log(this.searchedPostsIDs);
+      console.log("Something worked")
     },
   },
   created() {
