@@ -86,11 +86,13 @@ export default {
       profileModalPosterDisplay: false,
       // searchedPostsIDs: ["rap"],
       searchedPostsIDs: [],
+      PMPusername: null,
     };
   },
   methods: {
     setPMPusername(n) {
       console.log(n);
+      this.userName = n;
     },
     openProfileModalPoster() {
       this.profileModalPosterDisplay = true;
