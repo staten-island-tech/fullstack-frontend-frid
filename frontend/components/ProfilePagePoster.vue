@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute flex items-center justify-center bg-slate-300 h-[75vh]"
+    class="fixed flex items-center justify-center bg-slate-300 h-[75vh]"
     v-show="value"
   >
     <div class="flex flex-row">
@@ -21,10 +21,15 @@
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit tiel
           </p>
-          <button @click="followUser">Follow</button>
+          <button
+            @click="followUser"
+            class="mx-[1rem] text-[.95rem] bg-transparent hover:bg-[#6e5ba7] hover:text-white border-[1px] border-[#330066] px-[5px] font-lora py-[2.5px] rounded-md transform active:translate-y-px flex relative left-[1.5vw]"
+          >
+            Follow
+          </button>
         </div>
         <button
-          class="mx-[1rem] my-[2rem] text-[1.25rem] text-[#3a2d80] font-medium w-[10vw] inline-block relative font-lora"
+          class="mx-[1rem] my-[2rem] text-[1.25rem] text-[#3a2d80] font-medium w-[10vw] inline-block relative font -lora"
           id="hover-underline-animation"
         >
           Followers
