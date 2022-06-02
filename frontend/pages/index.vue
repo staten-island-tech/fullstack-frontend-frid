@@ -25,6 +25,7 @@
       <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
         <Posts
           @openPMP="openProfileModalPoster"
+          @usernamePass="setPMPusername"
           v-bind:fetchedPostID="allPostsID"
         ></Posts>
       </li>
@@ -88,6 +89,9 @@ export default {
     };
   },
   methods: {
+    setPMPusername(n) {
+      console.log(n);
+    },
     openProfileModalPoster() {
       this.profileModalPosterDisplay = true;
     },
