@@ -1,9 +1,12 @@
 <template>
   <div>
-    <app-Navbar class="sticky top-0"
+    <app-Navbar class="sticky top-0">
       v-bind:searchedPostsIDs="searchedPostsIDs"
-      @searchedThroughPosts="searchedThroughPostsFunction($event)">
+      v-on:searchedThroughPosts="searchedThroughPosts($event)"
     </app-Navbar>
+    <!-- <button @click="searchedPostsIDs">ifncnscnk</button>
+    {{ postIDs }} -->
+
     <ProfilePage3
       v-model="profileModalDisplay"
       @closePM="closeProfileModal"
@@ -20,7 +23,10 @@
       class="w-[100vw] h-[75vh] bg-[#eeeeee] flex flex-row justify-evenly flex-wrap overflow-y-scroll"
     >
       <li v-for="allPostsID in allPostsIDs" :key="allPostsID" class="list-none">
-        <app-posts v-bind:fetchedPostID="allPostsID"></app-posts>
+        <Posts
+          @openPMP="openProfileModalPoster"
+          v-bind:fetchedPostID="allPostsID"
+        ></Posts>
       </li>
     </div>
     <div class="flex flex-row place-content-end items-center mr-[4vw]">
@@ -78,7 +84,7 @@ export default {
       userName: null,
       profileModalPosterDisplay: false,
       // searchedPostsIDs: ["rap"],
-      searchedPostsIDs: null,
+      searchedPostsIDs: [],
     };
   },
   methods: {
@@ -149,10 +155,10 @@ export default {
         console.log(error);
       }
     },
-    searchedThroughPostsFunction: function(searchedIDs) {
-      this.searchedPostsIDs = searchedIDs;
+    searchedThroughPosts: function (searchedThroughPosts) {
+      this.searchedPostsIDs = searchedThroughPosts;
       console.log(this.searchedPostsIDs);
-      console.log("Something worked")
+      console.log("Something worked");
     },
   },
   created() {

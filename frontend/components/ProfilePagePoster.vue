@@ -13,7 +13,7 @@
             id="username"
             class="mx-[1rem] text-[.95rem] text-[#3a2d80] font-semibold w-[7.5vw] flex relative left-[1.5vw] font-lora brightness-50"
           >
-            {{ this.username }}
+            {{ this.username }} hello
           </p>
           <p
             id="bio"
