@@ -159,49 +159,6 @@
                   <div class="w-[50%] pl-[1.5vw]">
                     #{{ comment.commentNumber }}
                   </div>
-                  <!-- <div class="w-[30%] pl-[1.5vw] ">
-                    <button
-                      :disabled="disliked"
-                      id="like-button"
-                      v-on:click="likeComment"
-                      class="mx-[0.6vw]"
-                    >
-                      <img
-                        src="../assets/like1.svg"
-                        alt="Logo"
-                        class="h-[3.5vh] mx-[0.5vw]"
-                        v-if="likedComment"
-                      />
-                      <img
-                        src="../assets/like.svg"
-                        alt="Logo"
-                        class="h-[3.5vh] mx-[0.5vw]"
-                        v-else
-                      />
-                    </button>
-                    {{ comment.commentLikes }}
-                  </div>
-                  <div class="w-[30%] pl-[1.5vw] ">
-                    <button
-                      id="dislike-button"
-                      v-on:click="dislikeComment"
-                      class="mx-[0.6vw]"
-                    >
-                      <img
-                        src="../assets/dislike1.svg"
-                        alt="Logo"
-                        class="h-[3.5vh] mx-[0.5vw]"
-                        v-if="dislikedComment"
-                      />
-                      <img
-                        src="../assets/dislike.svg"
-                        alt="Logo"
-                        class="h-[3.5vh] mx-[0.5vw]"
-                        v-else
-                      />
-                    </button>
-                    {{ comment.commentDisLikes }}
-                  </div> -->
                   <div class="flex justify-end w-[50%] pr-[1.5vw]">
                     {{ comment.commentUserName }}
                   </div>

@@ -166,11 +166,11 @@ export default {
         this.searchPostAPI.forEach((element) => {
           this.searchedPostsIDs.push(element._id);
         });
-        console.log(this.searchedPostsIDs)
-        this.$emit('searchedThroughPosts', 'searchedPostsIDs');
       } catch (error) {
         console.log(error);
       }
+      console.log(this.searchedPostsIDs)
+      this.$emit('searchedThroughPosts', this.searchedPostsIDs);
     },
     searchedThroughPosts (){
       alert("g7fncjkewbhfdnc")
