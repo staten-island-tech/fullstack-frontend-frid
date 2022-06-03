@@ -275,7 +275,9 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
+          process.env.PRODUCTION_URL +
+            "/api/v1/posts/" +
+            this.modalLargePostOpenID,
           requestOptionsPatch
         );
         const result = await response.json();
@@ -298,7 +300,9 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.modalLargePostOpenID,
+          process.env.PRODUCTION_URL +
+            "/api/v1/posts/" +
+            this.modalLargePostOpenID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -335,7 +339,9 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/users/" + this.localCommentUserName,
+          process.env.PRODUCTION_URL +
+            "/api/v1/users/" +
+            this.localCommentUserName,
           requestOptionsGet
         );
         const result = await response.json();

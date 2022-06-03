@@ -117,7 +117,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/users/spotifyToken",
+          process.env.PRODUCTION_URL + "/api/v1/users/spotifyToken",
           requestOptionsGet
         );
         const result = await response.json();
@@ -148,7 +148,7 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/",
+          process.env.PRODUCTION_URL + "/api/v1/posts/",
           requestOptionsGet
         );
         const result = await response.json();
@@ -170,6 +170,9 @@ export default {
   created() {
     this.getPosts();
     // this.mapState(["postIDs"]);
+  },
+  mounted() {
+    console.log(process.env.PRODUCTION_URL);
   },
 };
 </script>

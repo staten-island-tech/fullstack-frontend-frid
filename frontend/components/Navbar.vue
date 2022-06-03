@@ -129,56 +129,58 @@ export default {
           method: "GET",
           redirect: "follow",
         };
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts?tags.tagName=" + queryCaps,
-            requestOptionsGet
-          );
-          const result = await response.json();
-          console.log(result);
-          this.searchPostAPI = result.data.posts;
-          this.searchPostAPI.forEach((element) => {
-            this.searchedPostsIDs.push(element._id);
-          });
-        } catch (error) {
-          console.log(error);
-        }
+      try {
+        const response = await fetch(
+          process.env.PRODUCTION_URL +
+            "/api/v1/posts?tags.tagName=" +
+            queryCaps,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
+        this.searchPostAPI = result.data.posts;
+        this.searchPostAPI.forEach((element) => {
+          this.searchedPostsIDs.push(element._id);
+        });
+      } catch (error) {
+        console.log(error);
+      }
 
-        //any posts with query as a post name
+      //any posts with query as a post name
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts?postName=" + queryCaps,
-            requestOptionsGet
-          );
-          const result = await response.json();
-          console.log(result);
-          this.searchPostAPI = result.data.posts;
-          this.searchPostAPI.forEach((element) => {
-            this.searchedPostsIDs.push(element._id);
-          });
-        } catch (error) {
-          console.log(error);
-        }
+      try {
+        const response = await fetch(
+          process.env.PRODUCTION_URL + "/api/v1/posts?postName=" + queryCaps,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
+        this.searchPostAPI = result.data.posts;
+        this.searchPostAPI.forEach((element) => {
+          this.searchedPostsIDs.push(element._id);
+        });
+      } catch (error) {
+        console.log(error);
+      }
 
-        //any posts with query as a user name
+      //any posts with query as a user name
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/posts?userName=" + queryCaps,
-            requestOptionsGet
-          );
-          const result = await response.json();
-          console.log(result);
-          this.searchPostAPI = result.data.posts;
-          this.searchPostAPI.forEach((element) => {
-            this.searchedPostsIDs.push(element._id);
-          });
-        } catch (error) {
-          console.log(error);
-        }
+      try {
+        const response = await fetch(
+          process.env.PRODUCTION_URL + "/api/v1/posts?userName=" + queryCaps,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        console.log(result);
+        this.searchPostAPI = result.data.posts;
+        this.searchPostAPI.forEach((element) => {
+          this.searchedPostsIDs.push(element._id);
+        });
+      } catch (error) {
+        console.log(error);
+      }
         console.log(this.searchedPostsIDs)
-        this.$emit('searchedThroughPosts', this.searchedPostsIDs);
+        this.$emit("searchedThroughPosts", this.searchedPostsIDs);
       };
     },
     queryReset (){
@@ -186,10 +188,6 @@ export default {
       this.query = null;
       this.$emit('resetSearchedThroughPosts');
     },
-    searchedThroughPosts (){
-      alert("g7fncjkewbhfdnc")
-      console.log("buefwndifvnudi")
-    }
   },
 };
 </script>

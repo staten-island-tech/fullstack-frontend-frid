@@ -238,7 +238,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+          process.env.PRODUCTION_URL + "/api/v1/posts/" + this.fetchedPostID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -303,7 +303,7 @@ export default {
 
         try {
           const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+            process.env.PRODUCTION_URL + "/api/v1/posts/" + this.fetchedPostID,
             requestOptionsPatch
           );
           const result = await response.json();
@@ -399,7 +399,7 @@ export default {
 
         try {
           const response = await fetch(
-            "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
+            process.env.PRODUCTION_URL + "/api/v1/posts/" + this.fetchedPostID,
             requestOptionsPatch
           );
           const result = await response.json();
