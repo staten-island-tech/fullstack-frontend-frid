@@ -1,5 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  target: "static",
+
   head: {
     title: "frontend",
     htmlAttrs: {
@@ -28,6 +30,10 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
+  generate: {
+    fallback: true,
+  },
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
@@ -47,7 +53,7 @@ export default {
       auth0: {
         domain: "dev-7g4awxij.us.auth0.com",
         clientId: "d41Q0WOQujXeyYA8MckBQp984IoPhiAC",
-        logoutRedirectUri: "http://localhost:8000",
+        logoutRedirectUri: "https://songbird-sitech.netlify.app",
         // audience: "https:dev-7g4awxij.us.auth0.com/",
       },
     },

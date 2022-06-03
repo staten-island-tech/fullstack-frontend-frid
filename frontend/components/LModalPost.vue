@@ -359,8 +359,3 @@ export default {
   },
 };
 </script>
-
-v-bind:style="formStyle"
-<button v-on:click="formStylesOpen">Open</button>
-<button v-on:click="formStylesClosed">Closed</button>
-<div id="button"></div>
