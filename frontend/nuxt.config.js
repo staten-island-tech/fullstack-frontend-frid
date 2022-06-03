@@ -53,7 +53,7 @@ export default {
       auth0: {
         domain: "dev-7g4awxij.us.auth0.com",
         clientId: "d41Q0WOQujXeyYA8MckBQp984IoPhiAC",
-        logoutRedirectUri: "https://songbird-sitech.netlify.app/",
+        logoutRedirectUri: "https://songbird-sitech.netlify.app",
         // audience: "https:dev-7g4awxij.us.auth0.com/",
       },
     },
