@@ -264,7 +264,7 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/create",
+          process.env.PRODUCTION_URL + "/api/v1/posts/create",
           requestOptionsPost
         );
         const result = await response.json();
@@ -291,7 +291,7 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/users/" + this.userID,
+          process.env.PRODUCTION_URL + "/api/v1/users/" + this.userID,
           requestOptionsGet
         );
         const result = await response.json();
@@ -324,7 +324,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/users/searchTracks",
+          process.env.PRODUCTION_URL + "/api/v1/users/searchTracks",
           requestOptionsPatch
         );
         const result = await response.json();

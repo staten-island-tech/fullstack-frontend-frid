@@ -117,7 +117,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/users/spotifyToken",
+          process.env.PRODUCTION_URL + "/api/v1/users/spotifyToken",
           requestOptionsGet
         );
         const result = await response.json();
