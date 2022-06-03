@@ -1,11 +1,12 @@
 <template>
   <div>
-    <app-Navbar class="sticky top-0"
+    <Navbar
+      class="sticky top-0"
       v-bind:searchedPostsIDs="searchedPostsIDs"
-      @searchedThroughPosts="searchedThroughPostsFunction($event)" 
+      @searchedThroughPosts="searchedThroughPostsFunction($event)"
       @resetSearchedThroughPosts="getPosts()"
-      >
-    </app-Navbar>
+    >
+    </Navbar>
     <!-- <button @click="searchedPostsIDs">ifncnscnk</button>
     {{ postIDs }} -->
 
@@ -64,14 +65,14 @@
 
 <script>
 import Posts from "../components/Posts.vue";
-import Navbar from "../components/Navbar.vue";
+// import Navbar from "../components/Navbar.vue";
 // import { mapState } from "frontend/store/vuexTest.js";
 // import LModalPost from "../components/LModalPost.vue";
 export default {
   components: {
     "app-posts": Posts,
     // 'LModalPost': LModalPost,
-    "app-Navbar": Navbar,
+    // "app-Navbar": Navbar,
   },
   props: ["searchedPostsIDs"],
   data() {
