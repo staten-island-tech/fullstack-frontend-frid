@@ -123,7 +123,9 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts?tags.tagName=" + queryCaps,
+          process.env.PRODUCTION_URL +
+            "/api/v1/posts?tags.tagName=" +
+            queryCaps,
           requestOptionsGet
         );
         const result = await response.json();
@@ -140,7 +142,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts?postName=" + queryCaps,
+          process.env.PRODUCTION_URL + "/api/v1/posts?postName=" + queryCaps,
           requestOptionsGet
         );
         const result = await response.json();
@@ -157,7 +159,7 @@ export default {
 
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts?userName=" + queryCaps,
+          process.env.PRODUCTION_URL + "/api/v1/posts?userName=" + queryCaps,
           requestOptionsGet
         );
         const result = await response.json();
@@ -166,16 +168,16 @@ export default {
         this.searchPostAPI.forEach((element) => {
           this.searchedPostsIDs.push(element._id);
         });
-        console.log(this.searchedPostsIDs)
-        this.$emit('searchedThroughPosts', 'searchedPostsIDs');
       } catch (error) {
         console.log(error);
       }
+      console.log(this.searchedPostsIDs);
+      this.$emit("searchedThroughPosts", this.searchedPostsIDs);
     },
-    searchedThroughPosts (){
-      alert("g7fncjkewbhfdnc")
-      console.log("buefwndifvnudi")
-    }
+    searchedThroughPosts() {
+      alert("g7fncjkewbhfdnc");
+      console.log("buefwndifvnudi");
+    },
   },
 };
 </script>

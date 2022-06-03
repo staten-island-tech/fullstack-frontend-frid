@@ -123,7 +123,7 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/posts/",
+          process.env.PRODUCTION_URL + "/api/v1/posts/",
           requestOptionsGet
         );
         const result = await response.json();
@@ -155,7 +155,7 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://localhost:3000/api/v1/users/" + this.username,
+          process.env.PRODUCTION_URL + "/api/v1/users/" + this.username,
           requestOptionsGet
         );
         const result = await response.json();
