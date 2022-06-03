@@ -7,8 +7,6 @@
       @resetSearchedThroughPosts="getPosts()"
     >
     </Navbar>
-    <!-- <button @click="searchedPostsIDs">ifncnscnk</button>
-    {{ postIDs }} -->
 
     <ProfilePage3
       v-model="profileModalDisplay"
