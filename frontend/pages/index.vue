@@ -1,8 +1,10 @@
 <template>
   <div>
-    <app-Navbar class="sticky top-0">
+    <app-Navbar class="sticky top-0"
       v-bind:searchedPostsIDs="searchedPostsIDs"
-      v-on:searchedThroughPosts="searchedThroughPosts($event)"
+      @searchedThroughPosts="searchedThroughPostsFunction($event)" 
+      @resetSearchedThroughPosts="getPosts()"
+      >
     </app-Navbar>
     <!-- <button @click="searchedPostsIDs">ifncnscnk</button>
     {{ postIDs }} -->
@@ -85,14 +87,12 @@ export default {
       userName: null,
       profileModalPosterDisplay: false,
       // searchedPostsIDs: ["rap"],
-      searchedPostsIDs: [],
-      PMPusername: null,
+      searchedPostsIDs: null,
     };
   },
   methods: {
     setPMPusername(n) {
       console.log(n);
-      this.userName = n;
     },
     openProfileModalPoster() {
       this.profileModalPosterDisplay = true;
@@ -161,10 +161,10 @@ export default {
         console.log(error);
       }
     },
-    searchedThroughPosts: function (searchedThroughPosts) {
-      this.searchedPostsIDs = searchedThroughPosts;
-      console.log(this.searchedPostsIDs);
-      console.log("Something worked");
+    searchedThroughPostsFunction: function (searchedIDs) {
+      this.searchedPostsIDs = searchedIDs;
+      console.log("User Searched for specific posts!");
+      this.allPostsIDs = this.searchedPostsIDs;
     },
   },
   created() {
