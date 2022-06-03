@@ -118,67 +118,72 @@ export default {
       await this.$auth.logout();
     },
     querySort: async function () {
-      const queryCaps =
-        this.query.charAt(0).toUpperCase() + this.query.slice(1);
+      if ( this.query==null){
+        alert("Please put something in the Search Bar first!")
+      } else {
+        const queryCaps =
+          this.query.charAt(0).toUpperCase() + this.query.slice(1);
 
-      //any posts with query as a tag
+        //any posts with query as a tag
+        var requestOptionsGet = {
+          method: "GET",
+          redirect: "follow",
+        };
+        try {
+          const response = await fetch(
+            "http://localhost:3000/api/v1/posts?tags.tagName=" + queryCaps,
+            requestOptionsGet
+          );
+          const result = await response.json();
+          console.log(result);
+          this.searchPostAPI = result.data.posts;
+          this.searchPostAPI.forEach((element) => {
+            this.searchedPostsIDs.push(element._id);
+          });
+        } catch (error) {
+          console.log(error);
+        }
 
-      var requestOptionsGet = {
-        method: "GET",
-        redirect: "follow",
+        //any posts with query as a post name
+
+        try {
+          const response = await fetch(
+            "http://localhost:3000/api/v1/posts?postName=" + queryCaps,
+            requestOptionsGet
+          );
+          const result = await response.json();
+          console.log(result);
+          this.searchPostAPI = result.data.posts;
+          this.searchPostAPI.forEach((element) => {
+            this.searchedPostsIDs.push(element._id);
+          });
+        } catch (error) {
+          console.log(error);
+        }
+
+        //any posts with query as a user name
+
+        try {
+          const response = await fetch(
+            "http://localhost:3000/api/v1/posts?userName=" + queryCaps,
+            requestOptionsGet
+          );
+          const result = await response.json();
+          console.log(result);
+          this.searchPostAPI = result.data.posts;
+          this.searchPostAPI.forEach((element) => {
+            this.searchedPostsIDs.push(element._id);
+          });
+        } catch (error) {
+          console.log(error);
+        }
+        console.log(this.searchedPostsIDs)
+        this.$emit('searchedThroughPosts', this.searchedPostsIDs);
       };
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts?tags.tagName=" + queryCaps,
-          requestOptionsGet
-        );
-        const result = await response.json();
-        console.log(result);
-        this.searchPostAPI = result.data.posts;
-        this.searchPostAPI.forEach((element) => {
-          this.searchedPostsIDs.push(element._id);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-
-      //any posts with query as a post name
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts?postName=" + queryCaps,
-          requestOptionsGet
-        );
-        const result = await response.json();
-        console.log(result);
-        this.searchPostAPI = result.data.posts;
-        this.searchPostAPI.forEach((element) => {
-          this.searchedPostsIDs.push(element._id);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-
-      //any posts with query as a user name
-
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/posts?userName=" + queryCaps,
-          requestOptionsGet
-        );
-        const result = await response.json();
-        console.log(result);
-        this.searchPostAPI = result.data.posts;
-        this.searchPostAPI.forEach((element) => {
-          this.searchedPostsIDs.push(element._id);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-      console.log(this.searchedPostsIDs)
-      this.$emit('searchedThroughPosts', this.searchedPostsIDs);
     },
     queryReset (){
+      this.searchedPostsIDs = null;
+      this.query = null;
       this.$emit('resetSearchedThroughPosts');
     },
     searchedThroughPosts (){
