@@ -1,10 +1,11 @@
 <template>
   <div>
-    <app-Navbar class="sticky top-0"
+    <app-Navbar
+      class="sticky top-0"
       v-bind:searchedPostsIDs="searchedPostsIDs"
-      @searchedThroughPosts="searchedThroughPostsFunction($event)" 
+      @searchedThroughPosts="searchedThroughPostsFunction($event)"
       @resetSearchedThroughPosts="getPosts()"
-      >
+    >
     </app-Navbar>
     <!-- <button @click="searchedPostsIDs">ifncnscnk</button>
     {{ postIDs }} -->
@@ -93,6 +94,7 @@ export default {
   methods: {
     setPMPusername(n) {
       console.log(n);
+      this.userName = n;
     },
     openProfileModalPoster() {
       this.profileModalPosterDisplay = true;
