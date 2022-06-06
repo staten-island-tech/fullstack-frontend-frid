@@ -19,8 +19,11 @@
             id="pfp"
             class="w-[1rem] h-[1rem] bg-[#6957e7] rounded-[100%] mx-[1.5vw]"
           ></span>
-          <div id="username" class="text-[1rem] font-lora">
-            <button @click="$emit('usernamePass', { userName })">hello</button>
+          <div
+            id="username"
+            class="text-[1rem] font-lora"
+            @click="$emit('usernamePass', { userName })"
+          >
             <button @click="$emit('openPMP')">
               {{ userName }}
             </button>
@@ -478,3 +481,5 @@ export default {
   },
 };
 </script>
+
+if this.username =

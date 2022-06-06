@@ -13,7 +13,7 @@
             id="username"
             class="mx-[1rem] text-[.95rem] text-[#3a2d80] font-semibold w-[7.5vw] flex relative left-[1.5vw] font-lora brightness-50"
           >
-            {{ this.username }} hello
+            {{ this.username }}
           </p>
           <p
             id="bio"
@@ -85,7 +85,7 @@
             :key="allPostsID"
             class="list-none"
           >
-            <app-posts v-bind:fetchedPostID="allPostsID"></app-posts>
+            <Posts v-bind:fetchedPostID="allPostsID"></Posts>
           </li>
         </div>
       </div>
@@ -131,67 +131,44 @@ export default {
       try {
         const response = await fetch(
           process.env.PRODUCTION_URL +
-            "/api/v1/users?userName=" +
+            "/api/v1/users?username=" +
             this.username,
           requestOptionsGet
         );
         const result = await response.json();
-        console.log(result);
+        console.log(result.data.users[0].username);
       } catch (error) {
         console.log(error);
       }
-
-      // var myHeaders = new Headers();
-      // myHeaders.append("Content-Type", "application/json");
-
-      // var raw = JSON.stringify({
-      //   followers:,
-      // });
-
-      // var requestOptionsPatch = {
-      //   method: "PATCH",
-      //   headers: myHeaders,
-      //   body: raw,
-      //   redirect: "follow",
-      // };
-
-      // try {
-      //   const response = await fetch(
-      //     "http://localhost:3000/api/v1/posts/" + this.fetchedPostID,
-      //     requestOptionsPatch
-      //   );
-      //   const result = await response.json();
-      //   console.log("There are " + result.data.post.totalLikes + " likes");
-      // } catch (error) {
-      //   console.log(error);
-      // }
     },
     openModal() {
       this.modalOpen = !this.modalOpen;
     },
     getPosts: async function () {
+      console.log(this.username);
       var requestOptionsGet = {
         method: "GET",
         redirect: "follow",
       };
       try {
         const response = await fetch(
-          process.env.PRODUCTION_URL + "/api/v1/posts/",
+          process.env.PRODUCTION_URL +
+            "/api/v1/posts?userName=" +
+            this.username,
           requestOptionsGet
         );
         const result = await response.json();
+        console.log(result.data.posts);
         for (let i = 0; i < result.data.posts.length; i++) {
-          if (this.username == result.data.posts[i].userID) {
-            this.allPostsIDs.push(result.data.posts[i]._id);
-          } else {
-          }
+          this.allPostsIDs.push(result.data.posts[i]._id);
         }
-        console.log(this.postAPI);
+        // console.log(this.allPostsIDs);
         // this.postAPI = result.data.posts;
         // this.postAPI.forEach((element) => {
         //   this.allPostsIDs.push(element._id);
         // });
         // console.log(this.allPostsIDs);
+        console.log("hell world");
       } catch (error) {
         console.log(error);
       }
@@ -224,9 +201,8 @@ export default {
     },
   },
   created() {
-    this.getUserInfo();
+    // this.getUserInfo();
     this.getPosts();
-    this.getUserInfo();
   },
 };
 </script>

@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     setPMPusername(n) {
-      console.log(n);
+      this.userName = n.userName;
     },
     openProfileModalPoster() {
       this.profileModalPosterDisplay = true;
