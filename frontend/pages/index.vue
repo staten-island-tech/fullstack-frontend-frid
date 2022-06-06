@@ -26,6 +26,7 @@
         <Posts
           @openPMP="openProfileModalPoster"
           @usernamePass="setPMPusername"
+          @deletePost="postDelete"
           v-bind:fetchedPostID="allPostsID"
         ></Posts>
       </li>
@@ -86,6 +87,7 @@ export default {
       profileModalPosterDisplay: false,
       // searchedPostsIDs: ["rap"],
       searchedPostsIDs: [],
+      deletedPostID: null,
     };
   },
   methods: {
@@ -159,6 +161,26 @@ export default {
         console.log(error);
       }
     },
+
+    postDelete: async function () {
+      var requestOptionsDelete = {
+        method: "DELETE",
+        redirect: "manual",
+      };
+
+      try {
+        const response = await fetch(
+          process.env.PRODUCTION_URL + "/api/v1/posts/" + this.deletedPostID,
+          requestOptionsDelete
+        );
+        const result = await response.json();
+        console.log(result);
+        this.getPosts();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     searchedThroughPosts: function (searchedThroughPosts) {
       this.searchedPostsIDs = searchedThroughPosts;
       console.log(this.searchedPostsIDs);

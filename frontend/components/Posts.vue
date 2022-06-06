@@ -11,8 +11,19 @@
         id="post-container"
         class="h-[47vh] w-[32vw] bg-[#eeeeee] brightness-[105%] rounded-[5%] my-[2.5vh] mx-[2.5vw]"
       >
-        <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
-          {{ postName }}
+        <div class="flex flex-row items-center">
+          <div id="playlist-name" class="mx-[1vw] text-[1.25rem] font-lora">
+            {{ postName }}
+          </div>
+          <div>
+            <button @click="$emit('deletePost')">
+              <img
+                src="../assets/delete.svg"
+                class="items-center ml-[1vw] hover:border-b-2 border-[#6957e7]"
+                v-show="displayDelete"
+              />
+            </button>
+          </div>
         </div>
         <div id="user-name-container" class="flex flex-row items-center">
           <span
@@ -220,6 +231,9 @@ export default {
       disliked: false,
       commentsClicked: false,
       modalLargePostOpen: false,
+      activeUsername: null,
+      displayedUsername: null,
+      displayDelete: false,
       modalLargePostOpenID: "",
       // profileModalPosterDisplay: false,
       user: this.$auth.user,
@@ -263,6 +277,36 @@ export default {
         console.log(error);
       }
     },
+    getUserInfo: async function () {
+      console.log("hello world");
+      let userid = this.$auth.user.sub;
+      let n = 6;
+      this.activeUsername = userid.substring(n);
+      // console.log(this.username);
+
+      var requestOptionsGet = {
+        method: "GET",
+        redirect: "follow",
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/users/" + this.activeUsername,
+          requestOptionsGet
+        );
+        const result = await response.json();
+        this.displayedUsername = result.data.user.username;
+        console.log(this.displayedUsername);
+      } catch (error) {
+        console.log(error);
+      }
+      if (this.displayedUsername == this.userName) {
+        this.displayDelete = true;
+      }
+    },
+
+    // deletePost: async function () {
+
+    // },
 
     like: async function () {
       this.liked = !this.liked;
@@ -475,6 +519,7 @@ export default {
   },
   created() {
     this.postRetriever();
+    this.getUserInfo();
   },
 };
 </script>
